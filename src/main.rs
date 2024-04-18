@@ -23,36 +23,30 @@ async fn main() {
     client.connect().await;
 
     let mut input = String::new();
-    if io::stdin().read_line(&mut input).is_ok() && input.trim() == "stop"
-    {
+    if io::stdin().read_line(&mut input).is_ok() && input.trim() == "stop" {
         // client.disconnect();
     }
 }
 
-fn handle_event(client: &TikTokLiveClient, event: &TikTokLiveEvent)
-{
+fn handle_event(client: &TikTokLiveClient, event: &TikTokLiveEvent) {
     match event {
-        TikTokLiveEvent::OnMember(join_event) =>
-            {
-                info!("user: {}  joined", join_event.raw_data.user.nickname);
-            }
-        TikTokLiveEvent::OnChat(chat_event) =>
-            {
-                info!("user: {} -> {} ", chat_event.raw_data.user.nickname, chat_event.raw_data.content);
-            }
-        TikTokLiveEvent::OnGift(gift_event) =>
-            {
-                let nick = &gift_event.raw_data.user.nickname;
-                let gift_name = &gift_event.raw_data.gift.name;
-                let gifts_amount = gift_event.raw_data.gift.combo;
+        TikTokLiveEvent::OnMember(join_event) => {
+			info!("user: {}  joined", join_event.raw_data.user.nickname);
+		}
+        TikTokLiveEvent::OnChat(chat_event) => {
+			info!("user: {} -> {} ", chat_event.raw_data.user.nickname, chat_event.raw_data.content);
+        }
+        TikTokLiveEvent::OnGift(gift_event) => {
+			let nick = &gift_event.raw_data.user.nickname;
+			let gift_name = &gift_event.raw_data.gift.name;
+			let gifts_amount = gift_event.raw_data.gift.combo;
 
-                info!("user: {} sends gift: {} x {}", nick, gift_name, gifts_amount);
-            }
+			info!("user: {} sends gift: {} x {}", nick, gift_name, gifts_amount);
+		}
         _ => {}
     }
 }
 
-fn configure(settings: &mut TikTokLiveSettings)
-{
+fn configure(settings: &mut TikTokLiveSettings) {
     settings.http_data.time_out = Duration::from_secs(12);
 }
