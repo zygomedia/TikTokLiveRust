@@ -25,6 +25,10 @@ const CODE_EVENTS_OUTPUT_PATH: &str = "../src/generated/";
 
 #[tokio::main]
 async fn main() {
+	env_logger::Builder::from_default_env()
+		.filter(Some("build_script"), log::LevelFilter::Debug)
+		.init();
+
     let path = Path::new(PROTO_OUTPUT_PATH);
     fs::create_dir_all(path).unwrap();
 
@@ -59,7 +63,6 @@ async fn handle_download_proto_files(names: [&str; 3]) {
         file.write_all(content.as_bytes()).unwrap();
     }
 }
-
 
 fn handle_generating_proto(names: [&str; 3]) {
     let mut builder = &mut Codegen::new();

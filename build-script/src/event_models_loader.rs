@@ -49,16 +49,15 @@ pub fn get_event_data_models() -> Vec<TikTokEventDataModel> {
     return webcast_models.into_values().collect();
 }
 
-
 fn remove_duplicates(models: &mut Vec<TikTokEventDataModel>) {
     let mut unique_event_names = HashSet::new();
     models.retain(|model| unique_event_names.insert(model.event_name.clone()));
 }
 
-
 fn get_models_from_proto() -> HashMap<String, TikTokEventDataModel> {
     let syntax_tree = get_syntax_tree("src/proto/webcast.rs".to_string());
     let mut event_models = HashMap::new();
+
     for item in syntax_tree.items {
         if let Item::Struct(struct_item) = item {
             let webcast_name = struct_item.ident.to_string();
@@ -80,8 +79,7 @@ fn get_models_from_proto() -> HashMap<String, TikTokEventDataModel> {
                  pub raw_data: #webcast_name_ident,
             };
 
-            let model = TikTokEventDataModel
-            {
+            let model = TikTokEventDataModel {
                 fields: vec![method_name_token],
                 is_webcast: true,
                 webcast_name,
@@ -98,6 +96,7 @@ fn get_models_from_proto() -> HashMap<String, TikTokEventDataModel> {
             event_models.insert(event_name.clone().to_string(), model);
         }
     }
+
     return event_models;
 }
 
