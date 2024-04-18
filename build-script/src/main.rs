@@ -33,7 +33,7 @@ async fn main() {
     fs::create_dir_all(path).unwrap();
 
     let names = ["data", "enums", "webcast"];
-    handle_download_proto_files(names).await;
+    // handle_download_proto_files(names).await;
     handle_generating_proto(names);
 
     let event_models = get_event_data_models();
@@ -43,6 +43,8 @@ async fn main() {
     generate_mapper_class(&event_models);
 }
 
+// For up to date proto files, check the original java one:
+// https://github.com/jwdeveloper/TikTokLiveJava/tree/master/API/src/main/proto
 async fn handle_download_proto_files(names: [&str; 3]) {
     let base_url = "https://raw.githubusercontent.com/jwdeveloper/TikTokLiveJava/master/API/src/main/proto/";
     let client = Client::builder()
