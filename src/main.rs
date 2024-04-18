@@ -32,21 +32,21 @@ async fn main() {
 fn handle_event(client: &TikTokLiveClient, event: &TikTokLiveEvent)
 {
     match event {
-        TikTokLiveEvent::OnMember(joinEvent) =>
+        TikTokLiveEvent::OnMember(join_event) =>
             {
-                println!("user: {}  joined", joinEvent.raw_data.user.nickname);
+                info!("user: {}  joined", join_event.raw_data.user.nickname);
             }
-        TikTokLiveEvent::OnChat(chatEvent) =>
+        TikTokLiveEvent::OnChat(chat_event) =>
             {
-                println!("user: {} -> {} ", chatEvent.raw_data.user.nickname, chatEvent.raw_data.content);
+                info!("user: {} -> {} ", chat_event.raw_data.user.nickname, chat_event.raw_data.content);
             }
-        TikTokLiveEvent::OnGift(giftEvent) =>
+        TikTokLiveEvent::OnGift(gift_event) =>
             {
-                let nick = &giftEvent.raw_data.user.nickname;
-                let gift_name = &giftEvent.raw_data.gift.name;
-                let gifts_amount = giftEvent.raw_data.gift.combo;
+                let nick = &gift_event.raw_data.user.nickname;
+                let gift_name = &gift_event.raw_data.gift.name;
+                let gifts_amount = gift_event.raw_data.gift.combo;
 
-                println!("user: {} sends gift: {} x {}", nick, gift_name, gifts_amount);
+                info!("user: {} sends gift: {} x {}", nick, gift_name, gifts_amount);
             }
         _ => {}
     }
