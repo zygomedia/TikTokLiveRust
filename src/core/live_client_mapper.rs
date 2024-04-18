@@ -15,7 +15,8 @@ impl TikTokLiveMessageMapper {
         }
     }
 
-    pub fn dupa(&self,webcast_response: WebcastResponse,client: &TikTokLiveClient) {
+    /// Dupa
+    pub fn dupa(&self,webcast_response: WebcastResponse, client: &TikTokLiveClient) {
 
         println!("XD")
     }
