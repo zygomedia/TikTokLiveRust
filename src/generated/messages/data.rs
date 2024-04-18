@@ -2155,8 +2155,10 @@ pub mod text {
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct Image {
     // message fields
-    // @@protoc_insertion_point(field:TikTok.Image.urlList)
-    pub urlList: ::std::vec::Vec<::std::string::String>,
+    // @@protoc_insertion_point(field:TikTok.Image.url)
+    pub url: ::std::vec::Vec<::std::string::String>,
+    // @@protoc_insertion_point(field:TikTok.Image.extras)
+    pub extras: ::std::string::String,
     // @@protoc_insertion_point(field:TikTok.Image.isAnimated)
     pub isAnimated: bool,
     // special fields
@@ -2176,12 +2178,17 @@ impl Image {
     }
 
     fn generated_message_descriptor_data() -> ::protobuf::reflect::GeneratedMessageDescriptorData {
-        let mut fields = ::std::vec::Vec::with_capacity(2);
+        let mut fields = ::std::vec::Vec::with_capacity(3);
         let mut oneofs = ::std::vec::Vec::with_capacity(0);
         fields.push(::protobuf::reflect::rt::v2::make_vec_simpler_accessor::<_, _>(
-            "urlList",
-            |m: &Image| { &m.urlList },
-            |m: &mut Image| { &mut m.urlList },
+            "url",
+            |m: &Image| { &m.url },
+            |m: &mut Image| { &mut m.url },
+        ));
+        fields.push(::protobuf::reflect::rt::v2::make_simpler_field_accessor::<_, _>(
+            "extras",
+            |m: &Image| { &m.extras },
+            |m: &mut Image| { &mut m.extras },
         ));
         fields.push(::protobuf::reflect::rt::v2::make_simpler_field_accessor::<_, _>(
             "isAnimated",
@@ -2207,7 +2214,10 @@ impl ::protobuf::Message for Image {
         while let Some(tag) = is.read_raw_tag_or_eof()? {
             match tag {
                 10 => {
-                    self.urlList.push(is.read_string()?);
+                    self.url.push(is.read_string()?);
+                },
+                18 => {
+                    self.extras = is.read_string()?;
                 },
                 72 => {
                     self.isAnimated = is.read_bool()?;
@@ -2224,9 +2234,12 @@ impl ::protobuf::Message for Image {
     #[allow(unused_variables)]
     fn compute_size(&self) -> u64 {
         let mut my_size = 0;
-        for value in &self.urlList {
+        for value in &self.url {
             my_size += ::protobuf::rt::string_size(1, &value);
         };
+        if !self.extras.is_empty() {
+            my_size += ::protobuf::rt::string_size(2, &self.extras);
+        }
         if self.isAnimated != false {
             my_size += 1 + 1;
         }
@@ -2236,9 +2249,12 @@ impl ::protobuf::Message for Image {
     }
 
     fn write_to_with_cached_sizes(&self, os: &mut ::protobuf::CodedOutputStream<'_>) -> ::protobuf::Result<()> {
-        for v in &self.urlList {
+        for v in &self.url {
             os.write_string(1, &v)?;
         };
+        if !self.extras.is_empty() {
+            os.write_string(2, &self.extras)?;
+        }
         if self.isAnimated != false {
             os.write_bool(9, self.isAnimated)?;
         }
@@ -2259,14 +2275,16 @@ impl ::protobuf::Message for Image {
     }
 
     fn clear(&mut self) {
-        self.urlList.clear();
+        self.url.clear();
+        self.extras.clear();
         self.isAnimated = false;
         self.special_fields.clear();
     }
 
     fn default_instance() -> &'static Image {
         static instance: Image = Image {
-            urlList: ::std::vec::Vec::new(),
+            url: ::std::vec::Vec::new(),
+            extras: ::std::string::String::new(),
             isAnimated: false,
             special_fields: ::protobuf::SpecialFields::new(),
         };
@@ -30442,91 +30460,92 @@ static file_descriptor_proto_data: &'static [u8] = b"\
     \n\x03key\x18\x01\x20\x01(\tR\x03key\x12&\n\x0edefaultPattern\x18\x02\
     \x20\x01(\tR\x0edefaultPattern\x1aO\n\rTextPieceUser\x12\x20\n\x04user\
     \x18\x01\x20\x01(\x0b2\x0c.TikTok.UserR\x04user\x12\x1c\n\twithColon\x18\
-    \x02\x20\x01(\x08R\twithColon\"A\n\x05Image\x12\x18\n\x07urlList\x18\x01\
-    \x20\x03(\tR\x07urlList\x12\x1e\n\nisAnimated\x18\t\x20\x01(\x08R\nisAni\
-    mated\"\xc8\x12\n\x0bBadgeStruct\x12F\n\x0bdisplayType\x18\x01\x20\x01(\
-    \x0e2$.TikTok.BadgeStruct.BadgeDisplayTypeR\x0bdisplayType\x126\n\x05ima\
-    ge\x18\x14\x20\x01(\x0b2\x1e.TikTok.BadgeStruct.ImageBadgeH\0R\x05image\
-    \x123\n\x04text\x18\x15\x20\x01(\x0b2\x1d.TikTok.BadgeStruct.TextBadgeH\
-    \0R\x04text\x123\n\x03str\x18\x16\x20\x01(\x0b2\x1f.TikTok.BadgeStruct.S\
-    tringBadgeH\0R\x03str\x12<\n\x07combine\x18\x17\x20\x01(\x0b2\x20.TikTok\
-    .BadgeStruct.CombineBadgeH\0R\x07combine\x1a\xbc\x05\n\x0cCombineBadge\
-    \x12!\n\x04icon\x18\x02\x20\x01(\x0b2\r.TikTok.ImageR\x04icon\x121\n\x04\
-    text\x18\x03\x20\x01(\x0b2\x1d.TikTok.BadgeStruct.TextBadgeR\x04text\x12\
-    \x10\n\x03str\x18\x04\x20\x01(\tR\x03str\x12P\n\x10profileCardPanel\x18\
-    \x07\x20\x01(\x0b2$.TikTok.BadgeStruct.ProfileCardPanelR\x10profileCardP\
-    anel\x12J\n\nbackground\x18\x0b\x20\x01(\x0b2*.TikTok.BadgeStruct.Combin\
-    eBadgeBackgroundR\nbackground\x12Z\n\x12backgroundDarkMode\x18\x0c\x20\
-    \x01(\x0b2*.TikTok.BadgeStruct.CombineBadgeBackgroundR\x12backgroundDark\
-    Mode\x12*\n\x10iconAutoMirrored\x18\r\x20\x01(\x08R\x10iconAutoMirrored\
-    \x126\n\x16backgroundAutoMirrored\x18\x0e\x20\x01(\x08R\x16backgroundAut\
-    oMirrored\x124\n\x15publicScreenShowStyle\x18\x0f\x20\x01(\x05R\x15publi\
-    cScreenShowStyle\x124\n\x15personalCardShowStyle\x18\x10\x20\x01(\x05R\
-    \x15personalCardShowStyle\x12H\n\x1franklistOnlineAudienceShowStyle\x18\
-    \x11\x20\x01(\x05R\x1franklistOnlineAudienceShowStyle\x120\n\x13multiGue\
-    stShowStyle\x18\x12\x20\x01(\x05R\x13multiGuestShowStyle\x1a\xb2\x01\n\
-    \x0eProfileContent\x12\x1e\n\nuseContent\x18\x01\x20\x01(\x08R\nuseConte\
-    nt\x12:\n\x08iconList\x18\x02\x20\x03(\x0b2\x1e.TikTok.BadgeStruct.IconC\
-    onfigR\x08iconList\x12D\n\x0cnumberConfig\x18\x03\x20\x01(\x0b2\x20.TikT\
-    ok.BadgeStruct.NumberConfigR\x0cnumberConfig\x1a[\n\x10ProjectionConfig\
-    \x12$\n\ruseProjection\x18\x01\x20\x01(\x08R\ruseProjection\x12!\n\x04ic\
-    on\x18\x02\x20\x01(\x0b2\r.TikTok.ImageR\x04icon\x1ar\n\x0cNumberConfig\
-    \x12\x16\n\x06number\x18\x01\x20\x01(\x03R\x06number\x12J\n\nbackground\
-    \x18\x03\x20\x01(\x0b2*.TikTok.BadgeStruct.CombineBadgeBackgroundR\nback\
-    ground\x1a\xe8\x01\n\x10ProfileCardPanel\x126\n\x16useNewProfileCardStyl\
-    e\x18\x01\x20\x01(\x08R\x16useNewProfileCardStyle\x12P\n\x10projectionCo\
-    nfig\x18\x03\x20\x01(\x0b2$.TikTok.BadgeStruct.ProjectionConfigR\x10proj\
-    ectionConfig\x12J\n\x0eprofileContent\x18\x04\x20\x01(\x0b2\".TikTok.Bad\
-    geStruct.ProfileContentR\x0eprofileContent\x1a\x99\x01\n\x16CombineBadge\
-    Background\x12#\n\x05image\x18\x01\x20\x01(\x0b2\r.TikTok.ImageR\x05imag\
-    e\x120\n\x13backgroundColorCode\x18\x02\x20\x01(\tR\x13backgroundColorCo\
-    de\x12(\n\x0fborderColorCode\x18\x03\x20\x01(\tR\x0fborderColorCode\x1a1\
-    \n\nImageBadge\x12#\n\x05image\x18\x02\x20\x01(\x0b2\r.TikTok.ImageR\x05\
-    image\x1a3\n\tTextBadge\x12&\n\x0edefaultPattern\x18\x03\x20\x01(\tR\x0e\
-    defaultPattern\x1a{\n\nIconConfig\x12!\n\x04icon\x18\x01\x20\x01(\x0b2\r\
-    .TikTok.ImageR\x04icon\x12J\n\nbackground\x18\x02\x20\x01(\x0b2*.TikTok.\
-    BadgeStruct.CombineBadgeBackgroundR\nbackground\x1a\x1f\n\x0bStringBadge\
-    \x12\x10\n\x03str\x18\x02\x20\x01(\tR\x03str\"G\n\x08DataCase\x12\x10\n\
-    \x0cDATA_NOT_SET\x10\0\x12\t\n\x05IMAGE\x10\x14\x12\x08\n\x04TEXT\x10\
-    \x15\x12\x07\n\x03STR\x10\x16\x12\x0b\n\x07COMBINE\x10\x17\"\xa2\x01\n\
-    \x10BadgeDisplayType\x12\x1c\n\x18BADGEDISPLAYTYPE_UNKNOWN\x10\0\x12\x1a\
-    \n\x16BADGEDISPLAYTYPE_IMAGE\x10\x01\x12\x19\n\x15BADGEDISPLAYTYPE_TEXT\
-    \x10\x02\x12\x1b\n\x17BADGEDISPLAYTYPE_STRING\x10\x03\x12\x1c\n\x18BADGE\
-    DISPLAYTYPE_COMBINE\x10\x04\"D\n\x08Position\x12\x13\n\x0fPOSITIONUNKNOW\
-    N\x10\0\x12\x10\n\x0cPOSITIONLEFT\x10\x01\x12\x11\n\rPOSITIONRIGHT\x10\
-    \x02B\x0b\n\tbadgeType\"\xf1\r\n\nGiftStruct\x12#\n\x05image\x18\x01\x20\
-    \x01(\x0b2\r.TikTok.ImageR\x05image\x12\x1a\n\x08describe\x18\x02\x20\
-    \x01(\tR\x08describe\x12\x1a\n\x08duration\x18\x04\x20\x01(\x03R\x08dura\
-    tion\x12\x0e\n\x02id\x18\x05\x20\x01(\x03R\x02id\x12\x1e\n\nforLinkmic\
-    \x18\x07\x20\x01(\x08R\nforLinkmic\x12\x14\n\x05combo\x18\n\x20\x01(\x08\
-    R\x05combo\x12\x12\n\x04type\x18\x0b\x20\x01(\x05R\x04type\x12\"\n\x0cdi\
-    amondCount\x18\x0c\x20\x01(\x05R\x0cdiamondCount\x12.\n\x12isDisplayedOn\
-    Panel\x18\r\x20\x01(\x08R\x12isDisplayedOnPanel\x12(\n\x0fprimaryEffectI\
-    d\x18\x0e\x20\x01(\x03R\x0fprimaryEffectId\x123\n\rgiftLabelIcon\x18\x0f\
-    \x20\x01(\x0b2\r.TikTok.ImageR\rgiftLabelIcon\x12\x12\n\x04name\x18\x10\
-    \x20\x01(\tR\x04name\x12!\n\x04icon\x18\x15\x20\x01(\x0b2\r.TikTok.Image\
-    R\x04icon\x12\x1e\n\ngoldEffect\x18\x18\x20\x01(\tR\ngoldEffect\x121\n\
-    \x0cpreviewImage\x18/\x20\x01(\x0b2\r.TikTok.ImageR\x0cpreviewImage\x12L\
-    \n\x0fgiftPanelBanner\x180\x20\x01(\x0b2\".TikTok.GiftStruct.GiftPanelBa\
-    nnerR\x0fgiftPanelBanner\x12(\n\x0fisBroadcastGift\x181\x20\x01(\x08R\
-    \x0fisBroadcastGift\x12(\n\x0fisEffectBefview\x182\x20\x01(\x08R\x0fisEf\
-    fectBefview\x12\"\n\x0cisRandomGift\x183\x20\x01(\x08R\x0cisRandomGift\
-    \x12\x1c\n\tisBoxGift\x184\x20\x01(\x08R\tisBoxGift\x12(\n\x0fcanPutInGi\
-    ftBox\x185\x20\x01(\x08R\x0fcanPutInGiftBox\x1a\xde\x01\n\x0fGiftPanelBa\
-    nner\x12.\n\x0bdisplayText\x18\x01\x20\x01(\x0b2\x0c.TikTok.TextR\x0bdis\
-    playText\x12)\n\x08leftIcon\x18\x02\x20\x01(\x0b2\r.TikTok.ImageR\x08lef\
-    tIcon\x12\x1c\n\tschemaUrl\x18\x03\x20\x01(\tR\tschemaUrl\x12,\n\x11bgCo\
-    lorValuesList\x18\x05\x20\x03(\tR\x11bgColorValuesList\x12$\n\rbannerLyn\
-    xUrl\x18\x06\x20\x01(\tR\rbannerLynxUrl\x1a\xa9\x02\n\x14GiftRandomEffec\
-    tInfo\x12^\n\x15randomGiftPanelBanner\x18\x01\x20\x01(\x0b2(.TikTok.Gift\
-    Struct.RandomGiftPanelBannerR\x15randomGiftPanelBanner\x12$\n\reffectIds\
-    List\x18\x02\x20\x03(\x03R\reffectIdsList\x12\x18\n\x07hostKey\x18\x03\
-    \x20\x01(\tR\x07hostKey\x12\x20\n\x0baudienceKey\x18\x04\x20\x01(\tR\x0b\
-    audienceKey\x12O\n\x10randomGiftBubble\x18\x05\x20\x01(\x0b2#.TikTok.Gif\
-    tStruct.RandomGiftBubbleR\x10randomGiftBubble\x1aq\n\x10RandomGiftBubble\
-    \x12\x20\n\x0bdisplayText\x18\x01\x20\x01(\tR\x0bdisplayText\x12;\n\x11i\
-    conDynamicEffect\x18\x02\x20\x01(\x0b2\r.TikTok.ImageR\x11iconDynamicEff\
-    ect\x1a\xe0\x02\n\x15RandomGiftPanelBanner\x12'\n\x07bgImage\x18\x01\x20\
+    \x02\x20\x01(\x08R\twithColon\"Q\n\x05Image\x12\x10\n\x03url\x18\x01\x20\
+    \x03(\tR\x03url\x12\x16\n\x06extras\x18\x02\x20\x01(\tR\x06extras\x12\
+    \x1e\n\nisAnimated\x18\t\x20\x01(\x08R\nisAnimated\"\xc8\x12\n\x0bBadgeS\
+    truct\x12F\n\x0bdisplayType\x18\x01\x20\x01(\x0e2$.TikTok.BadgeStruct.Ba\
+    dgeDisplayTypeR\x0bdisplayType\x126\n\x05image\x18\x14\x20\x01(\x0b2\x1e\
+    .TikTok.BadgeStruct.ImageBadgeH\0R\x05image\x123\n\x04text\x18\x15\x20\
+    \x01(\x0b2\x1d.TikTok.BadgeStruct.TextBadgeH\0R\x04text\x123\n\x03str\
+    \x18\x16\x20\x01(\x0b2\x1f.TikTok.BadgeStruct.StringBadgeH\0R\x03str\x12\
+    <\n\x07combine\x18\x17\x20\x01(\x0b2\x20.TikTok.BadgeStruct.CombineBadge\
+    H\0R\x07combine\x1a\xbc\x05\n\x0cCombineBadge\x12!\n\x04icon\x18\x02\x20\
+    \x01(\x0b2\r.TikTok.ImageR\x04icon\x121\n\x04text\x18\x03\x20\x01(\x0b2\
+    \x1d.TikTok.BadgeStruct.TextBadgeR\x04text\x12\x10\n\x03str\x18\x04\x20\
+    \x01(\tR\x03str\x12P\n\x10profileCardPanel\x18\x07\x20\x01(\x0b2$.TikTok\
+    .BadgeStruct.ProfileCardPanelR\x10profileCardPanel\x12J\n\nbackground\
+    \x18\x0b\x20\x01(\x0b2*.TikTok.BadgeStruct.CombineBadgeBackgroundR\nback\
+    ground\x12Z\n\x12backgroundDarkMode\x18\x0c\x20\x01(\x0b2*.TikTok.BadgeS\
+    truct.CombineBadgeBackgroundR\x12backgroundDarkMode\x12*\n\x10iconAutoMi\
+    rrored\x18\r\x20\x01(\x08R\x10iconAutoMirrored\x126\n\x16backgroundAutoM\
+    irrored\x18\x0e\x20\x01(\x08R\x16backgroundAutoMirrored\x124\n\x15public\
+    ScreenShowStyle\x18\x0f\x20\x01(\x05R\x15publicScreenShowStyle\x124\n\
+    \x15personalCardShowStyle\x18\x10\x20\x01(\x05R\x15personalCardShowStyle\
+    \x12H\n\x1franklistOnlineAudienceShowStyle\x18\x11\x20\x01(\x05R\x1frank\
+    listOnlineAudienceShowStyle\x120\n\x13multiGuestShowStyle\x18\x12\x20\
+    \x01(\x05R\x13multiGuestShowStyle\x1a\xb2\x01\n\x0eProfileContent\x12\
+    \x1e\n\nuseContent\x18\x01\x20\x01(\x08R\nuseContent\x12:\n\x08iconList\
+    \x18\x02\x20\x03(\x0b2\x1e.TikTok.BadgeStruct.IconConfigR\x08iconList\
+    \x12D\n\x0cnumberConfig\x18\x03\x20\x01(\x0b2\x20.TikTok.BadgeStruct.Num\
+    berConfigR\x0cnumberConfig\x1a[\n\x10ProjectionConfig\x12$\n\ruseProject\
+    ion\x18\x01\x20\x01(\x08R\ruseProjection\x12!\n\x04icon\x18\x02\x20\x01(\
+    \x0b2\r.TikTok.ImageR\x04icon\x1ar\n\x0cNumberConfig\x12\x16\n\x06number\
+    \x18\x01\x20\x01(\x03R\x06number\x12J\n\nbackground\x18\x03\x20\x01(\x0b\
+    2*.TikTok.BadgeStruct.CombineBadgeBackgroundR\nbackground\x1a\xe8\x01\n\
+    \x10ProfileCardPanel\x126\n\x16useNewProfileCardStyle\x18\x01\x20\x01(\
+    \x08R\x16useNewProfileCardStyle\x12P\n\x10projectionConfig\x18\x03\x20\
+    \x01(\x0b2$.TikTok.BadgeStruct.ProjectionConfigR\x10projectionConfig\x12\
+    J\n\x0eprofileContent\x18\x04\x20\x01(\x0b2\".TikTok.BadgeStruct.Profile\
+    ContentR\x0eprofileContent\x1a\x99\x01\n\x16CombineBadgeBackground\x12#\
+    \n\x05image\x18\x01\x20\x01(\x0b2\r.TikTok.ImageR\x05image\x120\n\x13bac\
+    kgroundColorCode\x18\x02\x20\x01(\tR\x13backgroundColorCode\x12(\n\x0fbo\
+    rderColorCode\x18\x03\x20\x01(\tR\x0fborderColorCode\x1a1\n\nImageBadge\
+    \x12#\n\x05image\x18\x02\x20\x01(\x0b2\r.TikTok.ImageR\x05image\x1a3\n\t\
+    TextBadge\x12&\n\x0edefaultPattern\x18\x03\x20\x01(\tR\x0edefaultPattern\
+    \x1a{\n\nIconConfig\x12!\n\x04icon\x18\x01\x20\x01(\x0b2\r.TikTok.ImageR\
+    \x04icon\x12J\n\nbackground\x18\x02\x20\x01(\x0b2*.TikTok.BadgeStruct.Co\
+    mbineBadgeBackgroundR\nbackground\x1a\x1f\n\x0bStringBadge\x12\x10\n\x03\
+    str\x18\x02\x20\x01(\tR\x03str\"G\n\x08DataCase\x12\x10\n\x0cDATA_NOT_SE\
+    T\x10\0\x12\t\n\x05IMAGE\x10\x14\x12\x08\n\x04TEXT\x10\x15\x12\x07\n\x03\
+    STR\x10\x16\x12\x0b\n\x07COMBINE\x10\x17\"\xa2\x01\n\x10BadgeDisplayType\
+    \x12\x1c\n\x18BADGEDISPLAYTYPE_UNKNOWN\x10\0\x12\x1a\n\x16BADGEDISPLAYTY\
+    PE_IMAGE\x10\x01\x12\x19\n\x15BADGEDISPLAYTYPE_TEXT\x10\x02\x12\x1b\n\
+    \x17BADGEDISPLAYTYPE_STRING\x10\x03\x12\x1c\n\x18BADGEDISPLAYTYPE_COMBIN\
+    E\x10\x04\"D\n\x08Position\x12\x13\n\x0fPOSITIONUNKNOWN\x10\0\x12\x10\n\
+    \x0cPOSITIONLEFT\x10\x01\x12\x11\n\rPOSITIONRIGHT\x10\x02B\x0b\n\tbadgeT\
+    ype\"\xf1\r\n\nGiftStruct\x12#\n\x05image\x18\x01\x20\x01(\x0b2\r.TikTok\
+    .ImageR\x05image\x12\x1a\n\x08describe\x18\x02\x20\x01(\tR\x08describe\
+    \x12\x1a\n\x08duration\x18\x04\x20\x01(\x03R\x08duration\x12\x0e\n\x02id\
+    \x18\x05\x20\x01(\x03R\x02id\x12\x1e\n\nforLinkmic\x18\x07\x20\x01(\x08R\
+    \nforLinkmic\x12\x14\n\x05combo\x18\n\x20\x01(\x08R\x05combo\x12\x12\n\
+    \x04type\x18\x0b\x20\x01(\x05R\x04type\x12\"\n\x0cdiamondCount\x18\x0c\
+    \x20\x01(\x05R\x0cdiamondCount\x12.\n\x12isDisplayedOnPanel\x18\r\x20\
+    \x01(\x08R\x12isDisplayedOnPanel\x12(\n\x0fprimaryEffectId\x18\x0e\x20\
+    \x01(\x03R\x0fprimaryEffectId\x123\n\rgiftLabelIcon\x18\x0f\x20\x01(\x0b\
+    2\r.TikTok.ImageR\rgiftLabelIcon\x12\x12\n\x04name\x18\x10\x20\x01(\tR\
+    \x04name\x12!\n\x04icon\x18\x15\x20\x01(\x0b2\r.TikTok.ImageR\x04icon\
+    \x12\x1e\n\ngoldEffect\x18\x18\x20\x01(\tR\ngoldEffect\x121\n\x0cpreview\
+    Image\x18/\x20\x01(\x0b2\r.TikTok.ImageR\x0cpreviewImage\x12L\n\x0fgiftP\
+    anelBanner\x180\x20\x01(\x0b2\".TikTok.GiftStruct.GiftPanelBannerR\x0fgi\
+    ftPanelBanner\x12(\n\x0fisBroadcastGift\x181\x20\x01(\x08R\x0fisBroadcas\
+    tGift\x12(\n\x0fisEffectBefview\x182\x20\x01(\x08R\x0fisEffectBefview\
+    \x12\"\n\x0cisRandomGift\x183\x20\x01(\x08R\x0cisRandomGift\x12\x1c\n\ti\
+    sBoxGift\x184\x20\x01(\x08R\tisBoxGift\x12(\n\x0fcanPutInGiftBox\x185\
+    \x20\x01(\x08R\x0fcanPutInGiftBox\x1a\xde\x01\n\x0fGiftPanelBanner\x12.\
+    \n\x0bdisplayText\x18\x01\x20\x01(\x0b2\x0c.TikTok.TextR\x0bdisplayText\
+    \x12)\n\x08leftIcon\x18\x02\x20\x01(\x0b2\r.TikTok.ImageR\x08leftIcon\
+    \x12\x1c\n\tschemaUrl\x18\x03\x20\x01(\tR\tschemaUrl\x12,\n\x11bgColorVa\
+    luesList\x18\x05\x20\x03(\tR\x11bgColorValuesList\x12$\n\rbannerLynxUrl\
+    \x18\x06\x20\x01(\tR\rbannerLynxUrl\x1a\xa9\x02\n\x14GiftRandomEffectInf\
+    o\x12^\n\x15randomGiftPanelBanner\x18\x01\x20\x01(\x0b2(.TikTok.GiftStru\
+    ct.RandomGiftPanelBannerR\x15randomGiftPanelBanner\x12$\n\reffectIdsList\
+    \x18\x02\x20\x03(\x03R\reffectIdsList\x12\x18\n\x07hostKey\x18\x03\x20\
+    \x01(\tR\x07hostKey\x12\x20\n\x0baudienceKey\x18\x04\x20\x01(\tR\x0baudi\
+    enceKey\x12O\n\x10randomGiftBubble\x18\x05\x20\x01(\x0b2#.TikTok.GiftStr\
+    uct.RandomGiftBubbleR\x10randomGiftBubble\x1aq\n\x10RandomGiftBubble\x12\
+    \x20\n\x0bdisplayText\x18\x01\x20\x01(\tR\x0bdisplayText\x12;\n\x11iconD\
+    ynamicEffect\x18\x02\x20\x01(\x0b2\r.TikTok.ImageR\x11iconDynamicEffect\
+    \x1a\xe0\x02\n\x15RandomGiftPanelBanner\x12'\n\x07bgImage\x18\x01\x20\
     \x01(\x0b2\r.TikTok.ImageR\x07bgImage\x121\n\x0cshadingImage\x18\x02\x20\
     \x01(\x0b2\r.TikTok.ImageR\x0cshadingImage\x12\x1c\n\ttargetNum\x18\x03\
     \x20\x01(\x03R\ttargetNum\x12\x1e\n\ncollectNum\x18\x04\x20\x01(\x03R\nc\

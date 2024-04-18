@@ -418,6 +418,89 @@ impl LinkmicApplierSortSetting {
 }
 
 #[derive(Clone,Copy,PartialEq,Eq,Debug,Hash)]
+// @@protoc_insertion_point(enum:TikTok.LinkMicBattleStatus)
+pub enum LinkMicBattleStatus {
+    // @@protoc_insertion_point(enum_value:TikTok.LinkMicBattleStatus.BATTLE_ARMY_UNKNOWN)
+    BATTLE_ARMY_UNKNOWN = 0,
+    // @@protoc_insertion_point(enum_value:TikTok.LinkMicBattleStatus.ARMY_ONGOING)
+    ARMY_ONGOING = 1,
+    // @@protoc_insertion_point(enum_value:TikTok.LinkMicBattleStatus.ARMY_FINISHED)
+    ARMY_FINISHED = 2,
+    // @@protoc_insertion_point(enum_value:TikTok.LinkMicBattleStatus.BATTLE_ONGOING)
+    BATTLE_ONGOING = 4,
+    // @@protoc_insertion_point(enum_value:TikTok.LinkMicBattleStatus.BATTLE_FINISHED)
+    BATTLE_FINISHED = 5,
+}
+
+impl ::protobuf::Enum for LinkMicBattleStatus {
+    const NAME: &'static str = "LinkMicBattleStatus";
+
+    fn value(&self) -> i32 {
+        *self as i32
+    }
+
+    fn from_i32(value: i32) -> ::std::option::Option<LinkMicBattleStatus> {
+        match value {
+            0 => ::std::option::Option::Some(LinkMicBattleStatus::BATTLE_ARMY_UNKNOWN),
+            1 => ::std::option::Option::Some(LinkMicBattleStatus::ARMY_ONGOING),
+            2 => ::std::option::Option::Some(LinkMicBattleStatus::ARMY_FINISHED),
+            4 => ::std::option::Option::Some(LinkMicBattleStatus::BATTLE_ONGOING),
+            5 => ::std::option::Option::Some(LinkMicBattleStatus::BATTLE_FINISHED),
+            _ => ::std::option::Option::None
+        }
+    }
+
+    fn from_str(str: &str) -> ::std::option::Option<LinkMicBattleStatus> {
+        match str {
+            "BATTLE_ARMY_UNKNOWN" => ::std::option::Option::Some(LinkMicBattleStatus::BATTLE_ARMY_UNKNOWN),
+            "ARMY_ONGOING" => ::std::option::Option::Some(LinkMicBattleStatus::ARMY_ONGOING),
+            "ARMY_FINISHED" => ::std::option::Option::Some(LinkMicBattleStatus::ARMY_FINISHED),
+            "BATTLE_ONGOING" => ::std::option::Option::Some(LinkMicBattleStatus::BATTLE_ONGOING),
+            "BATTLE_FINISHED" => ::std::option::Option::Some(LinkMicBattleStatus::BATTLE_FINISHED),
+            _ => ::std::option::Option::None
+        }
+    }
+
+    const VALUES: &'static [LinkMicBattleStatus] = &[
+        LinkMicBattleStatus::BATTLE_ARMY_UNKNOWN,
+        LinkMicBattleStatus::ARMY_ONGOING,
+        LinkMicBattleStatus::ARMY_FINISHED,
+        LinkMicBattleStatus::BATTLE_ONGOING,
+        LinkMicBattleStatus::BATTLE_FINISHED,
+    ];
+}
+
+impl ::protobuf::EnumFull for LinkMicBattleStatus {
+    fn enum_descriptor() -> ::protobuf::reflect::EnumDescriptor {
+        static descriptor: ::protobuf::rt::Lazy<::protobuf::reflect::EnumDescriptor> = ::protobuf::rt::Lazy::new();
+        descriptor.get(|| file_descriptor().enum_by_package_relative_name("LinkMicBattleStatus").unwrap()).clone()
+    }
+
+    fn descriptor(&self) -> ::protobuf::reflect::EnumValueDescriptor {
+        let index = match self {
+            LinkMicBattleStatus::BATTLE_ARMY_UNKNOWN => 0,
+            LinkMicBattleStatus::ARMY_ONGOING => 1,
+            LinkMicBattleStatus::ARMY_FINISHED => 2,
+            LinkMicBattleStatus::BATTLE_ONGOING => 3,
+            LinkMicBattleStatus::BATTLE_FINISHED => 4,
+        };
+        Self::enum_descriptor().value_by_index(index)
+    }
+}
+
+impl ::std::default::Default for LinkMicBattleStatus {
+    fn default() -> Self {
+        LinkMicBattleStatus::BATTLE_ARMY_UNKNOWN
+    }
+}
+
+impl LinkMicBattleStatus {
+    fn generated_enum_descriptor_data() -> ::protobuf::reflect::GeneratedEnumDescriptorData {
+        ::protobuf::reflect::GeneratedEnumDescriptorData::new::<LinkMicBattleStatus>("LinkMicBattleStatus")
+    }
+}
+
+#[derive(Clone,Copy,PartialEq,Eq,Debug,Hash)]
 // @@protoc_insertion_point(enum:TikTok.HashtagNamespace)
 pub enum HashtagNamespace {
     // @@protoc_insertion_point(enum_value:TikTok.HashtagNamespace.GLOBAL)
@@ -2532,48 +2615,51 @@ static file_descriptor_proto_data: &'static [u8] = b"\
     OTE_PRIVATE_TYPE_SUB_WAVE\x10\x01*)\n\x08TextType\x12\x10\n\x0cDISPLAY_T\
     EXT\x10\0\x12\x0b\n\x07CONTENT\x10\x01*r\n\x19LinkmicApplierSortSetting\
     \x12%\n!LINKMIC_APPLIER_SORT_SETTING_NONE\x10\0\x12.\n*LINKMIC_APPLIER_S\
-    ORT_SETTING_BY_GIFT_SCORE\x10\x01**\n\x10HashtagNamespace\x12\n\n\x06GLO\
-    BAL\x10\0\x12\n\n\x06GAMING\x10\x01*7\n\x0bAgreeStatus\x12\x11\n\rAGREE_\
-    UNKNOWN\x10\0\x12\t\n\x05AGREE\x10\x01\x12\n\n\x06REJECT\x10\x02*\xfd\
-    \x01\n\rKickoutReason\x12\x1a\n\x16KICKOUT_REASON_UNKNOWN\x10\0\x12&\n\"\
-    KICKOUT_REASON_FIRST_FRAME_TIMEOUT\x10\x01\x12\x1a\n\x16KICKOUT_REASON_B\
-    Y_HOST\x10\x02\x12&\n\"KICKOUT_REASON_RTC_LOST_CONNECTION\x10\x03\x12\
-    \x1c\n\x18KICKOUT_REASON_BY_PUNISH\x10\x04\x12\x1b\n\x17KICKOUT_REASON_B\
-    Y_ADMIN\x10\x05\x12)\n%KICKOUT_REASON_HOST_REMOVE_ALL_GUESTS\x10\x06*Z\n\
-    \x0bGroupStatus\x12\x18\n\x14GROUP_STATUS_UNKNOWN\x10\0\x12\x18\n\x14GRO\
-    UP_STATUS_WAITING\x10\x01\x12\x17\n\x13GROUP_STATUS_LINKED\x10\x03*\x83\
-    \x02\n\x0cBusinessCase\x12\x14\n\x10BUSINESS_NOT_SET\x10\0\x12\x15\n\x11\
-    APPLY_BIZ_CONTENT\x10\x01\x12\x16\n\x12INVITE_BIZ_CONTENT\x10\x02\x12\
-    \x15\n\x11REPLY_BIZ_CONTENT\x10\x03\x12\x16\n\x12PERMIT_BIZ_CONTENT\x10\
-    \x04\x12\x1b\n\x17JOIN_DIRECT_BIZ_CONTENT\x10\x05\x12\x18\n\x14KICK_OUT_\
-    BIZ_CONTENT\x10\x06\x12\x1b\n\x17LIST_CHANGE_BIZ_CONTENT\x10\x0b\x12\x16\
-    \n\x12MULTI_LIVE_CONTENT\x10d\x12\x13\n\x0eCOHOST_CONTENT\x10\xc8\x01*\
-    \xae\x08\n\x0bReplyStatus\x12\x18\n\x14REPLY_STATUS_UNKNOWN\x10\0\x12\
-    \x16\n\x12REPLY_STATUS_AGREE\x10\x01\x12\"\n\x1eREPLY_STATUS_REFUSE_PERS\
-    ONALLY\x10\x02\x12(\n$REPLY_STATUS_REFUSE_TYPE_NOT_SUPPORT\x10\x03\x12-\
-    \n)REPLY_STATUS_REFUSE_PROCESSING_INVITATION\x10\x04\x12\"\n\x1eREPLY_ST\
-    ATUS_REFUSE_BY_TIMEOUT\x10\x05\x12!\n\x1dREPLY_STATUS_REFUSE_EXCEPTION\
-    \x10\x06\x12,\n(REPLY_STATUS_REFUSE_SYSTEM_NOT_SUPPORTED\x10\x07\x12*\n&\
-    REPLY_STATUS_REFUSE_SUBTYPE_DIFFERENCE\x10\x08\x12\"\n\x1eREPLY_STATUS_R\
-    EFUSE_IN_MICROOM\x10\t\x12'\n#REPLY_STATUS_REFUSE_NOT_LOAD_PLUGIN\x10\n\
-    \x12&\n\"REPLY_STATUS_REFUSE_IN_MULTI_GUEST\x10\x0b\x12\"\n\x1eREPLY_STA\
-    TUS_REFUSE_PAUSE_LIVE\x10\x0c\x122\n.REPLY_STATUS_REFUSE_OPEN_CAMERA_DIA\
-    LOG_SHOWING\x10\r\x12%\n!REPLY_STATUS_REFUSE_DRAW_GUESSING\x10\x0e\x12'\
-    \n#REPLY_STATUS_REFUSE_RANDOM_MATCHING\x10\x0f\x12+\n'REPLY_STATUS_REFUS\
-    E_IN_MATCH_PROCESSING\x10\x10\x123\n/REPLY_STATUS_REFUSE_IN_MICROOM_FOR_\
-    MULTI_COHOST\x10\x11\x12'\n#REPLY_STATUS_REFUSE_COHOST_FINISHED\x10\x12\
-    \x12%\n!REPLY_STATUS_REFUSE_NOT_CONNECTED\x10\x13\x12$\n\x20REPLY_STATUS\
-    _REFUSE_LINKMIC_FULL\x10\x14\x12(\n$REPLY_STATUS_REFUSE_ARC_INCOMPATIBLE\
-    \x10\x15\x12/\n+REPLY_STATUS_REFUSE_PROCESSING_OTHER_INVITE\x10\x16\x12.\
-    \n*REPLY_STATUS_REFUSE_PROCESSING_OTHER_APPLY\x10\x17\x12(\n$REPLY_STATU\
-    S_REFUSE_IN_ANCHOR_COHOST\x10\x18\x12%\n!REPLY_STATUS_REFUSE_TOPIC_PAIRI\
-    NG\x10\x19*Z\n\rSubscribeType\x12\x16\n\x12SUBSCRIBETYPE_ONCE\x10\0\x12\
-    \x16\n\x12SUBSCRIBETYPE_AUTO\x10\x01\x12\x19\n\x15SUBSCRIBETYPE_DEFAULT\
-    \x10d*\xc5\x01\n\x12OldSubscribeStatus\x12\x1c\n\x18OLDSUBSCRIBESTATUS_F\
-    IRST\x10\0\x12\x1c\n\x18OLDSUBSCRIBESTATUS_RESUB\x10\x01\x12'\n#OLDSUBSC\
-    RIBESTATUS_SUBINGRACEPERIOD\x10\x02\x12*\n&OLDSUBSCRIBESTATUS_SUBNOTINGR\
-    ACEPERIOD\x10\x03\x12\x1e\n\x1aOLDSUBSCRIBESTATUS_DEFAULT\x10d*\xfb\x01\
-    \n\x11SubscribingStatus\x12\x1d\n\x19SUBSCRIBINGSTATUS_UNKNOWN\x10\0\x12\
+    ORT_SETTING_BY_GIFT_SCORE\x10\x01*|\n\x13LinkMicBattleStatus\x12\x17\n\
+    \x13BATTLE_ARMY_UNKNOWN\x10\0\x12\x10\n\x0cARMY_ONGOING\x10\x01\x12\x11\
+    \n\rARMY_FINISHED\x10\x02\x12\x12\n\x0eBATTLE_ONGOING\x10\x04\x12\x13\n\
+    \x0fBATTLE_FINISHED\x10\x05**\n\x10HashtagNamespace\x12\n\n\x06GLOBAL\
+    \x10\0\x12\n\n\x06GAMING\x10\x01*7\n\x0bAgreeStatus\x12\x11\n\rAGREE_UNK\
+    NOWN\x10\0\x12\t\n\x05AGREE\x10\x01\x12\n\n\x06REJECT\x10\x02*\xfd\x01\n\
+    \rKickoutReason\x12\x1a\n\x16KICKOUT_REASON_UNKNOWN\x10\0\x12&\n\"KICKOU\
+    T_REASON_FIRST_FRAME_TIMEOUT\x10\x01\x12\x1a\n\x16KICKOUT_REASON_BY_HOST\
+    \x10\x02\x12&\n\"KICKOUT_REASON_RTC_LOST_CONNECTION\x10\x03\x12\x1c\n\
+    \x18KICKOUT_REASON_BY_PUNISH\x10\x04\x12\x1b\n\x17KICKOUT_REASON_BY_ADMI\
+    N\x10\x05\x12)\n%KICKOUT_REASON_HOST_REMOVE_ALL_GUESTS\x10\x06*Z\n\x0bGr\
+    oupStatus\x12\x18\n\x14GROUP_STATUS_UNKNOWN\x10\0\x12\x18\n\x14GROUP_STA\
+    TUS_WAITING\x10\x01\x12\x17\n\x13GROUP_STATUS_LINKED\x10\x03*\x83\x02\n\
+    \x0cBusinessCase\x12\x14\n\x10BUSINESS_NOT_SET\x10\0\x12\x15\n\x11APPLY_\
+    BIZ_CONTENT\x10\x01\x12\x16\n\x12INVITE_BIZ_CONTENT\x10\x02\x12\x15\n\
+    \x11REPLY_BIZ_CONTENT\x10\x03\x12\x16\n\x12PERMIT_BIZ_CONTENT\x10\x04\
+    \x12\x1b\n\x17JOIN_DIRECT_BIZ_CONTENT\x10\x05\x12\x18\n\x14KICK_OUT_BIZ_\
+    CONTENT\x10\x06\x12\x1b\n\x17LIST_CHANGE_BIZ_CONTENT\x10\x0b\x12\x16\n\
+    \x12MULTI_LIVE_CONTENT\x10d\x12\x13\n\x0eCOHOST_CONTENT\x10\xc8\x01*\xae\
+    \x08\n\x0bReplyStatus\x12\x18\n\x14REPLY_STATUS_UNKNOWN\x10\0\x12\x16\n\
+    \x12REPLY_STATUS_AGREE\x10\x01\x12\"\n\x1eREPLY_STATUS_REFUSE_PERSONALLY\
+    \x10\x02\x12(\n$REPLY_STATUS_REFUSE_TYPE_NOT_SUPPORT\x10\x03\x12-\n)REPL\
+    Y_STATUS_REFUSE_PROCESSING_INVITATION\x10\x04\x12\"\n\x1eREPLY_STATUS_RE\
+    FUSE_BY_TIMEOUT\x10\x05\x12!\n\x1dREPLY_STATUS_REFUSE_EXCEPTION\x10\x06\
+    \x12,\n(REPLY_STATUS_REFUSE_SYSTEM_NOT_SUPPORTED\x10\x07\x12*\n&REPLY_ST\
+    ATUS_REFUSE_SUBTYPE_DIFFERENCE\x10\x08\x12\"\n\x1eREPLY_STATUS_REFUSE_IN\
+    _MICROOM\x10\t\x12'\n#REPLY_STATUS_REFUSE_NOT_LOAD_PLUGIN\x10\n\x12&\n\"\
+    REPLY_STATUS_REFUSE_IN_MULTI_GUEST\x10\x0b\x12\"\n\x1eREPLY_STATUS_REFUS\
+    E_PAUSE_LIVE\x10\x0c\x122\n.REPLY_STATUS_REFUSE_OPEN_CAMERA_DIALOG_SHOWI\
+    NG\x10\r\x12%\n!REPLY_STATUS_REFUSE_DRAW_GUESSING\x10\x0e\x12'\n#REPLY_S\
+    TATUS_REFUSE_RANDOM_MATCHING\x10\x0f\x12+\n'REPLY_STATUS_REFUSE_IN_MATCH\
+    _PROCESSING\x10\x10\x123\n/REPLY_STATUS_REFUSE_IN_MICROOM_FOR_MULTI_COHO\
+    ST\x10\x11\x12'\n#REPLY_STATUS_REFUSE_COHOST_FINISHED\x10\x12\x12%\n!REP\
+    LY_STATUS_REFUSE_NOT_CONNECTED\x10\x13\x12$\n\x20REPLY_STATUS_REFUSE_LIN\
+    KMIC_FULL\x10\x14\x12(\n$REPLY_STATUS_REFUSE_ARC_INCOMPATIBLE\x10\x15\
+    \x12/\n+REPLY_STATUS_REFUSE_PROCESSING_OTHER_INVITE\x10\x16\x12.\n*REPLY\
+    _STATUS_REFUSE_PROCESSING_OTHER_APPLY\x10\x17\x12(\n$REPLY_STATUS_REFUSE\
+    _IN_ANCHOR_COHOST\x10\x18\x12%\n!REPLY_STATUS_REFUSE_TOPIC_PAIRING\x10\
+    \x19*Z\n\rSubscribeType\x12\x16\n\x12SUBSCRIBETYPE_ONCE\x10\0\x12\x16\n\
+    \x12SUBSCRIBETYPE_AUTO\x10\x01\x12\x19\n\x15SUBSCRIBETYPE_DEFAULT\x10d*\
+    \xc5\x01\n\x12OldSubscribeStatus\x12\x1c\n\x18OLDSUBSCRIBESTATUS_FIRST\
+    \x10\0\x12\x1c\n\x18OLDSUBSCRIBESTATUS_RESUB\x10\x01\x12'\n#OLDSUBSCRIBE\
+    STATUS_SUBINGRACEPERIOD\x10\x02\x12*\n&OLDSUBSCRIBESTATUS_SUBNOTINGRACEP\
+    ERIOD\x10\x03\x12\x1e\n\x1aOLDSUBSCRIBESTATUS_DEFAULT\x10d*\xfb\x01\n\
+    \x11SubscribingStatus\x12\x1d\n\x19SUBSCRIBINGSTATUS_UNKNOWN\x10\0\x12\
     \x1a\n\x16SUBSCRIBINGSTATUS_ONCE\x10\x01\x12\x1c\n\x18SUBSCRIBINGSTATUS_\
     CIRCLE\x10\x02\x12\"\n\x1eSUBSCRIBINGSTATUS_CIRCLECANCEL\x10\x03\x12\x1c\
     \n\x18SUBSCRIBINGSTATUS_REFUND\x10\x04\x12#\n\x1fSUBSCRIBINGSTATUS_INGRA\
@@ -2669,13 +2755,14 @@ pub fn file_descriptor() -> &'static ::protobuf::reflect::FileDescriptor {
         let generated_file_descriptor = generated_file_descriptor_lazy.get(|| {
             let mut deps = ::std::vec::Vec::with_capacity(0);
             let mut messages = ::std::vec::Vec::with_capacity(0);
-            let mut enums = ::std::vec::Vec::with_capacity(27);
+            let mut enums = ::std::vec::Vec::with_capacity(28);
             enums.push(AuditStatus::generated_enum_descriptor_data());
             enums.push(EmoteType::generated_enum_descriptor_data());
             enums.push(ContentSource::generated_enum_descriptor_data());
             enums.push(EmotePrivateType::generated_enum_descriptor_data());
             enums.push(TextType::generated_enum_descriptor_data());
             enums.push(LinkmicApplierSortSetting::generated_enum_descriptor_data());
+            enums.push(LinkMicBattleStatus::generated_enum_descriptor_data());
             enums.push(HashtagNamespace::generated_enum_descriptor_data());
             enums.push(AgreeStatus::generated_enum_descriptor_data());
             enums.push(KickoutReason::generated_enum_descriptor_data());

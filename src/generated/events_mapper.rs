@@ -20,13 +20,147 @@ impl TikTokLiveMessageMapper {
                 let event = TikTokLikeEvent { raw_data };
                 client.publish_event(TikTokLiveEvent::OnLike(event));
             }
-            "WebcastQuestionNewMessage" => {
-                let raw_data = WebcastQuestionNewMessage::parse_from_bytes(
+            "WebcastRankUpdateMessage" => {
+                let raw_data = WebcastRankUpdateMessage::parse_from_bytes(
                         proto_message_content,
                     )
                     .unwrap();
-                let event = TikTokQuestionNewEvent { raw_data };
-                client.publish_event(TikTokLiveEvent::OnQuestionNew(event));
+                let event = TikTokRankUpdateEvent { raw_data };
+                client.publish_event(TikTokLiveEvent::OnRankUpdate(event));
+            }
+            "WebcastGoalUpdateMessage" => {
+                let raw_data = WebcastGoalUpdateMessage::parse_from_bytes(
+                        proto_message_content,
+                    )
+                    .unwrap();
+                let event = TikTokGoalUpdateEvent { raw_data };
+                client.publish_event(TikTokLiveEvent::OnGoalUpdate(event));
+            }
+            "WebcastImDeleteMessage" => {
+                let raw_data = WebcastImDeleteMessage::parse_from_bytes(
+                        proto_message_content,
+                    )
+                    .unwrap();
+                let event = TikTokImDeleteEvent { raw_data };
+                client.publish_event(TikTokLiveEvent::OnImDelete(event));
+            }
+            "WebcastLinkMicFanTicketMethod" => {
+                let raw_data = WebcastLinkMicFanTicketMethod::parse_from_bytes(
+                        proto_message_content,
+                    )
+                    .unwrap();
+                let event = TikTokLinkMicFanTicketMethodEvent {
+                    raw_data,
+                };
+                client.publish_event(TikTokLiveEvent::OnLinkMicFanTicketMethod(event));
+            }
+            "WebcastControlMessage" => {
+                let raw_data = WebcastControlMessage::parse_from_bytes(
+                        proto_message_content,
+                    )
+                    .unwrap();
+                let event = TikTokControlEvent { raw_data };
+                client.publish_event(TikTokLiveEvent::OnControl(event));
+            }
+            "WebcastLinkmicBattleTaskMessage" => {
+                let raw_data = WebcastLinkmicBattleTaskMessage::parse_from_bytes(
+                        proto_message_content,
+                    )
+                    .unwrap();
+                let event = TikTokLinkmicBattleTaskEvent {
+                    raw_data,
+                };
+                client.publish_event(TikTokLiveEvent::OnLinkmicBattleTask(event));
+            }
+            "WebcastRoomPinMessage" => {
+                let raw_data = WebcastRoomPinMessage::parse_from_bytes(
+                        proto_message_content,
+                    )
+                    .unwrap();
+                let event = TikTokRoomPinEvent { raw_data };
+                client.publish_event(TikTokLiveEvent::OnRoomPin(event));
+            }
+            "WebcastSystemMessage" => {
+                let raw_data = WebcastSystemMessage::parse_from_bytes(
+                        proto_message_content,
+                    )
+                    .unwrap();
+                let event = TikTokSystemEvent { raw_data };
+                client.publish_event(TikTokLiveEvent::OnSystem(event));
+            }
+            "WebcastSocialMessage" => {
+                let raw_data = WebcastSocialMessage::parse_from_bytes(
+                        proto_message_content,
+                    )
+                    .unwrap();
+                let event = TikTokSocialEvent { raw_data };
+                client.publish_event(TikTokLiveEvent::OnSocial(event));
+            }
+            "WebcastRankTextMessage" => {
+                let raw_data = WebcastRankTextMessage::parse_from_bytes(
+                        proto_message_content,
+                    )
+                    .unwrap();
+                let event = TikTokRankTextEvent { raw_data };
+                client.publish_event(TikTokLiveEvent::OnRankText(event));
+            }
+            "WebcastLiveIntroMessage" => {
+                let raw_data = WebcastLiveIntroMessage::parse_from_bytes(
+                        proto_message_content,
+                    )
+                    .unwrap();
+                let event = TikTokLiveIntroEvent { raw_data };
+                client.publish_event(TikTokLiveEvent::OnLiveIntro(event));
+            }
+            "WebcastLinkMessage" => {
+                let raw_data = WebcastLinkMessage::parse_from_bytes(
+                        proto_message_content,
+                    )
+                    .unwrap();
+                let event = TikTokLinkEvent { raw_data };
+                client.publish_event(TikTokLiveEvent::OnLink(event));
+            }
+            "WebcastLinkLayerMessage" => {
+                let raw_data = WebcastLinkLayerMessage::parse_from_bytes(
+                        proto_message_content,
+                    )
+                    .unwrap();
+                let event = TikTokLinkLayerEvent { raw_data };
+                client.publish_event(TikTokLiveEvent::OnLinkLayer(event));
+            }
+            "WebcastUnauthorizedMemberMessage" => {
+                let raw_data = WebcastUnauthorizedMemberMessage::parse_from_bytes(
+                        proto_message_content,
+                    )
+                    .unwrap();
+                let event = TikTokUnauthorizedMemberEvent {
+                    raw_data,
+                };
+                client.publish_event(TikTokLiveEvent::OnUnauthorizedMember(event));
+            }
+            "WebcastLinkMicBattle" => {
+                let raw_data = WebcastLinkMicBattle::parse_from_bytes(
+                        proto_message_content,
+                    )
+                    .unwrap();
+                let event = TikTokLinkMicBattleEvent {
+                    raw_data,
+                };
+                client.publish_event(TikTokLiveEvent::OnLinkMicBattle(event));
+            }
+            "WebcastHourlyRankMessage" => {
+                let raw_data = WebcastHourlyRankMessage::parse_from_bytes(
+                        proto_message_content,
+                    )
+                    .unwrap();
+                let event = TikTokHourlyRankEvent { raw_data };
+                client.publish_event(TikTokLiveEvent::OnHourlyRank(event));
+            }
+            "WebcastPushFrame" => {
+                let raw_data = WebcastPushFrame::parse_from_bytes(proto_message_content)
+                    .unwrap();
+                let event = TikTokPushFrameEvent { raw_data };
+                client.publish_event(TikTokLiveEvent::OnPushFrame(event));
             }
             "WebcastLinkMicBattlePunishFinish" => {
                 let raw_data = WebcastLinkMicBattlePunishFinish::parse_from_bytes(
@@ -39,47 +173,53 @@ impl TikTokLiveMessageMapper {
                 client
                     .publish_event(TikTokLiveEvent::OnLinkMicBattlePunishFinish(event));
             }
-            "WebcastRankUpdateMessage" => {
-                let raw_data = WebcastRankUpdateMessage::parse_from_bytes(
+            "WebcastMsgDetectMessage" => {
+                let raw_data = WebcastMsgDetectMessage::parse_from_bytes(
                         proto_message_content,
                     )
                     .unwrap();
-                let event = TikTokRankUpdateEvent { raw_data };
-                client.publish_event(TikTokLiveEvent::OnRankUpdate(event));
+                let event = TikTokMsgDetectEvent { raw_data };
+                client.publish_event(TikTokLiveEvent::OnMsgDetect(event));
             }
-            "WebcastLinkMicFanTicketMethod" => {
-                let raw_data = WebcastLinkMicFanTicketMethod::parse_from_bytes(
+            "WebcastOecLiveShoppingMessage" => {
+                let raw_data = WebcastOecLiveShoppingMessage::parse_from_bytes(
                         proto_message_content,
                     )
                     .unwrap();
-                let event = TikTokLinkMicFanTicketMethodEvent {
+                let event = TikTokOecLiveShoppingEvent {
                     raw_data,
                 };
-                client.publish_event(TikTokLiveEvent::OnLinkMicFanTicketMethod(event));
+                client.publish_event(TikTokLiveEvent::OnOecLiveShopping(event));
             }
-            "WebcastLiveIntroMessage" => {
-                let raw_data = WebcastLiveIntroMessage::parse_from_bytes(
+            "WebcastResponse" => {
+                let raw_data = WebcastResponse::parse_from_bytes(proto_message_content)
+                    .unwrap();
+                let event = TikTokResponseEvent { raw_data };
+                client.publish_event(TikTokLiveEvent::OnResponse(event));
+            }
+            "RoomVerifyMessage" => {
+                let raw_data = RoomVerifyMessage::parse_from_bytes(proto_message_content)
+                    .unwrap();
+                let event = TikTokRoomVerifyEvent { raw_data };
+                client.publish_event(TikTokLiveEvent::OnRoomVerify(event));
+            }
+            "WebcastRoomMessage" => {
+                let raw_data = WebcastRoomMessage::parse_from_bytes(
                         proto_message_content,
                     )
                     .unwrap();
-                let event = TikTokLiveIntroEvent { raw_data };
-                client.publish_event(TikTokLiveEvent::OnLiveIntro(event));
+                let event = TikTokRoomEvent { raw_data };
+                client.publish_event(TikTokLiveEvent::OnRoom(event));
             }
-            "WebcastMemberMessage" => {
-                let raw_data = WebcastMemberMessage::parse_from_bytes(
+            "WebcastLinkMicMethod" => {
+                let raw_data = WebcastLinkMicMethod::parse_from_bytes(
                         proto_message_content,
                     )
                     .unwrap();
-                let event = TikTokMemberEvent { raw_data };
-                client.publish_event(TikTokLiveEvent::OnMember(event));
-            }
-            "WebcastChatMessage" => {
-                let raw_data = WebcastChatMessage::parse_from_bytes(
-                        proto_message_content,
-                    )
-                    .unwrap();
-                let event = TikTokChatEvent { raw_data };
-                client.publish_event(TikTokLiveEvent::OnChat(event));
+                let event = TikTokLinkMicMethodEvent {
+                    raw_data,
+                };
+                client.publish_event(TikTokLiveEvent::OnLinkMicMethod(event));
             }
             "WebcastLinkMicArmies" => {
                 let raw_data = WebcastLinkMicArmies::parse_from_bytes(
@@ -91,51 +231,21 @@ impl TikTokLiveMessageMapper {
                 };
                 client.publish_event(TikTokLiveEvent::OnLinkMicArmies(event));
             }
-            "WebcastLinkLayerMessage" => {
-                let raw_data = WebcastLinkLayerMessage::parse_from_bytes(
+            "WebcastSubNotifyMessage" => {
+                let raw_data = WebcastSubNotifyMessage::parse_from_bytes(
                         proto_message_content,
                     )
                     .unwrap();
-                let event = TikTokLinkLayerEvent { raw_data };
-                client.publish_event(TikTokLiveEvent::OnLinkLayer(event));
+                let event = TikTokSubNotifyEvent { raw_data };
+                client.publish_event(TikTokLiveEvent::OnSubNotify(event));
             }
-            "WebcastResponse" => {
-                let raw_data = WebcastResponse::parse_from_bytes(proto_message_content)
-                    .unwrap();
-                let event = TikTokResponseEvent { raw_data };
-                client.publish_event(TikTokLiveEvent::OnResponse(event));
-            }
-            "WebcastPushFrame" => {
-                let raw_data = WebcastPushFrame::parse_from_bytes(proto_message_content)
-                    .unwrap();
-                let event = TikTokPushFrameEvent { raw_data };
-                client.publish_event(TikTokLiveEvent::OnPushFrame(event));
-            }
-            "WebcastRankTextMessage" => {
-                let raw_data = WebcastRankTextMessage::parse_from_bytes(
+            "WebcastQuestionNewMessage" => {
+                let raw_data = WebcastQuestionNewMessage::parse_from_bytes(
                         proto_message_content,
                     )
                     .unwrap();
-                let event = TikTokRankTextEvent { raw_data };
-                client.publish_event(TikTokLiveEvent::OnRankText(event));
-            }
-            "WebcastSystemMessage" => {
-                let raw_data = WebcastSystemMessage::parse_from_bytes(
-                        proto_message_content,
-                    )
-                    .unwrap();
-                let event = TikTokSystemEvent { raw_data };
-                client.publish_event(TikTokLiveEvent::OnSystem(event));
-            }
-            "WebcastLinkmicBattleTaskMessage" => {
-                let raw_data = WebcastLinkmicBattleTaskMessage::parse_from_bytes(
-                        proto_message_content,
-                    )
-                    .unwrap();
-                let event = TikTokLinkmicBattleTaskEvent {
-                    raw_data,
-                };
-                client.publish_event(TikTokLiveEvent::OnLinkmicBattleTask(event));
+                let event = TikTokQuestionNewEvent { raw_data };
+                client.publish_event(TikTokLiveEvent::OnQuestionNew(event));
             }
             "WebcastGiftMessage" => {
                 let raw_data = WebcastGiftMessage::parse_from_bytes(
@@ -155,85 +265,13 @@ impl TikTokLiveMessageMapper {
                 };
                 client.publish_event(TikTokLiveEvent::OnInRoomBanner(event));
             }
-            "WebcastMsgDetectMessage" => {
-                let raw_data = WebcastMsgDetectMessage::parse_from_bytes(
+            "WebcastRoomUserSeqMessage" => {
+                let raw_data = WebcastRoomUserSeqMessage::parse_from_bytes(
                         proto_message_content,
                     )
                     .unwrap();
-                let event = TikTokMsgDetectEvent { raw_data };
-                client.publish_event(TikTokLiveEvent::OnMsgDetect(event));
-            }
-            "WebcastControlMessage" => {
-                let raw_data = WebcastControlMessage::parse_from_bytes(
-                        proto_message_content,
-                    )
-                    .unwrap();
-                let event = TikTokControlEvent { raw_data };
-                client.publish_event(TikTokLiveEvent::OnControl(event));
-            }
-            "WebcastLinkMicMethod" => {
-                let raw_data = WebcastLinkMicMethod::parse_from_bytes(
-                        proto_message_content,
-                    )
-                    .unwrap();
-                let event = TikTokLinkMicMethodEvent {
-                    raw_data,
-                };
-                client.publish_event(TikTokLiveEvent::OnLinkMicMethod(event));
-            }
-            "WebcastGoalUpdateMessage" => {
-                let raw_data = WebcastGoalUpdateMessage::parse_from_bytes(
-                        proto_message_content,
-                    )
-                    .unwrap();
-                let event = TikTokGoalUpdateEvent { raw_data };
-                client.publish_event(TikTokLiveEvent::OnGoalUpdate(event));
-            }
-            "WebcastCaptionMessage" => {
-                let raw_data = WebcastCaptionMessage::parse_from_bytes(
-                        proto_message_content,
-                    )
-                    .unwrap();
-                let event = TikTokCaptionEvent { raw_data };
-                client.publish_event(TikTokLiveEvent::OnCaption(event));
-            }
-            "WebcastHourlyRankMessage" => {
-                let raw_data = WebcastHourlyRankMessage::parse_from_bytes(
-                        proto_message_content,
-                    )
-                    .unwrap();
-                let event = TikTokHourlyRankEvent { raw_data };
-                client.publish_event(TikTokLiveEvent::OnHourlyRank(event));
-            }
-            "WebcastBarrageMessage" => {
-                let raw_data = WebcastBarrageMessage::parse_from_bytes(
-                        proto_message_content,
-                    )
-                    .unwrap();
-                let event = TikTokBarrageEvent { raw_data };
-                client.publish_event(TikTokLiveEvent::OnBarrage(event));
-            }
-            "WebcastSubNotifyMessage" => {
-                let raw_data = WebcastSubNotifyMessage::parse_from_bytes(
-                        proto_message_content,
-                    )
-                    .unwrap();
-                let event = TikTokSubNotifyEvent { raw_data };
-                client.publish_event(TikTokLiveEvent::OnSubNotify(event));
-            }
-            "RoomVerifyMessage" => {
-                let raw_data = RoomVerifyMessage::parse_from_bytes(proto_message_content)
-                    .unwrap();
-                let event = TikTokRoomVerifyEvent { raw_data };
-                client.publish_event(TikTokLiveEvent::OnRoomVerify(event));
-            }
-            "WebcastSocialMessage" => {
-                let raw_data = WebcastSocialMessage::parse_from_bytes(
-                        proto_message_content,
-                    )
-                    .unwrap();
-                let event = TikTokSocialEvent { raw_data };
-                client.publish_event(TikTokLiveEvent::OnSocial(event));
+                let event = TikTokRoomUserSeqEvent { raw_data };
+                client.publish_event(TikTokLiveEvent::OnRoomUserSeq(event));
             }
             "WebcastEmoteChatMessage" => {
                 let raw_data = WebcastEmoteChatMessage::parse_from_bytes(
@@ -243,29 +281,37 @@ impl TikTokLiveMessageMapper {
                 let event = TikTokEmoteChatEvent { raw_data };
                 client.publish_event(TikTokLiveEvent::OnEmoteChat(event));
             }
-            "WebcastPollMessage" => {
-                let raw_data = WebcastPollMessage::parse_from_bytes(
+            "WebcastMemberMessage" => {
+                let raw_data = WebcastMemberMessage::parse_from_bytes(
                         proto_message_content,
                     )
                     .unwrap();
-                let event = TikTokPollEvent { raw_data };
-                client.publish_event(TikTokLiveEvent::OnPoll(event));
+                let event = TikTokMemberEvent { raw_data };
+                client.publish_event(TikTokLiveEvent::OnMember(event));
             }
-            "WebcastRoomPinMessage" => {
-                let raw_data = WebcastRoomPinMessage::parse_from_bytes(
+            "WebcastCaptionMessage" => {
+                let raw_data = WebcastCaptionMessage::parse_from_bytes(
                         proto_message_content,
                     )
                     .unwrap();
-                let event = TikTokRoomPinEvent { raw_data };
-                client.publish_event(TikTokLiveEvent::OnRoomPin(event));
+                let event = TikTokCaptionEvent { raw_data };
+                client.publish_event(TikTokLiveEvent::OnCaption(event));
             }
-            "WebcastRoomMessage" => {
-                let raw_data = WebcastRoomMessage::parse_from_bytes(
+            "WebcastChatMessage" => {
+                let raw_data = WebcastChatMessage::parse_from_bytes(
                         proto_message_content,
                     )
                     .unwrap();
-                let event = TikTokRoomEvent { raw_data };
-                client.publish_event(TikTokLiveEvent::OnRoom(event));
+                let event = TikTokChatEvent { raw_data };
+                client.publish_event(TikTokLiveEvent::OnChat(event));
+            }
+            "WebcastBarrageMessage" => {
+                let raw_data = WebcastBarrageMessage::parse_from_bytes(
+                        proto_message_content,
+                    )
+                    .unwrap();
+                let event = TikTokBarrageEvent { raw_data };
+                client.publish_event(TikTokLiveEvent::OnBarrage(event));
             }
             "WebcastEnvelopeMessage" => {
                 let raw_data = WebcastEnvelopeMessage::parse_from_bytes(
@@ -275,59 +321,13 @@ impl TikTokLiveMessageMapper {
                 let event = TikTokEnvelopeEvent { raw_data };
                 client.publish_event(TikTokLiveEvent::OnEnvelope(event));
             }
-            "WebcastImDeleteMessage" => {
-                let raw_data = WebcastImDeleteMessage::parse_from_bytes(
+            "WebcastPollMessage" => {
+                let raw_data = WebcastPollMessage::parse_from_bytes(
                         proto_message_content,
                     )
                     .unwrap();
-                let event = TikTokImDeleteEvent { raw_data };
-                client.publish_event(TikTokLiveEvent::OnImDelete(event));
-            }
-            "WebcastRoomUserSeqMessage" => {
-                let raw_data = WebcastRoomUserSeqMessage::parse_from_bytes(
-                        proto_message_content,
-                    )
-                    .unwrap();
-                let event = TikTokRoomUserSeqEvent { raw_data };
-                client.publish_event(TikTokLiveEvent::OnRoomUserSeq(event));
-            }
-            "WebcastUnauthorizedMemberMessage" => {
-                let raw_data = WebcastUnauthorizedMemberMessage::parse_from_bytes(
-                        proto_message_content,
-                    )
-                    .unwrap();
-                let event = TikTokUnauthorizedMemberEvent {
-                    raw_data,
-                };
-                client.publish_event(TikTokLiveEvent::OnUnauthorizedMember(event));
-            }
-            "WebcastOecLiveShoppingMessage" => {
-                let raw_data = WebcastOecLiveShoppingMessage::parse_from_bytes(
-                        proto_message_content,
-                    )
-                    .unwrap();
-                let event = TikTokOecLiveShoppingEvent {
-                    raw_data,
-                };
-                client.publish_event(TikTokLiveEvent::OnOecLiveShopping(event));
-            }
-            "WebcastLinkMessage" => {
-                let raw_data = WebcastLinkMessage::parse_from_bytes(
-                        proto_message_content,
-                    )
-                    .unwrap();
-                let event = TikTokLinkEvent { raw_data };
-                client.publish_event(TikTokLiveEvent::OnLink(event));
-            }
-            "WebcastLinkMicBattle" => {
-                let raw_data = WebcastLinkMicBattle::parse_from_bytes(
-                        proto_message_content,
-                    )
-                    .unwrap();
-                let event = TikTokLinkMicBattleEvent {
-                    raw_data,
-                };
-                client.publish_event(TikTokLiveEvent::OnLinkMicBattle(event));
+                let event = TikTokPollEvent { raw_data };
+                client.publish_event(TikTokLiveEvent::OnPoll(event));
             }
             _ => {
                 client

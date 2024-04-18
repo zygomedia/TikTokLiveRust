@@ -10055,7 +10055,7 @@ pub struct WebcastLinkMicArmies {
     // @@protoc_insertion_point(field:TikTok.WebcastLinkMicArmies.timeStamp2)
     pub timeStamp2: u64,
     // @@protoc_insertion_point(field:TikTok.WebcastLinkMicArmies.battleStatus)
-    pub battleStatus: i32,
+    pub battleStatus: ::protobuf::EnumOrUnknown<super::enums::LinkMicBattleStatus>,
     // @@protoc_insertion_point(field:TikTok.WebcastLinkMicArmies.data1)
     pub data1: u64,
     // @@protoc_insertion_point(field:TikTok.WebcastLinkMicArmies.data2)
@@ -10189,7 +10189,7 @@ impl ::protobuf::Message for WebcastLinkMicArmies {
                     self.timeStamp2 = is.read_uint64()?;
                 },
                 56 => {
-                    self.battleStatus = is.read_int32()?;
+                    self.battleStatus = is.read_enum_or_unknown()?;
                 },
                 64 => {
                     self.data1 = is.read_uint64()?;
@@ -10241,8 +10241,8 @@ impl ::protobuf::Message for WebcastLinkMicArmies {
         if self.timeStamp2 != 0 {
             my_size += ::protobuf::rt::uint64_size(6, self.timeStamp2);
         }
-        if self.battleStatus != 0 {
-            my_size += ::protobuf::rt::int32_size(7, self.battleStatus);
+        if self.battleStatus != ::protobuf::EnumOrUnknown::new(super::enums::LinkMicBattleStatus::BATTLE_ARMY_UNKNOWN) {
+            my_size += ::protobuf::rt::int32_size(7, self.battleStatus.value());
         }
         if self.data1 != 0 {
             my_size += ::protobuf::rt::uint64_size(8, self.data1);
@@ -10287,8 +10287,8 @@ impl ::protobuf::Message for WebcastLinkMicArmies {
         if self.timeStamp2 != 0 {
             os.write_uint64(6, self.timeStamp2)?;
         }
-        if self.battleStatus != 0 {
-            os.write_int32(7, self.battleStatus)?;
+        if self.battleStatus != ::protobuf::EnumOrUnknown::new(super::enums::LinkMicBattleStatus::BATTLE_ARMY_UNKNOWN) {
+            os.write_enum(7, ::protobuf::EnumOrUnknown::value(&self.battleStatus))?;
         }
         if self.data1 != 0 {
             os.write_uint64(8, self.data1)?;
@@ -10331,7 +10331,7 @@ impl ::protobuf::Message for WebcastLinkMicArmies {
         self.id2 = 0;
         self.timeStamp1 = 0;
         self.timeStamp2 = 0;
-        self.battleStatus = 0;
+        self.battleStatus = ::protobuf::EnumOrUnknown::new(super::enums::LinkMicBattleStatus::BATTLE_ARMY_UNKNOWN);
         self.data1 = 0;
         self.data2 = 0;
         self.data3 = 0;
@@ -10349,7 +10349,7 @@ impl ::protobuf::Message for WebcastLinkMicArmies {
             id2: 0,
             timeStamp1: 0,
             timeStamp2: 0,
-            battleStatus: 0,
+            battleStatus: ::protobuf::EnumOrUnknown::from_i32(0),
             data1: 0,
             data2: 0,
             data3: 0,
@@ -11403,16 +11403,20 @@ pub struct WebcastLinkMicBattle {
     pub id: u64,
     // @@protoc_insertion_point(field:TikTok.WebcastLinkMicBattle.battleConfig)
     pub battleConfig: ::protobuf::MessageField<webcast_link_mic_battle::LinkMicBattleConfig>,
-    // @@protoc_insertion_point(field:TikTok.WebcastLinkMicBattle.data2)
-    pub data2: u32,
+    // @@protoc_insertion_point(field:TikTok.WebcastLinkMicBattle.battleStatus)
+    pub battleStatus: ::protobuf::EnumOrUnknown<super::enums::LinkMicBattleStatus>,
     // @@protoc_insertion_point(field:TikTok.WebcastLinkMicBattle.details)
     pub details: ::std::vec::Vec<webcast_link_mic_battle::LinkMicBattleDetails>,
-    // @@protoc_insertion_point(field:TikTok.WebcastLinkMicBattle.teams1)
-    pub teams1: ::std::vec::Vec<webcast_link_mic_battle::LinkMicBattleTeam>,
-    // @@protoc_insertion_point(field:TikTok.WebcastLinkMicBattle.teams2)
-    pub teams2: ::std::vec::Vec<webcast_link_mic_battle::LinkMicBattleTeam>,
+    // @@protoc_insertion_point(field:TikTok.WebcastLinkMicBattle.viewerTeam)
+    pub viewerTeam: ::std::vec::Vec<webcast_link_mic_battle::LinkMicBattleTopViewers>,
+    // @@protoc_insertion_point(field:TikTok.WebcastLinkMicBattle.hostTeam)
+    pub hostTeam: ::std::vec::Vec<webcast_link_mic_battle::LinkMicBattleHost>,
     // @@protoc_insertion_point(field:TikTok.WebcastLinkMicBattle.teamData)
     pub teamData: ::std::vec::Vec<webcast_link_mic_battle::LinkMicBattleTeamData>,
+    // @@protoc_insertion_point(field:TikTok.WebcastLinkMicBattle.unknownData16)
+    pub unknownData16: u64,
+    // @@protoc_insertion_point(field:TikTok.WebcastLinkMicBattle.hostData2v2)
+    pub hostData2v2: ::std::vec::Vec<webcast_link_mic_battle::Host2v2Data>,
     // special fields
     // @@protoc_insertion_point(special_field:TikTok.WebcastLinkMicBattle.special_fields)
     pub special_fields: ::protobuf::SpecialFields,
@@ -11430,7 +11434,7 @@ impl WebcastLinkMicBattle {
     }
 
     fn generated_message_descriptor_data() -> ::protobuf::reflect::GeneratedMessageDescriptorData {
-        let mut fields = ::std::vec::Vec::with_capacity(8);
+        let mut fields = ::std::vec::Vec::with_capacity(10);
         let mut oneofs = ::std::vec::Vec::with_capacity(0);
         fields.push(::protobuf::reflect::rt::v2::make_message_field_accessor::<_, super::data::Common>(
             "common",
@@ -11448,9 +11452,9 @@ impl WebcastLinkMicBattle {
             |m: &mut WebcastLinkMicBattle| { &mut m.battleConfig },
         ));
         fields.push(::protobuf::reflect::rt::v2::make_simpler_field_accessor::<_, _>(
-            "data2",
-            |m: &WebcastLinkMicBattle| { &m.data2 },
-            |m: &mut WebcastLinkMicBattle| { &mut m.data2 },
+            "battleStatus",
+            |m: &WebcastLinkMicBattle| { &m.battleStatus },
+            |m: &mut WebcastLinkMicBattle| { &mut m.battleStatus },
         ));
         fields.push(::protobuf::reflect::rt::v2::make_vec_simpler_accessor::<_, _>(
             "details",
@@ -11458,19 +11462,29 @@ impl WebcastLinkMicBattle {
             |m: &mut WebcastLinkMicBattle| { &mut m.details },
         ));
         fields.push(::protobuf::reflect::rt::v2::make_vec_simpler_accessor::<_, _>(
-            "teams1",
-            |m: &WebcastLinkMicBattle| { &m.teams1 },
-            |m: &mut WebcastLinkMicBattle| { &mut m.teams1 },
+            "viewerTeam",
+            |m: &WebcastLinkMicBattle| { &m.viewerTeam },
+            |m: &mut WebcastLinkMicBattle| { &mut m.viewerTeam },
         ));
         fields.push(::protobuf::reflect::rt::v2::make_vec_simpler_accessor::<_, _>(
-            "teams2",
-            |m: &WebcastLinkMicBattle| { &m.teams2 },
-            |m: &mut WebcastLinkMicBattle| { &mut m.teams2 },
+            "hostTeam",
+            |m: &WebcastLinkMicBattle| { &m.hostTeam },
+            |m: &mut WebcastLinkMicBattle| { &mut m.hostTeam },
         ));
         fields.push(::protobuf::reflect::rt::v2::make_vec_simpler_accessor::<_, _>(
             "teamData",
             |m: &WebcastLinkMicBattle| { &m.teamData },
             |m: &mut WebcastLinkMicBattle| { &mut m.teamData },
+        ));
+        fields.push(::protobuf::reflect::rt::v2::make_simpler_field_accessor::<_, _>(
+            "unknownData16",
+            |m: &WebcastLinkMicBattle| { &m.unknownData16 },
+            |m: &mut WebcastLinkMicBattle| { &mut m.unknownData16 },
+        ));
+        fields.push(::protobuf::reflect::rt::v2::make_vec_simpler_accessor::<_, _>(
+            "hostData2v2",
+            |m: &WebcastLinkMicBattle| { &m.hostData2v2 },
+            |m: &mut WebcastLinkMicBattle| { &mut m.hostData2v2 },
         ));
         ::protobuf::reflect::GeneratedMessageDescriptorData::new_2::<WebcastLinkMicBattle>(
             "WebcastLinkMicBattle",
@@ -11500,19 +11514,25 @@ impl ::protobuf::Message for WebcastLinkMicBattle {
                     ::protobuf::rt::read_singular_message_into_field(is, &mut self.battleConfig)?;
                 },
                 32 => {
-                    self.data2 = is.read_uint32()?;
+                    self.battleStatus = is.read_enum_or_unknown()?;
                 },
                 42 => {
                     self.details.push(is.read_message()?);
                 },
                 74 => {
-                    self.teams1.push(is.read_message()?);
+                    self.viewerTeam.push(is.read_message()?);
                 },
                 82 => {
-                    self.teams2.push(is.read_message()?);
+                    self.hostTeam.push(is.read_message()?);
                 },
                 106 => {
                     self.teamData.push(is.read_message()?);
+                },
+                128 => {
+                    self.unknownData16 = is.read_uint64()?;
+                },
+                138 => {
+                    self.hostData2v2.push(is.read_message()?);
                 },
                 tag => {
                     ::protobuf::rt::read_unknown_or_skip_group(tag, is, self.special_fields.mut_unknown_fields())?;
@@ -11537,24 +11557,31 @@ impl ::protobuf::Message for WebcastLinkMicBattle {
             let len = v.compute_size();
             my_size += 1 + ::protobuf::rt::compute_raw_varint64_size(len) + len;
         }
-        if self.data2 != 0 {
-            my_size += ::protobuf::rt::uint32_size(4, self.data2);
+        if self.battleStatus != ::protobuf::EnumOrUnknown::new(super::enums::LinkMicBattleStatus::BATTLE_ARMY_UNKNOWN) {
+            my_size += ::protobuf::rt::int32_size(4, self.battleStatus.value());
         }
         for value in &self.details {
             let len = value.compute_size();
             my_size += 1 + ::protobuf::rt::compute_raw_varint64_size(len) + len;
         };
-        for value in &self.teams1 {
+        for value in &self.viewerTeam {
             let len = value.compute_size();
             my_size += 1 + ::protobuf::rt::compute_raw_varint64_size(len) + len;
         };
-        for value in &self.teams2 {
+        for value in &self.hostTeam {
             let len = value.compute_size();
             my_size += 1 + ::protobuf::rt::compute_raw_varint64_size(len) + len;
         };
         for value in &self.teamData {
             let len = value.compute_size();
             my_size += 1 + ::protobuf::rt::compute_raw_varint64_size(len) + len;
+        };
+        if self.unknownData16 != 0 {
+            my_size += ::protobuf::rt::uint64_size(16, self.unknownData16);
+        }
+        for value in &self.hostData2v2 {
+            let len = value.compute_size();
+            my_size += 2 + ::protobuf::rt::compute_raw_varint64_size(len) + len;
         };
         my_size += ::protobuf::rt::unknown_fields_size(self.special_fields.unknown_fields());
         self.special_fields.cached_size().set(my_size as u32);
@@ -11571,20 +11598,26 @@ impl ::protobuf::Message for WebcastLinkMicBattle {
         if let Some(v) = self.battleConfig.as_ref() {
             ::protobuf::rt::write_message_field_with_cached_size(3, v, os)?;
         }
-        if self.data2 != 0 {
-            os.write_uint32(4, self.data2)?;
+        if self.battleStatus != ::protobuf::EnumOrUnknown::new(super::enums::LinkMicBattleStatus::BATTLE_ARMY_UNKNOWN) {
+            os.write_enum(4, ::protobuf::EnumOrUnknown::value(&self.battleStatus))?;
         }
         for v in &self.details {
             ::protobuf::rt::write_message_field_with_cached_size(5, v, os)?;
         };
-        for v in &self.teams1 {
+        for v in &self.viewerTeam {
             ::protobuf::rt::write_message_field_with_cached_size(9, v, os)?;
         };
-        for v in &self.teams2 {
+        for v in &self.hostTeam {
             ::protobuf::rt::write_message_field_with_cached_size(10, v, os)?;
         };
         for v in &self.teamData {
             ::protobuf::rt::write_message_field_with_cached_size(13, v, os)?;
+        };
+        if self.unknownData16 != 0 {
+            os.write_uint64(16, self.unknownData16)?;
+        }
+        for v in &self.hostData2v2 {
+            ::protobuf::rt::write_message_field_with_cached_size(17, v, os)?;
         };
         os.write_unknown_fields(self.special_fields.unknown_fields())?;
         ::std::result::Result::Ok(())
@@ -11606,11 +11639,13 @@ impl ::protobuf::Message for WebcastLinkMicBattle {
         self.common.clear();
         self.id = 0;
         self.battleConfig.clear();
-        self.data2 = 0;
+        self.battleStatus = ::protobuf::EnumOrUnknown::new(super::enums::LinkMicBattleStatus::BATTLE_ARMY_UNKNOWN);
         self.details.clear();
-        self.teams1.clear();
-        self.teams2.clear();
+        self.viewerTeam.clear();
+        self.hostTeam.clear();
         self.teamData.clear();
+        self.unknownData16 = 0;
+        self.hostData2v2.clear();
         self.special_fields.clear();
     }
 
@@ -11619,11 +11654,13 @@ impl ::protobuf::Message for WebcastLinkMicBattle {
             common: ::protobuf::MessageField::none(),
             id: 0,
             battleConfig: ::protobuf::MessageField::none(),
-            data2: 0,
+            battleStatus: ::protobuf::EnumOrUnknown::from_i32(0),
             details: ::std::vec::Vec::new(),
-            teams1: ::std::vec::Vec::new(),
-            teams2: ::std::vec::Vec::new(),
+            viewerTeam: ::std::vec::Vec::new(),
+            hostTeam: ::std::vec::Vec::new(),
             teamData: ::std::vec::Vec::new(),
+            unknownData16: 0,
+            hostData2v2: ::std::vec::Vec::new(),
             special_fields: ::protobuf::SpecialFields::new(),
         };
         &instance
@@ -11649,6 +11686,344 @@ impl ::protobuf::reflect::ProtobufValue for WebcastLinkMicBattle {
 
 /// Nested message and enums of message `WebcastLinkMicBattle`
 pub mod webcast_link_mic_battle {
+    // @@protoc_insertion_point(message:TikTok.WebcastLinkMicBattle.Host2v2Data)
+    #[derive(PartialEq,Clone,Default,Debug)]
+    pub struct Host2v2Data {
+        // message fields
+        // @@protoc_insertion_point(field:TikTok.WebcastLinkMicBattle.Host2v2Data.teamNumber)
+        pub teamNumber: u32,
+        // @@protoc_insertion_point(field:TikTok.WebcastLinkMicBattle.Host2v2Data.hostdata)
+        pub hostdata: ::std::vec::Vec<host2v2data::HostData>,
+        // @@protoc_insertion_point(field:TikTok.WebcastLinkMicBattle.Host2v2Data.unknownData3)
+        pub unknownData3: u32,
+        // @@protoc_insertion_point(field:TikTok.WebcastLinkMicBattle.Host2v2Data.totalPoints)
+        pub totalPoints: u32,
+        // special fields
+        // @@protoc_insertion_point(special_field:TikTok.WebcastLinkMicBattle.Host2v2Data.special_fields)
+        pub special_fields: ::protobuf::SpecialFields,
+    }
+
+    impl<'a> ::std::default::Default for &'a Host2v2Data {
+        fn default() -> &'a Host2v2Data {
+            <Host2v2Data as ::protobuf::Message>::default_instance()
+        }
+    }
+
+    impl Host2v2Data {
+        pub fn new() -> Host2v2Data {
+            ::std::default::Default::default()
+        }
+
+        pub(in super) fn generated_message_descriptor_data() -> ::protobuf::reflect::GeneratedMessageDescriptorData {
+            let mut fields = ::std::vec::Vec::with_capacity(4);
+            let mut oneofs = ::std::vec::Vec::with_capacity(0);
+            fields.push(::protobuf::reflect::rt::v2::make_simpler_field_accessor::<_, _>(
+                "teamNumber",
+                |m: &Host2v2Data| { &m.teamNumber },
+                |m: &mut Host2v2Data| { &mut m.teamNumber },
+            ));
+            fields.push(::protobuf::reflect::rt::v2::make_vec_simpler_accessor::<_, _>(
+                "hostdata",
+                |m: &Host2v2Data| { &m.hostdata },
+                |m: &mut Host2v2Data| { &mut m.hostdata },
+            ));
+            fields.push(::protobuf::reflect::rt::v2::make_simpler_field_accessor::<_, _>(
+                "unknownData3",
+                |m: &Host2v2Data| { &m.unknownData3 },
+                |m: &mut Host2v2Data| { &mut m.unknownData3 },
+            ));
+            fields.push(::protobuf::reflect::rt::v2::make_simpler_field_accessor::<_, _>(
+                "totalPoints",
+                |m: &Host2v2Data| { &m.totalPoints },
+                |m: &mut Host2v2Data| { &mut m.totalPoints },
+            ));
+            ::protobuf::reflect::GeneratedMessageDescriptorData::new_2::<Host2v2Data>(
+                "WebcastLinkMicBattle.Host2v2Data",
+                fields,
+                oneofs,
+            )
+        }
+    }
+
+    impl ::protobuf::Message for Host2v2Data {
+        const NAME: &'static str = "Host2v2Data";
+
+        fn is_initialized(&self) -> bool {
+            true
+        }
+
+        fn merge_from(&mut self, is: &mut ::protobuf::CodedInputStream<'_>) -> ::protobuf::Result<()> {
+            while let Some(tag) = is.read_raw_tag_or_eof()? {
+                match tag {
+                    8 => {
+                        self.teamNumber = is.read_uint32()?;
+                    },
+                    18 => {
+                        self.hostdata.push(is.read_message()?);
+                    },
+                    24 => {
+                        self.unknownData3 = is.read_uint32()?;
+                    },
+                    32 => {
+                        self.totalPoints = is.read_uint32()?;
+                    },
+                    tag => {
+                        ::protobuf::rt::read_unknown_or_skip_group(tag, is, self.special_fields.mut_unknown_fields())?;
+                    },
+                };
+            }
+            ::std::result::Result::Ok(())
+        }
+
+        // Compute sizes of nested messages
+        #[allow(unused_variables)]
+        fn compute_size(&self) -> u64 {
+            let mut my_size = 0;
+            if self.teamNumber != 0 {
+                my_size += ::protobuf::rt::uint32_size(1, self.teamNumber);
+            }
+            for value in &self.hostdata {
+                let len = value.compute_size();
+                my_size += 1 + ::protobuf::rt::compute_raw_varint64_size(len) + len;
+            };
+            if self.unknownData3 != 0 {
+                my_size += ::protobuf::rt::uint32_size(3, self.unknownData3);
+            }
+            if self.totalPoints != 0 {
+                my_size += ::protobuf::rt::uint32_size(4, self.totalPoints);
+            }
+            my_size += ::protobuf::rt::unknown_fields_size(self.special_fields.unknown_fields());
+            self.special_fields.cached_size().set(my_size as u32);
+            my_size
+        }
+
+        fn write_to_with_cached_sizes(&self, os: &mut ::protobuf::CodedOutputStream<'_>) -> ::protobuf::Result<()> {
+            if self.teamNumber != 0 {
+                os.write_uint32(1, self.teamNumber)?;
+            }
+            for v in &self.hostdata {
+                ::protobuf::rt::write_message_field_with_cached_size(2, v, os)?;
+            };
+            if self.unknownData3 != 0 {
+                os.write_uint32(3, self.unknownData3)?;
+            }
+            if self.totalPoints != 0 {
+                os.write_uint32(4, self.totalPoints)?;
+            }
+            os.write_unknown_fields(self.special_fields.unknown_fields())?;
+            ::std::result::Result::Ok(())
+        }
+
+        fn special_fields(&self) -> &::protobuf::SpecialFields {
+            &self.special_fields
+        }
+
+        fn mut_special_fields(&mut self) -> &mut ::protobuf::SpecialFields {
+            &mut self.special_fields
+        }
+
+        fn new() -> Host2v2Data {
+            Host2v2Data::new()
+        }
+
+        fn clear(&mut self) {
+            self.teamNumber = 0;
+            self.hostdata.clear();
+            self.unknownData3 = 0;
+            self.totalPoints = 0;
+            self.special_fields.clear();
+        }
+
+        fn default_instance() -> &'static Host2v2Data {
+            static instance: Host2v2Data = Host2v2Data {
+                teamNumber: 0,
+                hostdata: ::std::vec::Vec::new(),
+                unknownData3: 0,
+                totalPoints: 0,
+                special_fields: ::protobuf::SpecialFields::new(),
+            };
+            &instance
+        }
+    }
+
+    impl ::protobuf::MessageFull for Host2v2Data {
+        fn descriptor() -> ::protobuf::reflect::MessageDescriptor {
+            static descriptor: ::protobuf::rt::Lazy<::protobuf::reflect::MessageDescriptor> = ::protobuf::rt::Lazy::new();
+            descriptor.get(|| super::file_descriptor().message_by_package_relative_name("WebcastLinkMicBattle.Host2v2Data").unwrap()).clone()
+        }
+    }
+
+    impl ::std::fmt::Display for Host2v2Data {
+        fn fmt(&self, f: &mut ::std::fmt::Formatter<'_>) -> ::std::fmt::Result {
+            ::protobuf::text_format::fmt(self, f)
+        }
+    }
+
+    impl ::protobuf::reflect::ProtobufValue for Host2v2Data {
+        type RuntimeType = ::protobuf::reflect::rt::RuntimeTypeMessage<Self>;
+    }
+
+    /// Nested message and enums of message `Host2v2Data`
+    pub mod host2v2data {
+        // @@protoc_insertion_point(message:TikTok.WebcastLinkMicBattle.Host2v2Data.HostData)
+        #[derive(PartialEq,Clone,Default,Debug)]
+        pub struct HostData {
+            // message fields
+            // @@protoc_insertion_point(field:TikTok.WebcastLinkMicBattle.Host2v2Data.HostData.hostId)
+            pub hostId: u64,
+            // @@protoc_insertion_point(field:TikTok.WebcastLinkMicBattle.Host2v2Data.HostData.points)
+            pub points: u32,
+            // @@protoc_insertion_point(field:TikTok.WebcastLinkMicBattle.Host2v2Data.HostData.hostIdStr)
+            pub hostIdStr: ::std::string::String,
+            // special fields
+            // @@protoc_insertion_point(special_field:TikTok.WebcastLinkMicBattle.Host2v2Data.HostData.special_fields)
+            pub special_fields: ::protobuf::SpecialFields,
+        }
+
+        impl<'a> ::std::default::Default for &'a HostData {
+            fn default() -> &'a HostData {
+                <HostData as ::protobuf::Message>::default_instance()
+            }
+        }
+
+        impl HostData {
+            pub fn new() -> HostData {
+                ::std::default::Default::default()
+            }
+
+            pub(in super::super) fn generated_message_descriptor_data() -> ::protobuf::reflect::GeneratedMessageDescriptorData {
+                let mut fields = ::std::vec::Vec::with_capacity(3);
+                let mut oneofs = ::std::vec::Vec::with_capacity(0);
+                fields.push(::protobuf::reflect::rt::v2::make_simpler_field_accessor::<_, _>(
+                    "hostId",
+                    |m: &HostData| { &m.hostId },
+                    |m: &mut HostData| { &mut m.hostId },
+                ));
+                fields.push(::protobuf::reflect::rt::v2::make_simpler_field_accessor::<_, _>(
+                    "points",
+                    |m: &HostData| { &m.points },
+                    |m: &mut HostData| { &mut m.points },
+                ));
+                fields.push(::protobuf::reflect::rt::v2::make_simpler_field_accessor::<_, _>(
+                    "hostIdStr",
+                    |m: &HostData| { &m.hostIdStr },
+                    |m: &mut HostData| { &mut m.hostIdStr },
+                ));
+                ::protobuf::reflect::GeneratedMessageDescriptorData::new_2::<HostData>(
+                    "WebcastLinkMicBattle.Host2v2Data.HostData",
+                    fields,
+                    oneofs,
+                )
+            }
+        }
+
+        impl ::protobuf::Message for HostData {
+            const NAME: &'static str = "HostData";
+
+            fn is_initialized(&self) -> bool {
+                true
+            }
+
+            fn merge_from(&mut self, is: &mut ::protobuf::CodedInputStream<'_>) -> ::protobuf::Result<()> {
+                while let Some(tag) = is.read_raw_tag_or_eof()? {
+                    match tag {
+                        8 => {
+                            self.hostId = is.read_uint64()?;
+                        },
+                        16 => {
+                            self.points = is.read_uint32()?;
+                        },
+                        26 => {
+                            self.hostIdStr = is.read_string()?;
+                        },
+                        tag => {
+                            ::protobuf::rt::read_unknown_or_skip_group(tag, is, self.special_fields.mut_unknown_fields())?;
+                        },
+                    };
+                }
+                ::std::result::Result::Ok(())
+            }
+
+            // Compute sizes of nested messages
+            #[allow(unused_variables)]
+            fn compute_size(&self) -> u64 {
+                let mut my_size = 0;
+                if self.hostId != 0 {
+                    my_size += ::protobuf::rt::uint64_size(1, self.hostId);
+                }
+                if self.points != 0 {
+                    my_size += ::protobuf::rt::uint32_size(2, self.points);
+                }
+                if !self.hostIdStr.is_empty() {
+                    my_size += ::protobuf::rt::string_size(3, &self.hostIdStr);
+                }
+                my_size += ::protobuf::rt::unknown_fields_size(self.special_fields.unknown_fields());
+                self.special_fields.cached_size().set(my_size as u32);
+                my_size
+            }
+
+            fn write_to_with_cached_sizes(&self, os: &mut ::protobuf::CodedOutputStream<'_>) -> ::protobuf::Result<()> {
+                if self.hostId != 0 {
+                    os.write_uint64(1, self.hostId)?;
+                }
+                if self.points != 0 {
+                    os.write_uint32(2, self.points)?;
+                }
+                if !self.hostIdStr.is_empty() {
+                    os.write_string(3, &self.hostIdStr)?;
+                }
+                os.write_unknown_fields(self.special_fields.unknown_fields())?;
+                ::std::result::Result::Ok(())
+            }
+
+            fn special_fields(&self) -> &::protobuf::SpecialFields {
+                &self.special_fields
+            }
+
+            fn mut_special_fields(&mut self) -> &mut ::protobuf::SpecialFields {
+                &mut self.special_fields
+            }
+
+            fn new() -> HostData {
+                HostData::new()
+            }
+
+            fn clear(&mut self) {
+                self.hostId = 0;
+                self.points = 0;
+                self.hostIdStr.clear();
+                self.special_fields.clear();
+            }
+
+            fn default_instance() -> &'static HostData {
+                static instance: HostData = HostData {
+                    hostId: 0,
+                    points: 0,
+                    hostIdStr: ::std::string::String::new(),
+                    special_fields: ::protobuf::SpecialFields::new(),
+                };
+                &instance
+            }
+        }
+
+        impl ::protobuf::MessageFull for HostData {
+            fn descriptor() -> ::protobuf::reflect::MessageDescriptor {
+                static descriptor: ::protobuf::rt::Lazy<::protobuf::reflect::MessageDescriptor> = ::protobuf::rt::Lazy::new();
+                descriptor.get(|| super::super::file_descriptor().message_by_package_relative_name("WebcastLinkMicBattle.Host2v2Data.HostData").unwrap()).clone()
+            }
+        }
+
+        impl ::std::fmt::Display for HostData {
+            fn fmt(&self, f: &mut ::std::fmt::Formatter<'_>) -> ::std::fmt::Result {
+                ::protobuf::text_format::fmt(self, f)
+            }
+        }
+
+        impl ::protobuf::reflect::ProtobufValue for HostData {
+            type RuntimeType = ::protobuf::reflect::rt::RuntimeTypeMessage<Self>;
+        }
+    }
+
     // @@protoc_insertion_point(message:TikTok.WebcastLinkMicBattle.LinkMicBattleConfig)
     #[derive(PartialEq,Clone,Default,Debug)]
     pub struct LinkMicBattleConfig {
@@ -11663,6 +12038,10 @@ pub mod webcast_link_mic_battle {
         pub id2: u64,
         // @@protoc_insertion_point(field:TikTok.WebcastLinkMicBattle.LinkMicBattleConfig.data2)
         pub data2: u32,
+        // @@protoc_insertion_point(field:TikTok.WebcastLinkMicBattle.LinkMicBattleConfig.data3)
+        pub data3: u32,
+        // @@protoc_insertion_point(field:TikTok.WebcastLinkMicBattle.LinkMicBattleConfig.data4)
+        pub data4: u32,
         // special fields
         // @@protoc_insertion_point(special_field:TikTok.WebcastLinkMicBattle.LinkMicBattleConfig.special_fields)
         pub special_fields: ::protobuf::SpecialFields,
@@ -11680,7 +12059,7 @@ pub mod webcast_link_mic_battle {
         }
 
         pub(in super) fn generated_message_descriptor_data() -> ::protobuf::reflect::GeneratedMessageDescriptorData {
-            let mut fields = ::std::vec::Vec::with_capacity(5);
+            let mut fields = ::std::vec::Vec::with_capacity(7);
             let mut oneofs = ::std::vec::Vec::with_capacity(0);
             fields.push(::protobuf::reflect::rt::v2::make_simpler_field_accessor::<_, _>(
                 "id1",
@@ -11706,6 +12085,16 @@ pub mod webcast_link_mic_battle {
                 "data2",
                 |m: &LinkMicBattleConfig| { &m.data2 },
                 |m: &mut LinkMicBattleConfig| { &mut m.data2 },
+            ));
+            fields.push(::protobuf::reflect::rt::v2::make_simpler_field_accessor::<_, _>(
+                "data3",
+                |m: &LinkMicBattleConfig| { &m.data3 },
+                |m: &mut LinkMicBattleConfig| { &mut m.data3 },
+            ));
+            fields.push(::protobuf::reflect::rt::v2::make_simpler_field_accessor::<_, _>(
+                "data4",
+                |m: &LinkMicBattleConfig| { &m.data4 },
+                |m: &mut LinkMicBattleConfig| { &mut m.data4 },
             ));
             ::protobuf::reflect::GeneratedMessageDescriptorData::new_2::<LinkMicBattleConfig>(
                 "WebcastLinkMicBattle.LinkMicBattleConfig",
@@ -11740,6 +12129,12 @@ pub mod webcast_link_mic_battle {
                     40 => {
                         self.data2 = is.read_uint32()?;
                     },
+                    48 => {
+                        self.data3 = is.read_uint32()?;
+                    },
+                    64 => {
+                        self.data4 = is.read_uint32()?;
+                    },
                     tag => {
                         ::protobuf::rt::read_unknown_or_skip_group(tag, is, self.special_fields.mut_unknown_fields())?;
                     },
@@ -11767,6 +12162,12 @@ pub mod webcast_link_mic_battle {
             if self.data2 != 0 {
                 my_size += ::protobuf::rt::uint32_size(5, self.data2);
             }
+            if self.data3 != 0 {
+                my_size += ::protobuf::rt::uint32_size(6, self.data3);
+            }
+            if self.data4 != 0 {
+                my_size += ::protobuf::rt::uint32_size(8, self.data4);
+            }
             my_size += ::protobuf::rt::unknown_fields_size(self.special_fields.unknown_fields());
             self.special_fields.cached_size().set(my_size as u32);
             my_size
@@ -11787,6 +12188,12 @@ pub mod webcast_link_mic_battle {
             }
             if self.data2 != 0 {
                 os.write_uint32(5, self.data2)?;
+            }
+            if self.data3 != 0 {
+                os.write_uint32(6, self.data3)?;
+            }
+            if self.data4 != 0 {
+                os.write_uint32(8, self.data4)?;
             }
             os.write_unknown_fields(self.special_fields.unknown_fields())?;
             ::std::result::Result::Ok(())
@@ -11810,6 +12217,8 @@ pub mod webcast_link_mic_battle {
             self.data1 = 0;
             self.id2 = 0;
             self.data2 = 0;
+            self.data3 = 0;
+            self.data4 = 0;
             self.special_fields.clear();
         }
 
@@ -11820,6 +12229,8 @@ pub mod webcast_link_mic_battle {
                 data1: 0,
                 id2: 0,
                 data2: 0,
+                data3: 0,
+                data4: 0,
                 special_fields: ::protobuf::SpecialFields::new(),
             };
             &instance
@@ -11840,482 +12251,6 @@ pub mod webcast_link_mic_battle {
     }
 
     impl ::protobuf::reflect::ProtobufValue for LinkMicBattleConfig {
-        type RuntimeType = ::protobuf::reflect::rt::RuntimeTypeMessage<Self>;
-    }
-
-    // @@protoc_insertion_point(message:TikTok.WebcastLinkMicBattle.LinkMicBattleData)
-    #[derive(PartialEq,Clone,Default,Debug)]
-    pub struct LinkMicBattleData {
-        // message fields
-        // @@protoc_insertion_point(field:TikTok.WebcastLinkMicBattle.LinkMicBattleData.id)
-        pub id: u64,
-        // @@protoc_insertion_point(field:TikTok.WebcastLinkMicBattle.LinkMicBattleData.data1)
-        pub data1: u32,
-        // @@protoc_insertion_point(field:TikTok.WebcastLinkMicBattle.LinkMicBattleData.data2)
-        pub data2: u32,
-        // @@protoc_insertion_point(field:TikTok.WebcastLinkMicBattle.LinkMicBattleData.data3)
-        pub data3: u32,
-        // @@protoc_insertion_point(field:TikTok.WebcastLinkMicBattle.LinkMicBattleData.url)
-        pub url: ::std::string::String,
-        // special fields
-        // @@protoc_insertion_point(special_field:TikTok.WebcastLinkMicBattle.LinkMicBattleData.special_fields)
-        pub special_fields: ::protobuf::SpecialFields,
-    }
-
-    impl<'a> ::std::default::Default for &'a LinkMicBattleData {
-        fn default() -> &'a LinkMicBattleData {
-            <LinkMicBattleData as ::protobuf::Message>::default_instance()
-        }
-    }
-
-    impl LinkMicBattleData {
-        pub fn new() -> LinkMicBattleData {
-            ::std::default::Default::default()
-        }
-
-        pub(in super) fn generated_message_descriptor_data() -> ::protobuf::reflect::GeneratedMessageDescriptorData {
-            let mut fields = ::std::vec::Vec::with_capacity(5);
-            let mut oneofs = ::std::vec::Vec::with_capacity(0);
-            fields.push(::protobuf::reflect::rt::v2::make_simpler_field_accessor::<_, _>(
-                "id",
-                |m: &LinkMicBattleData| { &m.id },
-                |m: &mut LinkMicBattleData| { &mut m.id },
-            ));
-            fields.push(::protobuf::reflect::rt::v2::make_simpler_field_accessor::<_, _>(
-                "data1",
-                |m: &LinkMicBattleData| { &m.data1 },
-                |m: &mut LinkMicBattleData| { &mut m.data1 },
-            ));
-            fields.push(::protobuf::reflect::rt::v2::make_simpler_field_accessor::<_, _>(
-                "data2",
-                |m: &LinkMicBattleData| { &m.data2 },
-                |m: &mut LinkMicBattleData| { &mut m.data2 },
-            ));
-            fields.push(::protobuf::reflect::rt::v2::make_simpler_field_accessor::<_, _>(
-                "data3",
-                |m: &LinkMicBattleData| { &m.data3 },
-                |m: &mut LinkMicBattleData| { &mut m.data3 },
-            ));
-            fields.push(::protobuf::reflect::rt::v2::make_simpler_field_accessor::<_, _>(
-                "url",
-                |m: &LinkMicBattleData| { &m.url },
-                |m: &mut LinkMicBattleData| { &mut m.url },
-            ));
-            ::protobuf::reflect::GeneratedMessageDescriptorData::new_2::<LinkMicBattleData>(
-                "WebcastLinkMicBattle.LinkMicBattleData",
-                fields,
-                oneofs,
-            )
-        }
-    }
-
-    impl ::protobuf::Message for LinkMicBattleData {
-        const NAME: &'static str = "LinkMicBattleData";
-
-        fn is_initialized(&self) -> bool {
-            true
-        }
-
-        fn merge_from(&mut self, is: &mut ::protobuf::CodedInputStream<'_>) -> ::protobuf::Result<()> {
-            while let Some(tag) = is.read_raw_tag_or_eof()? {
-                match tag {
-                    8 => {
-                        self.id = is.read_uint64()?;
-                    },
-                    16 => {
-                        self.data1 = is.read_uint32()?;
-                    },
-                    24 => {
-                        self.data2 = is.read_uint32()?;
-                    },
-                    40 => {
-                        self.data3 = is.read_uint32()?;
-                    },
-                    50 => {
-                        self.url = is.read_string()?;
-                    },
-                    tag => {
-                        ::protobuf::rt::read_unknown_or_skip_group(tag, is, self.special_fields.mut_unknown_fields())?;
-                    },
-                };
-            }
-            ::std::result::Result::Ok(())
-        }
-
-        // Compute sizes of nested messages
-        #[allow(unused_variables)]
-        fn compute_size(&self) -> u64 {
-            let mut my_size = 0;
-            if self.id != 0 {
-                my_size += ::protobuf::rt::uint64_size(1, self.id);
-            }
-            if self.data1 != 0 {
-                my_size += ::protobuf::rt::uint32_size(2, self.data1);
-            }
-            if self.data2 != 0 {
-                my_size += ::protobuf::rt::uint32_size(3, self.data2);
-            }
-            if self.data3 != 0 {
-                my_size += ::protobuf::rt::uint32_size(5, self.data3);
-            }
-            if !self.url.is_empty() {
-                my_size += ::protobuf::rt::string_size(6, &self.url);
-            }
-            my_size += ::protobuf::rt::unknown_fields_size(self.special_fields.unknown_fields());
-            self.special_fields.cached_size().set(my_size as u32);
-            my_size
-        }
-
-        fn write_to_with_cached_sizes(&self, os: &mut ::protobuf::CodedOutputStream<'_>) -> ::protobuf::Result<()> {
-            if self.id != 0 {
-                os.write_uint64(1, self.id)?;
-            }
-            if self.data1 != 0 {
-                os.write_uint32(2, self.data1)?;
-            }
-            if self.data2 != 0 {
-                os.write_uint32(3, self.data2)?;
-            }
-            if self.data3 != 0 {
-                os.write_uint32(5, self.data3)?;
-            }
-            if !self.url.is_empty() {
-                os.write_string(6, &self.url)?;
-            }
-            os.write_unknown_fields(self.special_fields.unknown_fields())?;
-            ::std::result::Result::Ok(())
-        }
-
-        fn special_fields(&self) -> &::protobuf::SpecialFields {
-            &self.special_fields
-        }
-
-        fn mut_special_fields(&mut self) -> &mut ::protobuf::SpecialFields {
-            &mut self.special_fields
-        }
-
-        fn new() -> LinkMicBattleData {
-            LinkMicBattleData::new()
-        }
-
-        fn clear(&mut self) {
-            self.id = 0;
-            self.data1 = 0;
-            self.data2 = 0;
-            self.data3 = 0;
-            self.url.clear();
-            self.special_fields.clear();
-        }
-
-        fn default_instance() -> &'static LinkMicBattleData {
-            static instance: LinkMicBattleData = LinkMicBattleData {
-                id: 0,
-                data1: 0,
-                data2: 0,
-                data3: 0,
-                url: ::std::string::String::new(),
-                special_fields: ::protobuf::SpecialFields::new(),
-            };
-            &instance
-        }
-    }
-
-    impl ::protobuf::MessageFull for LinkMicBattleData {
-        fn descriptor() -> ::protobuf::reflect::MessageDescriptor {
-            static descriptor: ::protobuf::rt::Lazy<::protobuf::reflect::MessageDescriptor> = ::protobuf::rt::Lazy::new();
-            descriptor.get(|| super::file_descriptor().message_by_package_relative_name("WebcastLinkMicBattle.LinkMicBattleData").unwrap()).clone()
-        }
-    }
-
-    impl ::std::fmt::Display for LinkMicBattleData {
-        fn fmt(&self, f: &mut ::std::fmt::Formatter<'_>) -> ::std::fmt::Result {
-            ::protobuf::text_format::fmt(self, f)
-        }
-    }
-
-    impl ::protobuf::reflect::ProtobufValue for LinkMicBattleData {
-        type RuntimeType = ::protobuf::reflect::rt::RuntimeTypeMessage<Self>;
-    }
-
-    // @@protoc_insertion_point(message:TikTok.WebcastLinkMicBattle.LinkMicBattleDetails)
-    #[derive(PartialEq,Clone,Default,Debug)]
-    pub struct LinkMicBattleDetails {
-        // message fields
-        // @@protoc_insertion_point(field:TikTok.WebcastLinkMicBattle.LinkMicBattleDetails.id)
-        pub id: u64,
-        // @@protoc_insertion_point(field:TikTok.WebcastLinkMicBattle.LinkMicBattleDetails.details)
-        pub details: ::protobuf::MessageField<LinkMicBattleData>,
-        // special fields
-        // @@protoc_insertion_point(special_field:TikTok.WebcastLinkMicBattle.LinkMicBattleDetails.special_fields)
-        pub special_fields: ::protobuf::SpecialFields,
-    }
-
-    impl<'a> ::std::default::Default for &'a LinkMicBattleDetails {
-        fn default() -> &'a LinkMicBattleDetails {
-            <LinkMicBattleDetails as ::protobuf::Message>::default_instance()
-        }
-    }
-
-    impl LinkMicBattleDetails {
-        pub fn new() -> LinkMicBattleDetails {
-            ::std::default::Default::default()
-        }
-
-        pub(in super) fn generated_message_descriptor_data() -> ::protobuf::reflect::GeneratedMessageDescriptorData {
-            let mut fields = ::std::vec::Vec::with_capacity(2);
-            let mut oneofs = ::std::vec::Vec::with_capacity(0);
-            fields.push(::protobuf::reflect::rt::v2::make_simpler_field_accessor::<_, _>(
-                "id",
-                |m: &LinkMicBattleDetails| { &m.id },
-                |m: &mut LinkMicBattleDetails| { &mut m.id },
-            ));
-            fields.push(::protobuf::reflect::rt::v2::make_message_field_accessor::<_, LinkMicBattleData>(
-                "details",
-                |m: &LinkMicBattleDetails| { &m.details },
-                |m: &mut LinkMicBattleDetails| { &mut m.details },
-            ));
-            ::protobuf::reflect::GeneratedMessageDescriptorData::new_2::<LinkMicBattleDetails>(
-                "WebcastLinkMicBattle.LinkMicBattleDetails",
-                fields,
-                oneofs,
-            )
-        }
-    }
-
-    impl ::protobuf::Message for LinkMicBattleDetails {
-        const NAME: &'static str = "LinkMicBattleDetails";
-
-        fn is_initialized(&self) -> bool {
-            true
-        }
-
-        fn merge_from(&mut self, is: &mut ::protobuf::CodedInputStream<'_>) -> ::protobuf::Result<()> {
-            while let Some(tag) = is.read_raw_tag_or_eof()? {
-                match tag {
-                    8 => {
-                        self.id = is.read_uint64()?;
-                    },
-                    18 => {
-                        ::protobuf::rt::read_singular_message_into_field(is, &mut self.details)?;
-                    },
-                    tag => {
-                        ::protobuf::rt::read_unknown_or_skip_group(tag, is, self.special_fields.mut_unknown_fields())?;
-                    },
-                };
-            }
-            ::std::result::Result::Ok(())
-        }
-
-        // Compute sizes of nested messages
-        #[allow(unused_variables)]
-        fn compute_size(&self) -> u64 {
-            let mut my_size = 0;
-            if self.id != 0 {
-                my_size += ::protobuf::rt::uint64_size(1, self.id);
-            }
-            if let Some(v) = self.details.as_ref() {
-                let len = v.compute_size();
-                my_size += 1 + ::protobuf::rt::compute_raw_varint64_size(len) + len;
-            }
-            my_size += ::protobuf::rt::unknown_fields_size(self.special_fields.unknown_fields());
-            self.special_fields.cached_size().set(my_size as u32);
-            my_size
-        }
-
-        fn write_to_with_cached_sizes(&self, os: &mut ::protobuf::CodedOutputStream<'_>) -> ::protobuf::Result<()> {
-            if self.id != 0 {
-                os.write_uint64(1, self.id)?;
-            }
-            if let Some(v) = self.details.as_ref() {
-                ::protobuf::rt::write_message_field_with_cached_size(2, v, os)?;
-            }
-            os.write_unknown_fields(self.special_fields.unknown_fields())?;
-            ::std::result::Result::Ok(())
-        }
-
-        fn special_fields(&self) -> &::protobuf::SpecialFields {
-            &self.special_fields
-        }
-
-        fn mut_special_fields(&mut self) -> &mut ::protobuf::SpecialFields {
-            &mut self.special_fields
-        }
-
-        fn new() -> LinkMicBattleDetails {
-            LinkMicBattleDetails::new()
-        }
-
-        fn clear(&mut self) {
-            self.id = 0;
-            self.details.clear();
-            self.special_fields.clear();
-        }
-
-        fn default_instance() -> &'static LinkMicBattleDetails {
-            static instance: LinkMicBattleDetails = LinkMicBattleDetails {
-                id: 0,
-                details: ::protobuf::MessageField::none(),
-                special_fields: ::protobuf::SpecialFields::new(),
-            };
-            &instance
-        }
-    }
-
-    impl ::protobuf::MessageFull for LinkMicBattleDetails {
-        fn descriptor() -> ::protobuf::reflect::MessageDescriptor {
-            static descriptor: ::protobuf::rt::Lazy<::protobuf::reflect::MessageDescriptor> = ::protobuf::rt::Lazy::new();
-            descriptor.get(|| super::file_descriptor().message_by_package_relative_name("WebcastLinkMicBattle.LinkMicBattleDetails").unwrap()).clone()
-        }
-    }
-
-    impl ::std::fmt::Display for LinkMicBattleDetails {
-        fn fmt(&self, f: &mut ::std::fmt::Formatter<'_>) -> ::std::fmt::Result {
-            ::protobuf::text_format::fmt(self, f)
-        }
-    }
-
-    impl ::protobuf::reflect::ProtobufValue for LinkMicBattleDetails {
-        type RuntimeType = ::protobuf::reflect::rt::RuntimeTypeMessage<Self>;
-    }
-
-    // @@protoc_insertion_point(message:TikTok.WebcastLinkMicBattle.LinkMicBattleTeam)
-    #[derive(PartialEq,Clone,Default,Debug)]
-    pub struct LinkMicBattleTeam {
-        // message fields
-        // @@protoc_insertion_point(field:TikTok.WebcastLinkMicBattle.LinkMicBattleTeam.id)
-        pub id: u64,
-        // @@protoc_insertion_point(field:TikTok.WebcastLinkMicBattle.LinkMicBattleTeam.users)
-        pub users: ::std::vec::Vec<super::super::data::User>,
-        // special fields
-        // @@protoc_insertion_point(special_field:TikTok.WebcastLinkMicBattle.LinkMicBattleTeam.special_fields)
-        pub special_fields: ::protobuf::SpecialFields,
-    }
-
-    impl<'a> ::std::default::Default for &'a LinkMicBattleTeam {
-        fn default() -> &'a LinkMicBattleTeam {
-            <LinkMicBattleTeam as ::protobuf::Message>::default_instance()
-        }
-    }
-
-    impl LinkMicBattleTeam {
-        pub fn new() -> LinkMicBattleTeam {
-            ::std::default::Default::default()
-        }
-
-        pub(in super) fn generated_message_descriptor_data() -> ::protobuf::reflect::GeneratedMessageDescriptorData {
-            let mut fields = ::std::vec::Vec::with_capacity(2);
-            let mut oneofs = ::std::vec::Vec::with_capacity(0);
-            fields.push(::protobuf::reflect::rt::v2::make_simpler_field_accessor::<_, _>(
-                "id",
-                |m: &LinkMicBattleTeam| { &m.id },
-                |m: &mut LinkMicBattleTeam| { &mut m.id },
-            ));
-            fields.push(::protobuf::reflect::rt::v2::make_vec_simpler_accessor::<_, _>(
-                "users",
-                |m: &LinkMicBattleTeam| { &m.users },
-                |m: &mut LinkMicBattleTeam| { &mut m.users },
-            ));
-            ::protobuf::reflect::GeneratedMessageDescriptorData::new_2::<LinkMicBattleTeam>(
-                "WebcastLinkMicBattle.LinkMicBattleTeam",
-                fields,
-                oneofs,
-            )
-        }
-    }
-
-    impl ::protobuf::Message for LinkMicBattleTeam {
-        const NAME: &'static str = "LinkMicBattleTeam";
-
-        fn is_initialized(&self) -> bool {
-            true
-        }
-
-        fn merge_from(&mut self, is: &mut ::protobuf::CodedInputStream<'_>) -> ::protobuf::Result<()> {
-            while let Some(tag) = is.read_raw_tag_or_eof()? {
-                match tag {
-                    8 => {
-                        self.id = is.read_uint64()?;
-                    },
-                    18 => {
-                        self.users.push(is.read_message()?);
-                    },
-                    tag => {
-                        ::protobuf::rt::read_unknown_or_skip_group(tag, is, self.special_fields.mut_unknown_fields())?;
-                    },
-                };
-            }
-            ::std::result::Result::Ok(())
-        }
-
-        // Compute sizes of nested messages
-        #[allow(unused_variables)]
-        fn compute_size(&self) -> u64 {
-            let mut my_size = 0;
-            if self.id != 0 {
-                my_size += ::protobuf::rt::uint64_size(1, self.id);
-            }
-            for value in &self.users {
-                let len = value.compute_size();
-                my_size += 1 + ::protobuf::rt::compute_raw_varint64_size(len) + len;
-            };
-            my_size += ::protobuf::rt::unknown_fields_size(self.special_fields.unknown_fields());
-            self.special_fields.cached_size().set(my_size as u32);
-            my_size
-        }
-
-        fn write_to_with_cached_sizes(&self, os: &mut ::protobuf::CodedOutputStream<'_>) -> ::protobuf::Result<()> {
-            if self.id != 0 {
-                os.write_uint64(1, self.id)?;
-            }
-            for v in &self.users {
-                ::protobuf::rt::write_message_field_with_cached_size(2, v, os)?;
-            };
-            os.write_unknown_fields(self.special_fields.unknown_fields())?;
-            ::std::result::Result::Ok(())
-        }
-
-        fn special_fields(&self) -> &::protobuf::SpecialFields {
-            &self.special_fields
-        }
-
-        fn mut_special_fields(&mut self) -> &mut ::protobuf::SpecialFields {
-            &mut self.special_fields
-        }
-
-        fn new() -> LinkMicBattleTeam {
-            LinkMicBattleTeam::new()
-        }
-
-        fn clear(&mut self) {
-            self.id = 0;
-            self.users.clear();
-            self.special_fields.clear();
-        }
-
-        fn default_instance() -> &'static LinkMicBattleTeam {
-            static instance: LinkMicBattleTeam = LinkMicBattleTeam {
-                id: 0,
-                users: ::std::vec::Vec::new(),
-                special_fields: ::protobuf::SpecialFields::new(),
-            };
-            &instance
-        }
-    }
-
-    impl ::protobuf::MessageFull for LinkMicBattleTeam {
-        fn descriptor() -> ::protobuf::reflect::MessageDescriptor {
-            static descriptor: ::protobuf::rt::Lazy<::protobuf::reflect::MessageDescriptor> = ::protobuf::rt::Lazy::new();
-            descriptor.get(|| super::file_descriptor().message_by_package_relative_name("WebcastLinkMicBattle.LinkMicBattleTeam").unwrap()).clone()
-        }
-    }
-
-    impl ::std::fmt::Display for LinkMicBattleTeam {
-        fn fmt(&self, f: &mut ::std::fmt::Formatter<'_>) -> ::std::fmt::Result {
-            ::protobuf::text_format::fmt(self, f)
-        }
-    }
-
-    impl ::protobuf::reflect::ProtobufValue for LinkMicBattleTeam {
         type RuntimeType = ::protobuf::reflect::rt::RuntimeTypeMessage<Self>;
     }
 
@@ -12458,6 +12393,1486 @@ pub mod webcast_link_mic_battle {
 
     impl ::protobuf::reflect::ProtobufValue for LinkMicBattleTeamData {
         type RuntimeType = ::protobuf::reflect::rt::RuntimeTypeMessage<Self>;
+    }
+
+    // @@protoc_insertion_point(message:TikTok.WebcastLinkMicBattle.LinkMicBattleData)
+    #[derive(PartialEq,Clone,Default,Debug)]
+    pub struct LinkMicBattleData {
+        // message fields
+        // @@protoc_insertion_point(field:TikTok.WebcastLinkMicBattle.LinkMicBattleData.id)
+        pub id: u64,
+        // @@protoc_insertion_point(field:TikTok.WebcastLinkMicBattle.LinkMicBattleData.data1)
+        pub data1: u32,
+        // @@protoc_insertion_point(field:TikTok.WebcastLinkMicBattle.LinkMicBattleData.winStreak)
+        pub winStreak: u32,
+        // @@protoc_insertion_point(field:TikTok.WebcastLinkMicBattle.LinkMicBattleData.data3)
+        pub data3: u32,
+        // @@protoc_insertion_point(field:TikTok.WebcastLinkMicBattle.LinkMicBattleData.url)
+        pub url: ::std::string::String,
+        // special fields
+        // @@protoc_insertion_point(special_field:TikTok.WebcastLinkMicBattle.LinkMicBattleData.special_fields)
+        pub special_fields: ::protobuf::SpecialFields,
+    }
+
+    impl<'a> ::std::default::Default for &'a LinkMicBattleData {
+        fn default() -> &'a LinkMicBattleData {
+            <LinkMicBattleData as ::protobuf::Message>::default_instance()
+        }
+    }
+
+    impl LinkMicBattleData {
+        pub fn new() -> LinkMicBattleData {
+            ::std::default::Default::default()
+        }
+
+        pub(in super) fn generated_message_descriptor_data() -> ::protobuf::reflect::GeneratedMessageDescriptorData {
+            let mut fields = ::std::vec::Vec::with_capacity(5);
+            let mut oneofs = ::std::vec::Vec::with_capacity(0);
+            fields.push(::protobuf::reflect::rt::v2::make_simpler_field_accessor::<_, _>(
+                "id",
+                |m: &LinkMicBattleData| { &m.id },
+                |m: &mut LinkMicBattleData| { &mut m.id },
+            ));
+            fields.push(::protobuf::reflect::rt::v2::make_simpler_field_accessor::<_, _>(
+                "data1",
+                |m: &LinkMicBattleData| { &m.data1 },
+                |m: &mut LinkMicBattleData| { &mut m.data1 },
+            ));
+            fields.push(::protobuf::reflect::rt::v2::make_simpler_field_accessor::<_, _>(
+                "winStreak",
+                |m: &LinkMicBattleData| { &m.winStreak },
+                |m: &mut LinkMicBattleData| { &mut m.winStreak },
+            ));
+            fields.push(::protobuf::reflect::rt::v2::make_simpler_field_accessor::<_, _>(
+                "data3",
+                |m: &LinkMicBattleData| { &m.data3 },
+                |m: &mut LinkMicBattleData| { &mut m.data3 },
+            ));
+            fields.push(::protobuf::reflect::rt::v2::make_simpler_field_accessor::<_, _>(
+                "url",
+                |m: &LinkMicBattleData| { &m.url },
+                |m: &mut LinkMicBattleData| { &mut m.url },
+            ));
+            ::protobuf::reflect::GeneratedMessageDescriptorData::new_2::<LinkMicBattleData>(
+                "WebcastLinkMicBattle.LinkMicBattleData",
+                fields,
+                oneofs,
+            )
+        }
+    }
+
+    impl ::protobuf::Message for LinkMicBattleData {
+        const NAME: &'static str = "LinkMicBattleData";
+
+        fn is_initialized(&self) -> bool {
+            true
+        }
+
+        fn merge_from(&mut self, is: &mut ::protobuf::CodedInputStream<'_>) -> ::protobuf::Result<()> {
+            while let Some(tag) = is.read_raw_tag_or_eof()? {
+                match tag {
+                    8 => {
+                        self.id = is.read_uint64()?;
+                    },
+                    16 => {
+                        self.data1 = is.read_uint32()?;
+                    },
+                    24 => {
+                        self.winStreak = is.read_uint32()?;
+                    },
+                    40 => {
+                        self.data3 = is.read_uint32()?;
+                    },
+                    50 => {
+                        self.url = is.read_string()?;
+                    },
+                    tag => {
+                        ::protobuf::rt::read_unknown_or_skip_group(tag, is, self.special_fields.mut_unknown_fields())?;
+                    },
+                };
+            }
+            ::std::result::Result::Ok(())
+        }
+
+        // Compute sizes of nested messages
+        #[allow(unused_variables)]
+        fn compute_size(&self) -> u64 {
+            let mut my_size = 0;
+            if self.id != 0 {
+                my_size += ::protobuf::rt::uint64_size(1, self.id);
+            }
+            if self.data1 != 0 {
+                my_size += ::protobuf::rt::uint32_size(2, self.data1);
+            }
+            if self.winStreak != 0 {
+                my_size += ::protobuf::rt::uint32_size(3, self.winStreak);
+            }
+            if self.data3 != 0 {
+                my_size += ::protobuf::rt::uint32_size(5, self.data3);
+            }
+            if !self.url.is_empty() {
+                my_size += ::protobuf::rt::string_size(6, &self.url);
+            }
+            my_size += ::protobuf::rt::unknown_fields_size(self.special_fields.unknown_fields());
+            self.special_fields.cached_size().set(my_size as u32);
+            my_size
+        }
+
+        fn write_to_with_cached_sizes(&self, os: &mut ::protobuf::CodedOutputStream<'_>) -> ::protobuf::Result<()> {
+            if self.id != 0 {
+                os.write_uint64(1, self.id)?;
+            }
+            if self.data1 != 0 {
+                os.write_uint32(2, self.data1)?;
+            }
+            if self.winStreak != 0 {
+                os.write_uint32(3, self.winStreak)?;
+            }
+            if self.data3 != 0 {
+                os.write_uint32(5, self.data3)?;
+            }
+            if !self.url.is_empty() {
+                os.write_string(6, &self.url)?;
+            }
+            os.write_unknown_fields(self.special_fields.unknown_fields())?;
+            ::std::result::Result::Ok(())
+        }
+
+        fn special_fields(&self) -> &::protobuf::SpecialFields {
+            &self.special_fields
+        }
+
+        fn mut_special_fields(&mut self) -> &mut ::protobuf::SpecialFields {
+            &mut self.special_fields
+        }
+
+        fn new() -> LinkMicBattleData {
+            LinkMicBattleData::new()
+        }
+
+        fn clear(&mut self) {
+            self.id = 0;
+            self.data1 = 0;
+            self.winStreak = 0;
+            self.data3 = 0;
+            self.url.clear();
+            self.special_fields.clear();
+        }
+
+        fn default_instance() -> &'static LinkMicBattleData {
+            static instance: LinkMicBattleData = LinkMicBattleData {
+                id: 0,
+                data1: 0,
+                winStreak: 0,
+                data3: 0,
+                url: ::std::string::String::new(),
+                special_fields: ::protobuf::SpecialFields::new(),
+            };
+            &instance
+        }
+    }
+
+    impl ::protobuf::MessageFull for LinkMicBattleData {
+        fn descriptor() -> ::protobuf::reflect::MessageDescriptor {
+            static descriptor: ::protobuf::rt::Lazy<::protobuf::reflect::MessageDescriptor> = ::protobuf::rt::Lazy::new();
+            descriptor.get(|| super::file_descriptor().message_by_package_relative_name("WebcastLinkMicBattle.LinkMicBattleData").unwrap()).clone()
+        }
+    }
+
+    impl ::std::fmt::Display for LinkMicBattleData {
+        fn fmt(&self, f: &mut ::std::fmt::Formatter<'_>) -> ::std::fmt::Result {
+            ::protobuf::text_format::fmt(self, f)
+        }
+    }
+
+    impl ::protobuf::reflect::ProtobufValue for LinkMicBattleData {
+        type RuntimeType = ::protobuf::reflect::rt::RuntimeTypeMessage<Self>;
+    }
+
+    // @@protoc_insertion_point(message:TikTok.WebcastLinkMicBattle.LinkMicBattleDetails)
+    #[derive(PartialEq,Clone,Default,Debug)]
+    pub struct LinkMicBattleDetails {
+        // message fields
+        // @@protoc_insertion_point(field:TikTok.WebcastLinkMicBattle.LinkMicBattleDetails.id)
+        pub id: u64,
+        // @@protoc_insertion_point(field:TikTok.WebcastLinkMicBattle.LinkMicBattleDetails.summary)
+        pub summary: ::protobuf::MessageField<link_mic_battle_details::LinkMicBattleDetailsSummary>,
+        // special fields
+        // @@protoc_insertion_point(special_field:TikTok.WebcastLinkMicBattle.LinkMicBattleDetails.special_fields)
+        pub special_fields: ::protobuf::SpecialFields,
+    }
+
+    impl<'a> ::std::default::Default for &'a LinkMicBattleDetails {
+        fn default() -> &'a LinkMicBattleDetails {
+            <LinkMicBattleDetails as ::protobuf::Message>::default_instance()
+        }
+    }
+
+    impl LinkMicBattleDetails {
+        pub fn new() -> LinkMicBattleDetails {
+            ::std::default::Default::default()
+        }
+
+        pub(in super) fn generated_message_descriptor_data() -> ::protobuf::reflect::GeneratedMessageDescriptorData {
+            let mut fields = ::std::vec::Vec::with_capacity(2);
+            let mut oneofs = ::std::vec::Vec::with_capacity(0);
+            fields.push(::protobuf::reflect::rt::v2::make_simpler_field_accessor::<_, _>(
+                "id",
+                |m: &LinkMicBattleDetails| { &m.id },
+                |m: &mut LinkMicBattleDetails| { &mut m.id },
+            ));
+            fields.push(::protobuf::reflect::rt::v2::make_message_field_accessor::<_, link_mic_battle_details::LinkMicBattleDetailsSummary>(
+                "summary",
+                |m: &LinkMicBattleDetails| { &m.summary },
+                |m: &mut LinkMicBattleDetails| { &mut m.summary },
+            ));
+            ::protobuf::reflect::GeneratedMessageDescriptorData::new_2::<LinkMicBattleDetails>(
+                "WebcastLinkMicBattle.LinkMicBattleDetails",
+                fields,
+                oneofs,
+            )
+        }
+    }
+
+    impl ::protobuf::Message for LinkMicBattleDetails {
+        const NAME: &'static str = "LinkMicBattleDetails";
+
+        fn is_initialized(&self) -> bool {
+            true
+        }
+
+        fn merge_from(&mut self, is: &mut ::protobuf::CodedInputStream<'_>) -> ::protobuf::Result<()> {
+            while let Some(tag) = is.read_raw_tag_or_eof()? {
+                match tag {
+                    8 => {
+                        self.id = is.read_uint64()?;
+                    },
+                    18 => {
+                        ::protobuf::rt::read_singular_message_into_field(is, &mut self.summary)?;
+                    },
+                    tag => {
+                        ::protobuf::rt::read_unknown_or_skip_group(tag, is, self.special_fields.mut_unknown_fields())?;
+                    },
+                };
+            }
+            ::std::result::Result::Ok(())
+        }
+
+        // Compute sizes of nested messages
+        #[allow(unused_variables)]
+        fn compute_size(&self) -> u64 {
+            let mut my_size = 0;
+            if self.id != 0 {
+                my_size += ::protobuf::rt::uint64_size(1, self.id);
+            }
+            if let Some(v) = self.summary.as_ref() {
+                let len = v.compute_size();
+                my_size += 1 + ::protobuf::rt::compute_raw_varint64_size(len) + len;
+            }
+            my_size += ::protobuf::rt::unknown_fields_size(self.special_fields.unknown_fields());
+            self.special_fields.cached_size().set(my_size as u32);
+            my_size
+        }
+
+        fn write_to_with_cached_sizes(&self, os: &mut ::protobuf::CodedOutputStream<'_>) -> ::protobuf::Result<()> {
+            if self.id != 0 {
+                os.write_uint64(1, self.id)?;
+            }
+            if let Some(v) = self.summary.as_ref() {
+                ::protobuf::rt::write_message_field_with_cached_size(2, v, os)?;
+            }
+            os.write_unknown_fields(self.special_fields.unknown_fields())?;
+            ::std::result::Result::Ok(())
+        }
+
+        fn special_fields(&self) -> &::protobuf::SpecialFields {
+            &self.special_fields
+        }
+
+        fn mut_special_fields(&mut self) -> &mut ::protobuf::SpecialFields {
+            &mut self.special_fields
+        }
+
+        fn new() -> LinkMicBattleDetails {
+            LinkMicBattleDetails::new()
+        }
+
+        fn clear(&mut self) {
+            self.id = 0;
+            self.summary.clear();
+            self.special_fields.clear();
+        }
+
+        fn default_instance() -> &'static LinkMicBattleDetails {
+            static instance: LinkMicBattleDetails = LinkMicBattleDetails {
+                id: 0,
+                summary: ::protobuf::MessageField::none(),
+                special_fields: ::protobuf::SpecialFields::new(),
+            };
+            &instance
+        }
+    }
+
+    impl ::protobuf::MessageFull for LinkMicBattleDetails {
+        fn descriptor() -> ::protobuf::reflect::MessageDescriptor {
+            static descriptor: ::protobuf::rt::Lazy<::protobuf::reflect::MessageDescriptor> = ::protobuf::rt::Lazy::new();
+            descriptor.get(|| super::file_descriptor().message_by_package_relative_name("WebcastLinkMicBattle.LinkMicBattleDetails").unwrap()).clone()
+        }
+    }
+
+    impl ::std::fmt::Display for LinkMicBattleDetails {
+        fn fmt(&self, f: &mut ::std::fmt::Formatter<'_>) -> ::std::fmt::Result {
+            ::protobuf::text_format::fmt(self, f)
+        }
+    }
+
+    impl ::protobuf::reflect::ProtobufValue for LinkMicBattleDetails {
+        type RuntimeType = ::protobuf::reflect::rt::RuntimeTypeMessage<Self>;
+    }
+
+    /// Nested message and enums of message `LinkMicBattleDetails`
+    pub mod link_mic_battle_details {
+        // @@protoc_insertion_point(message:TikTok.WebcastLinkMicBattle.LinkMicBattleDetails.LinkMicBattleDetailsSummary)
+        #[derive(PartialEq,Clone,Default,Debug)]
+        pub struct LinkMicBattleDetailsSummary {
+            // message fields
+            // @@protoc_insertion_point(field:TikTok.WebcastLinkMicBattle.LinkMicBattleDetails.LinkMicBattleDetailsSummary.id)
+            pub id: u64,
+            // @@protoc_insertion_point(field:TikTok.WebcastLinkMicBattle.LinkMicBattleDetails.LinkMicBattleDetailsSummary.unknownData2)
+            pub unknownData2: u32,
+            // @@protoc_insertion_point(field:TikTok.WebcastLinkMicBattle.LinkMicBattleDetails.LinkMicBattleDetailsSummary.points)
+            pub points: u32,
+            // special fields
+            // @@protoc_insertion_point(special_field:TikTok.WebcastLinkMicBattle.LinkMicBattleDetails.LinkMicBattleDetailsSummary.special_fields)
+            pub special_fields: ::protobuf::SpecialFields,
+        }
+
+        impl<'a> ::std::default::Default for &'a LinkMicBattleDetailsSummary {
+            fn default() -> &'a LinkMicBattleDetailsSummary {
+                <LinkMicBattleDetailsSummary as ::protobuf::Message>::default_instance()
+            }
+        }
+
+        impl LinkMicBattleDetailsSummary {
+            pub fn new() -> LinkMicBattleDetailsSummary {
+                ::std::default::Default::default()
+            }
+
+            pub(in super::super) fn generated_message_descriptor_data() -> ::protobuf::reflect::GeneratedMessageDescriptorData {
+                let mut fields = ::std::vec::Vec::with_capacity(3);
+                let mut oneofs = ::std::vec::Vec::with_capacity(0);
+                fields.push(::protobuf::reflect::rt::v2::make_simpler_field_accessor::<_, _>(
+                    "id",
+                    |m: &LinkMicBattleDetailsSummary| { &m.id },
+                    |m: &mut LinkMicBattleDetailsSummary| { &mut m.id },
+                ));
+                fields.push(::protobuf::reflect::rt::v2::make_simpler_field_accessor::<_, _>(
+                    "unknownData2",
+                    |m: &LinkMicBattleDetailsSummary| { &m.unknownData2 },
+                    |m: &mut LinkMicBattleDetailsSummary| { &mut m.unknownData2 },
+                ));
+                fields.push(::protobuf::reflect::rt::v2::make_simpler_field_accessor::<_, _>(
+                    "points",
+                    |m: &LinkMicBattleDetailsSummary| { &m.points },
+                    |m: &mut LinkMicBattleDetailsSummary| { &mut m.points },
+                ));
+                ::protobuf::reflect::GeneratedMessageDescriptorData::new_2::<LinkMicBattleDetailsSummary>(
+                    "WebcastLinkMicBattle.LinkMicBattleDetails.LinkMicBattleDetailsSummary",
+                    fields,
+                    oneofs,
+                )
+            }
+        }
+
+        impl ::protobuf::Message for LinkMicBattleDetailsSummary {
+            const NAME: &'static str = "LinkMicBattleDetailsSummary";
+
+            fn is_initialized(&self) -> bool {
+                true
+            }
+
+            fn merge_from(&mut self, is: &mut ::protobuf::CodedInputStream<'_>) -> ::protobuf::Result<()> {
+                while let Some(tag) = is.read_raw_tag_or_eof()? {
+                    match tag {
+                        8 => {
+                            self.id = is.read_uint64()?;
+                        },
+                        16 => {
+                            self.unknownData2 = is.read_uint32()?;
+                        },
+                        24 => {
+                            self.points = is.read_uint32()?;
+                        },
+                        tag => {
+                            ::protobuf::rt::read_unknown_or_skip_group(tag, is, self.special_fields.mut_unknown_fields())?;
+                        },
+                    };
+                }
+                ::std::result::Result::Ok(())
+            }
+
+            // Compute sizes of nested messages
+            #[allow(unused_variables)]
+            fn compute_size(&self) -> u64 {
+                let mut my_size = 0;
+                if self.id != 0 {
+                    my_size += ::protobuf::rt::uint64_size(1, self.id);
+                }
+                if self.unknownData2 != 0 {
+                    my_size += ::protobuf::rt::uint32_size(2, self.unknownData2);
+                }
+                if self.points != 0 {
+                    my_size += ::protobuf::rt::uint32_size(3, self.points);
+                }
+                my_size += ::protobuf::rt::unknown_fields_size(self.special_fields.unknown_fields());
+                self.special_fields.cached_size().set(my_size as u32);
+                my_size
+            }
+
+            fn write_to_with_cached_sizes(&self, os: &mut ::protobuf::CodedOutputStream<'_>) -> ::protobuf::Result<()> {
+                if self.id != 0 {
+                    os.write_uint64(1, self.id)?;
+                }
+                if self.unknownData2 != 0 {
+                    os.write_uint32(2, self.unknownData2)?;
+                }
+                if self.points != 0 {
+                    os.write_uint32(3, self.points)?;
+                }
+                os.write_unknown_fields(self.special_fields.unknown_fields())?;
+                ::std::result::Result::Ok(())
+            }
+
+            fn special_fields(&self) -> &::protobuf::SpecialFields {
+                &self.special_fields
+            }
+
+            fn mut_special_fields(&mut self) -> &mut ::protobuf::SpecialFields {
+                &mut self.special_fields
+            }
+
+            fn new() -> LinkMicBattleDetailsSummary {
+                LinkMicBattleDetailsSummary::new()
+            }
+
+            fn clear(&mut self) {
+                self.id = 0;
+                self.unknownData2 = 0;
+                self.points = 0;
+                self.special_fields.clear();
+            }
+
+            fn default_instance() -> &'static LinkMicBattleDetailsSummary {
+                static instance: LinkMicBattleDetailsSummary = LinkMicBattleDetailsSummary {
+                    id: 0,
+                    unknownData2: 0,
+                    points: 0,
+                    special_fields: ::protobuf::SpecialFields::new(),
+                };
+                &instance
+            }
+        }
+
+        impl ::protobuf::MessageFull for LinkMicBattleDetailsSummary {
+            fn descriptor() -> ::protobuf::reflect::MessageDescriptor {
+                static descriptor: ::protobuf::rt::Lazy<::protobuf::reflect::MessageDescriptor> = ::protobuf::rt::Lazy::new();
+                descriptor.get(|| super::super::file_descriptor().message_by_package_relative_name("WebcastLinkMicBattle.LinkMicBattleDetails.LinkMicBattleDetailsSummary").unwrap()).clone()
+            }
+        }
+
+        impl ::std::fmt::Display for LinkMicBattleDetailsSummary {
+            fn fmt(&self, f: &mut ::std::fmt::Formatter<'_>) -> ::std::fmt::Result {
+                ::protobuf::text_format::fmt(self, f)
+            }
+        }
+
+        impl ::protobuf::reflect::ProtobufValue for LinkMicBattleDetailsSummary {
+            type RuntimeType = ::protobuf::reflect::rt::RuntimeTypeMessage<Self>;
+        }
+    }
+
+    // @@protoc_insertion_point(message:TikTok.WebcastLinkMicBattle.LinkMicBattleTopViewers)
+    #[derive(PartialEq,Clone,Default,Debug)]
+    pub struct LinkMicBattleTopViewers {
+        // message fields
+        // @@protoc_insertion_point(field:TikTok.WebcastLinkMicBattle.LinkMicBattleTopViewers.id)
+        pub id: u64,
+        // @@protoc_insertion_point(field:TikTok.WebcastLinkMicBattle.LinkMicBattleTopViewers.viewerGroup)
+        pub viewerGroup: ::std::vec::Vec<link_mic_battle_top_viewers::TopViewerGroup>,
+        // special fields
+        // @@protoc_insertion_point(special_field:TikTok.WebcastLinkMicBattle.LinkMicBattleTopViewers.special_fields)
+        pub special_fields: ::protobuf::SpecialFields,
+    }
+
+    impl<'a> ::std::default::Default for &'a LinkMicBattleTopViewers {
+        fn default() -> &'a LinkMicBattleTopViewers {
+            <LinkMicBattleTopViewers as ::protobuf::Message>::default_instance()
+        }
+    }
+
+    impl LinkMicBattleTopViewers {
+        pub fn new() -> LinkMicBattleTopViewers {
+            ::std::default::Default::default()
+        }
+
+        pub(in super) fn generated_message_descriptor_data() -> ::protobuf::reflect::GeneratedMessageDescriptorData {
+            let mut fields = ::std::vec::Vec::with_capacity(2);
+            let mut oneofs = ::std::vec::Vec::with_capacity(0);
+            fields.push(::protobuf::reflect::rt::v2::make_simpler_field_accessor::<_, _>(
+                "id",
+                |m: &LinkMicBattleTopViewers| { &m.id },
+                |m: &mut LinkMicBattleTopViewers| { &mut m.id },
+            ));
+            fields.push(::protobuf::reflect::rt::v2::make_vec_simpler_accessor::<_, _>(
+                "viewerGroup",
+                |m: &LinkMicBattleTopViewers| { &m.viewerGroup },
+                |m: &mut LinkMicBattleTopViewers| { &mut m.viewerGroup },
+            ));
+            ::protobuf::reflect::GeneratedMessageDescriptorData::new_2::<LinkMicBattleTopViewers>(
+                "WebcastLinkMicBattle.LinkMicBattleTopViewers",
+                fields,
+                oneofs,
+            )
+        }
+    }
+
+    impl ::protobuf::Message for LinkMicBattleTopViewers {
+        const NAME: &'static str = "LinkMicBattleTopViewers";
+
+        fn is_initialized(&self) -> bool {
+            true
+        }
+
+        fn merge_from(&mut self, is: &mut ::protobuf::CodedInputStream<'_>) -> ::protobuf::Result<()> {
+            while let Some(tag) = is.read_raw_tag_or_eof()? {
+                match tag {
+                    8 => {
+                        self.id = is.read_uint64()?;
+                    },
+                    18 => {
+                        self.viewerGroup.push(is.read_message()?);
+                    },
+                    tag => {
+                        ::protobuf::rt::read_unknown_or_skip_group(tag, is, self.special_fields.mut_unknown_fields())?;
+                    },
+                };
+            }
+            ::std::result::Result::Ok(())
+        }
+
+        // Compute sizes of nested messages
+        #[allow(unused_variables)]
+        fn compute_size(&self) -> u64 {
+            let mut my_size = 0;
+            if self.id != 0 {
+                my_size += ::protobuf::rt::uint64_size(1, self.id);
+            }
+            for value in &self.viewerGroup {
+                let len = value.compute_size();
+                my_size += 1 + ::protobuf::rt::compute_raw_varint64_size(len) + len;
+            };
+            my_size += ::protobuf::rt::unknown_fields_size(self.special_fields.unknown_fields());
+            self.special_fields.cached_size().set(my_size as u32);
+            my_size
+        }
+
+        fn write_to_with_cached_sizes(&self, os: &mut ::protobuf::CodedOutputStream<'_>) -> ::protobuf::Result<()> {
+            if self.id != 0 {
+                os.write_uint64(1, self.id)?;
+            }
+            for v in &self.viewerGroup {
+                ::protobuf::rt::write_message_field_with_cached_size(2, v, os)?;
+            };
+            os.write_unknown_fields(self.special_fields.unknown_fields())?;
+            ::std::result::Result::Ok(())
+        }
+
+        fn special_fields(&self) -> &::protobuf::SpecialFields {
+            &self.special_fields
+        }
+
+        fn mut_special_fields(&mut self) -> &mut ::protobuf::SpecialFields {
+            &mut self.special_fields
+        }
+
+        fn new() -> LinkMicBattleTopViewers {
+            LinkMicBattleTopViewers::new()
+        }
+
+        fn clear(&mut self) {
+            self.id = 0;
+            self.viewerGroup.clear();
+            self.special_fields.clear();
+        }
+
+        fn default_instance() -> &'static LinkMicBattleTopViewers {
+            static instance: LinkMicBattleTopViewers = LinkMicBattleTopViewers {
+                id: 0,
+                viewerGroup: ::std::vec::Vec::new(),
+                special_fields: ::protobuf::SpecialFields::new(),
+            };
+            &instance
+        }
+    }
+
+    impl ::protobuf::MessageFull for LinkMicBattleTopViewers {
+        fn descriptor() -> ::protobuf::reflect::MessageDescriptor {
+            static descriptor: ::protobuf::rt::Lazy<::protobuf::reflect::MessageDescriptor> = ::protobuf::rt::Lazy::new();
+            descriptor.get(|| super::file_descriptor().message_by_package_relative_name("WebcastLinkMicBattle.LinkMicBattleTopViewers").unwrap()).clone()
+        }
+    }
+
+    impl ::std::fmt::Display for LinkMicBattleTopViewers {
+        fn fmt(&self, f: &mut ::std::fmt::Formatter<'_>) -> ::std::fmt::Result {
+            ::protobuf::text_format::fmt(self, f)
+        }
+    }
+
+    impl ::protobuf::reflect::ProtobufValue for LinkMicBattleTopViewers {
+        type RuntimeType = ::protobuf::reflect::rt::RuntimeTypeMessage<Self>;
+    }
+
+    /// Nested message and enums of message `LinkMicBattleTopViewers`
+    pub mod link_mic_battle_top_viewers {
+        // @@protoc_insertion_point(message:TikTok.WebcastLinkMicBattle.LinkMicBattleTopViewers.TopViewerGroup)
+        #[derive(PartialEq,Clone,Default,Debug)]
+        pub struct TopViewerGroup {
+            // message fields
+            // @@protoc_insertion_point(field:TikTok.WebcastLinkMicBattle.LinkMicBattleTopViewers.TopViewerGroup.viewer)
+            pub viewer: ::std::vec::Vec<top_viewer_group::TopViewer>,
+            // @@protoc_insertion_point(field:TikTok.WebcastLinkMicBattle.LinkMicBattleTopViewers.TopViewerGroup.points)
+            pub points: u32,
+            // @@protoc_insertion_point(field:TikTok.WebcastLinkMicBattle.LinkMicBattleTopViewers.TopViewerGroup.hostIdOrTeamNum)
+            pub hostIdOrTeamNum: ::std::string::String,
+            // special fields
+            // @@protoc_insertion_point(special_field:TikTok.WebcastLinkMicBattle.LinkMicBattleTopViewers.TopViewerGroup.special_fields)
+            pub special_fields: ::protobuf::SpecialFields,
+        }
+
+        impl<'a> ::std::default::Default for &'a TopViewerGroup {
+            fn default() -> &'a TopViewerGroup {
+                <TopViewerGroup as ::protobuf::Message>::default_instance()
+            }
+        }
+
+        impl TopViewerGroup {
+            pub fn new() -> TopViewerGroup {
+                ::std::default::Default::default()
+            }
+
+            pub(in super::super) fn generated_message_descriptor_data() -> ::protobuf::reflect::GeneratedMessageDescriptorData {
+                let mut fields = ::std::vec::Vec::with_capacity(3);
+                let mut oneofs = ::std::vec::Vec::with_capacity(0);
+                fields.push(::protobuf::reflect::rt::v2::make_vec_simpler_accessor::<_, _>(
+                    "viewer",
+                    |m: &TopViewerGroup| { &m.viewer },
+                    |m: &mut TopViewerGroup| { &mut m.viewer },
+                ));
+                fields.push(::protobuf::reflect::rt::v2::make_simpler_field_accessor::<_, _>(
+                    "points",
+                    |m: &TopViewerGroup| { &m.points },
+                    |m: &mut TopViewerGroup| { &mut m.points },
+                ));
+                fields.push(::protobuf::reflect::rt::v2::make_simpler_field_accessor::<_, _>(
+                    "hostIdOrTeamNum",
+                    |m: &TopViewerGroup| { &m.hostIdOrTeamNum },
+                    |m: &mut TopViewerGroup| { &mut m.hostIdOrTeamNum },
+                ));
+                ::protobuf::reflect::GeneratedMessageDescriptorData::new_2::<TopViewerGroup>(
+                    "WebcastLinkMicBattle.LinkMicBattleTopViewers.TopViewerGroup",
+                    fields,
+                    oneofs,
+                )
+            }
+        }
+
+        impl ::protobuf::Message for TopViewerGroup {
+            const NAME: &'static str = "TopViewerGroup";
+
+            fn is_initialized(&self) -> bool {
+                true
+            }
+
+            fn merge_from(&mut self, is: &mut ::protobuf::CodedInputStream<'_>) -> ::protobuf::Result<()> {
+                while let Some(tag) = is.read_raw_tag_or_eof()? {
+                    match tag {
+                        10 => {
+                            self.viewer.push(is.read_message()?);
+                        },
+                        16 => {
+                            self.points = is.read_uint32()?;
+                        },
+                        26 => {
+                            self.hostIdOrTeamNum = is.read_string()?;
+                        },
+                        tag => {
+                            ::protobuf::rt::read_unknown_or_skip_group(tag, is, self.special_fields.mut_unknown_fields())?;
+                        },
+                    };
+                }
+                ::std::result::Result::Ok(())
+            }
+
+            // Compute sizes of nested messages
+            #[allow(unused_variables)]
+            fn compute_size(&self) -> u64 {
+                let mut my_size = 0;
+                for value in &self.viewer {
+                    let len = value.compute_size();
+                    my_size += 1 + ::protobuf::rt::compute_raw_varint64_size(len) + len;
+                };
+                if self.points != 0 {
+                    my_size += ::protobuf::rt::uint32_size(2, self.points);
+                }
+                if !self.hostIdOrTeamNum.is_empty() {
+                    my_size += ::protobuf::rt::string_size(3, &self.hostIdOrTeamNum);
+                }
+                my_size += ::protobuf::rt::unknown_fields_size(self.special_fields.unknown_fields());
+                self.special_fields.cached_size().set(my_size as u32);
+                my_size
+            }
+
+            fn write_to_with_cached_sizes(&self, os: &mut ::protobuf::CodedOutputStream<'_>) -> ::protobuf::Result<()> {
+                for v in &self.viewer {
+                    ::protobuf::rt::write_message_field_with_cached_size(1, v, os)?;
+                };
+                if self.points != 0 {
+                    os.write_uint32(2, self.points)?;
+                }
+                if !self.hostIdOrTeamNum.is_empty() {
+                    os.write_string(3, &self.hostIdOrTeamNum)?;
+                }
+                os.write_unknown_fields(self.special_fields.unknown_fields())?;
+                ::std::result::Result::Ok(())
+            }
+
+            fn special_fields(&self) -> &::protobuf::SpecialFields {
+                &self.special_fields
+            }
+
+            fn mut_special_fields(&mut self) -> &mut ::protobuf::SpecialFields {
+                &mut self.special_fields
+            }
+
+            fn new() -> TopViewerGroup {
+                TopViewerGroup::new()
+            }
+
+            fn clear(&mut self) {
+                self.viewer.clear();
+                self.points = 0;
+                self.hostIdOrTeamNum.clear();
+                self.special_fields.clear();
+            }
+
+            fn default_instance() -> &'static TopViewerGroup {
+                static instance: TopViewerGroup = TopViewerGroup {
+                    viewer: ::std::vec::Vec::new(),
+                    points: 0,
+                    hostIdOrTeamNum: ::std::string::String::new(),
+                    special_fields: ::protobuf::SpecialFields::new(),
+                };
+                &instance
+            }
+        }
+
+        impl ::protobuf::MessageFull for TopViewerGroup {
+            fn descriptor() -> ::protobuf::reflect::MessageDescriptor {
+                static descriptor: ::protobuf::rt::Lazy<::protobuf::reflect::MessageDescriptor> = ::protobuf::rt::Lazy::new();
+                descriptor.get(|| super::super::file_descriptor().message_by_package_relative_name("WebcastLinkMicBattle.LinkMicBattleTopViewers.TopViewerGroup").unwrap()).clone()
+            }
+        }
+
+        impl ::std::fmt::Display for TopViewerGroup {
+            fn fmt(&self, f: &mut ::std::fmt::Formatter<'_>) -> ::std::fmt::Result {
+                ::protobuf::text_format::fmt(self, f)
+            }
+        }
+
+        impl ::protobuf::reflect::ProtobufValue for TopViewerGroup {
+            type RuntimeType = ::protobuf::reflect::rt::RuntimeTypeMessage<Self>;
+        }
+
+        /// Nested message and enums of message `TopViewerGroup`
+        pub mod top_viewer_group {
+            // @@protoc_insertion_point(message:TikTok.WebcastLinkMicBattle.LinkMicBattleTopViewers.TopViewerGroup.TopViewer)
+            #[derive(PartialEq,Clone,Default,Debug)]
+            pub struct TopViewer {
+                // message fields
+                // @@protoc_insertion_point(field:TikTok.WebcastLinkMicBattle.LinkMicBattleTopViewers.TopViewerGroup.TopViewer.id)
+                pub id: u64,
+                // @@protoc_insertion_point(field:TikTok.WebcastLinkMicBattle.LinkMicBattleTopViewers.TopViewerGroup.TopViewer.points)
+                pub points: u32,
+                // @@protoc_insertion_point(field:TikTok.WebcastLinkMicBattle.LinkMicBattleTopViewers.TopViewerGroup.TopViewer.profileId)
+                pub profileId: ::std::string::String,
+                // @@protoc_insertion_point(field:TikTok.WebcastLinkMicBattle.LinkMicBattleTopViewers.TopViewerGroup.TopViewer.images)
+                pub images: ::std::vec::Vec<super::super::super::super::data::Image>,
+                // @@protoc_insertion_point(field:TikTok.WebcastLinkMicBattle.LinkMicBattleTopViewers.TopViewerGroup.TopViewer.stringId)
+                pub stringId: ::std::string::String,
+                // special fields
+                // @@protoc_insertion_point(special_field:TikTok.WebcastLinkMicBattle.LinkMicBattleTopViewers.TopViewerGroup.TopViewer.special_fields)
+                pub special_fields: ::protobuf::SpecialFields,
+            }
+
+            impl<'a> ::std::default::Default for &'a TopViewer {
+                fn default() -> &'a TopViewer {
+                    <TopViewer as ::protobuf::Message>::default_instance()
+                }
+            }
+
+            impl TopViewer {
+                pub fn new() -> TopViewer {
+                    ::std::default::Default::default()
+                }
+
+                pub(in super::super::super) fn generated_message_descriptor_data() -> ::protobuf::reflect::GeneratedMessageDescriptorData {
+                    let mut fields = ::std::vec::Vec::with_capacity(5);
+                    let mut oneofs = ::std::vec::Vec::with_capacity(0);
+                    fields.push(::protobuf::reflect::rt::v2::make_simpler_field_accessor::<_, _>(
+                        "id",
+                        |m: &TopViewer| { &m.id },
+                        |m: &mut TopViewer| { &mut m.id },
+                    ));
+                    fields.push(::protobuf::reflect::rt::v2::make_simpler_field_accessor::<_, _>(
+                        "points",
+                        |m: &TopViewer| { &m.points },
+                        |m: &mut TopViewer| { &mut m.points },
+                    ));
+                    fields.push(::protobuf::reflect::rt::v2::make_simpler_field_accessor::<_, _>(
+                        "profileId",
+                        |m: &TopViewer| { &m.profileId },
+                        |m: &mut TopViewer| { &mut m.profileId },
+                    ));
+                    fields.push(::protobuf::reflect::rt::v2::make_vec_simpler_accessor::<_, _>(
+                        "images",
+                        |m: &TopViewer| { &m.images },
+                        |m: &mut TopViewer| { &mut m.images },
+                    ));
+                    fields.push(::protobuf::reflect::rt::v2::make_simpler_field_accessor::<_, _>(
+                        "stringId",
+                        |m: &TopViewer| { &m.stringId },
+                        |m: &mut TopViewer| { &mut m.stringId },
+                    ));
+                    ::protobuf::reflect::GeneratedMessageDescriptorData::new_2::<TopViewer>(
+                        "WebcastLinkMicBattle.LinkMicBattleTopViewers.TopViewerGroup.TopViewer",
+                        fields,
+                        oneofs,
+                    )
+                }
+            }
+
+            impl ::protobuf::Message for TopViewer {
+                const NAME: &'static str = "TopViewer";
+
+                fn is_initialized(&self) -> bool {
+                    true
+                }
+
+                fn merge_from(&mut self, is: &mut ::protobuf::CodedInputStream<'_>) -> ::protobuf::Result<()> {
+                    while let Some(tag) = is.read_raw_tag_or_eof()? {
+                        match tag {
+                            8 => {
+                                self.id = is.read_uint64()?;
+                            },
+                            16 => {
+                                self.points = is.read_uint32()?;
+                            },
+                            26 => {
+                                self.profileId = is.read_string()?;
+                            },
+                            34 => {
+                                self.images.push(is.read_message()?);
+                            },
+                            50 => {
+                                self.stringId = is.read_string()?;
+                            },
+                            tag => {
+                                ::protobuf::rt::read_unknown_or_skip_group(tag, is, self.special_fields.mut_unknown_fields())?;
+                            },
+                        };
+                    }
+                    ::std::result::Result::Ok(())
+                }
+
+                // Compute sizes of nested messages
+                #[allow(unused_variables)]
+                fn compute_size(&self) -> u64 {
+                    let mut my_size = 0;
+                    if self.id != 0 {
+                        my_size += ::protobuf::rt::uint64_size(1, self.id);
+                    }
+                    if self.points != 0 {
+                        my_size += ::protobuf::rt::uint32_size(2, self.points);
+                    }
+                    if !self.profileId.is_empty() {
+                        my_size += ::protobuf::rt::string_size(3, &self.profileId);
+                    }
+                    for value in &self.images {
+                        let len = value.compute_size();
+                        my_size += 1 + ::protobuf::rt::compute_raw_varint64_size(len) + len;
+                    };
+                    if !self.stringId.is_empty() {
+                        my_size += ::protobuf::rt::string_size(6, &self.stringId);
+                    }
+                    my_size += ::protobuf::rt::unknown_fields_size(self.special_fields.unknown_fields());
+                    self.special_fields.cached_size().set(my_size as u32);
+                    my_size
+                }
+
+                fn write_to_with_cached_sizes(&self, os: &mut ::protobuf::CodedOutputStream<'_>) -> ::protobuf::Result<()> {
+                    if self.id != 0 {
+                        os.write_uint64(1, self.id)?;
+                    }
+                    if self.points != 0 {
+                        os.write_uint32(2, self.points)?;
+                    }
+                    if !self.profileId.is_empty() {
+                        os.write_string(3, &self.profileId)?;
+                    }
+                    for v in &self.images {
+                        ::protobuf::rt::write_message_field_with_cached_size(4, v, os)?;
+                    };
+                    if !self.stringId.is_empty() {
+                        os.write_string(6, &self.stringId)?;
+                    }
+                    os.write_unknown_fields(self.special_fields.unknown_fields())?;
+                    ::std::result::Result::Ok(())
+                }
+
+                fn special_fields(&self) -> &::protobuf::SpecialFields {
+                    &self.special_fields
+                }
+
+                fn mut_special_fields(&mut self) -> &mut ::protobuf::SpecialFields {
+                    &mut self.special_fields
+                }
+
+                fn new() -> TopViewer {
+                    TopViewer::new()
+                }
+
+                fn clear(&mut self) {
+                    self.id = 0;
+                    self.points = 0;
+                    self.profileId.clear();
+                    self.images.clear();
+                    self.stringId.clear();
+                    self.special_fields.clear();
+                }
+
+                fn default_instance() -> &'static TopViewer {
+                    static instance: TopViewer = TopViewer {
+                        id: 0,
+                        points: 0,
+                        profileId: ::std::string::String::new(),
+                        images: ::std::vec::Vec::new(),
+                        stringId: ::std::string::String::new(),
+                        special_fields: ::protobuf::SpecialFields::new(),
+                    };
+                    &instance
+                }
+            }
+
+            impl ::protobuf::MessageFull for TopViewer {
+                fn descriptor() -> ::protobuf::reflect::MessageDescriptor {
+                    static descriptor: ::protobuf::rt::Lazy<::protobuf::reflect::MessageDescriptor> = ::protobuf::rt::Lazy::new();
+                    descriptor.get(|| super::super::super::file_descriptor().message_by_package_relative_name("WebcastLinkMicBattle.LinkMicBattleTopViewers.TopViewerGroup.TopViewer").unwrap()).clone()
+                }
+            }
+
+            impl ::std::fmt::Display for TopViewer {
+                fn fmt(&self, f: &mut ::std::fmt::Formatter<'_>) -> ::std::fmt::Result {
+                    ::protobuf::text_format::fmt(self, f)
+                }
+            }
+
+            impl ::protobuf::reflect::ProtobufValue for TopViewer {
+                type RuntimeType = ::protobuf::reflect::rt::RuntimeTypeMessage<Self>;
+            }
+        }
+    }
+
+    // @@protoc_insertion_point(message:TikTok.WebcastLinkMicBattle.LinkMicBattleHost)
+    #[derive(PartialEq,Clone,Default,Debug)]
+    pub struct LinkMicBattleHost {
+        // message fields
+        // @@protoc_insertion_point(field:TikTok.WebcastLinkMicBattle.LinkMicBattleHost.id)
+        pub id: u64,
+        // @@protoc_insertion_point(field:TikTok.WebcastLinkMicBattle.LinkMicBattleHost.hostGroup)
+        pub hostGroup: ::std::vec::Vec<link_mic_battle_host::HostGroup>,
+        // special fields
+        // @@protoc_insertion_point(special_field:TikTok.WebcastLinkMicBattle.LinkMicBattleHost.special_fields)
+        pub special_fields: ::protobuf::SpecialFields,
+    }
+
+    impl<'a> ::std::default::Default for &'a LinkMicBattleHost {
+        fn default() -> &'a LinkMicBattleHost {
+            <LinkMicBattleHost as ::protobuf::Message>::default_instance()
+        }
+    }
+
+    impl LinkMicBattleHost {
+        pub fn new() -> LinkMicBattleHost {
+            ::std::default::Default::default()
+        }
+
+        pub(in super) fn generated_message_descriptor_data() -> ::protobuf::reflect::GeneratedMessageDescriptorData {
+            let mut fields = ::std::vec::Vec::with_capacity(2);
+            let mut oneofs = ::std::vec::Vec::with_capacity(0);
+            fields.push(::protobuf::reflect::rt::v2::make_simpler_field_accessor::<_, _>(
+                "id",
+                |m: &LinkMicBattleHost| { &m.id },
+                |m: &mut LinkMicBattleHost| { &mut m.id },
+            ));
+            fields.push(::protobuf::reflect::rt::v2::make_vec_simpler_accessor::<_, _>(
+                "hostGroup",
+                |m: &LinkMicBattleHost| { &m.hostGroup },
+                |m: &mut LinkMicBattleHost| { &mut m.hostGroup },
+            ));
+            ::protobuf::reflect::GeneratedMessageDescriptorData::new_2::<LinkMicBattleHost>(
+                "WebcastLinkMicBattle.LinkMicBattleHost",
+                fields,
+                oneofs,
+            )
+        }
+    }
+
+    impl ::protobuf::Message for LinkMicBattleHost {
+        const NAME: &'static str = "LinkMicBattleHost";
+
+        fn is_initialized(&self) -> bool {
+            true
+        }
+
+        fn merge_from(&mut self, is: &mut ::protobuf::CodedInputStream<'_>) -> ::protobuf::Result<()> {
+            while let Some(tag) = is.read_raw_tag_or_eof()? {
+                match tag {
+                    8 => {
+                        self.id = is.read_uint64()?;
+                    },
+                    18 => {
+                        self.hostGroup.push(is.read_message()?);
+                    },
+                    tag => {
+                        ::protobuf::rt::read_unknown_or_skip_group(tag, is, self.special_fields.mut_unknown_fields())?;
+                    },
+                };
+            }
+            ::std::result::Result::Ok(())
+        }
+
+        // Compute sizes of nested messages
+        #[allow(unused_variables)]
+        fn compute_size(&self) -> u64 {
+            let mut my_size = 0;
+            if self.id != 0 {
+                my_size += ::protobuf::rt::uint64_size(1, self.id);
+            }
+            for value in &self.hostGroup {
+                let len = value.compute_size();
+                my_size += 1 + ::protobuf::rt::compute_raw_varint64_size(len) + len;
+            };
+            my_size += ::protobuf::rt::unknown_fields_size(self.special_fields.unknown_fields());
+            self.special_fields.cached_size().set(my_size as u32);
+            my_size
+        }
+
+        fn write_to_with_cached_sizes(&self, os: &mut ::protobuf::CodedOutputStream<'_>) -> ::protobuf::Result<()> {
+            if self.id != 0 {
+                os.write_uint64(1, self.id)?;
+            }
+            for v in &self.hostGroup {
+                ::protobuf::rt::write_message_field_with_cached_size(2, v, os)?;
+            };
+            os.write_unknown_fields(self.special_fields.unknown_fields())?;
+            ::std::result::Result::Ok(())
+        }
+
+        fn special_fields(&self) -> &::protobuf::SpecialFields {
+            &self.special_fields
+        }
+
+        fn mut_special_fields(&mut self) -> &mut ::protobuf::SpecialFields {
+            &mut self.special_fields
+        }
+
+        fn new() -> LinkMicBattleHost {
+            LinkMicBattleHost::new()
+        }
+
+        fn clear(&mut self) {
+            self.id = 0;
+            self.hostGroup.clear();
+            self.special_fields.clear();
+        }
+
+        fn default_instance() -> &'static LinkMicBattleHost {
+            static instance: LinkMicBattleHost = LinkMicBattleHost {
+                id: 0,
+                hostGroup: ::std::vec::Vec::new(),
+                special_fields: ::protobuf::SpecialFields::new(),
+            };
+            &instance
+        }
+    }
+
+    impl ::protobuf::MessageFull for LinkMicBattleHost {
+        fn descriptor() -> ::protobuf::reflect::MessageDescriptor {
+            static descriptor: ::protobuf::rt::Lazy<::protobuf::reflect::MessageDescriptor> = ::protobuf::rt::Lazy::new();
+            descriptor.get(|| super::file_descriptor().message_by_package_relative_name("WebcastLinkMicBattle.LinkMicBattleHost").unwrap()).clone()
+        }
+    }
+
+    impl ::std::fmt::Display for LinkMicBattleHost {
+        fn fmt(&self, f: &mut ::std::fmt::Formatter<'_>) -> ::std::fmt::Result {
+            ::protobuf::text_format::fmt(self, f)
+        }
+    }
+
+    impl ::protobuf::reflect::ProtobufValue for LinkMicBattleHost {
+        type RuntimeType = ::protobuf::reflect::rt::RuntimeTypeMessage<Self>;
+    }
+
+    /// Nested message and enums of message `LinkMicBattleHost`
+    pub mod link_mic_battle_host {
+        // @@protoc_insertion_point(message:TikTok.WebcastLinkMicBattle.LinkMicBattleHost.HostGroup)
+        #[derive(PartialEq,Clone,Default,Debug)]
+        pub struct HostGroup {
+            // message fields
+            // @@protoc_insertion_point(field:TikTok.WebcastLinkMicBattle.LinkMicBattleHost.HostGroup.host)
+            pub host: ::std::vec::Vec<host_group::Host>,
+            // @@protoc_insertion_point(field:TikTok.WebcastLinkMicBattle.LinkMicBattleHost.HostGroup.points)
+            pub points: u32,
+            // @@protoc_insertion_point(field:TikTok.WebcastLinkMicBattle.LinkMicBattleHost.HostGroup.hostId)
+            pub hostId: ::std::string::String,
+            // special fields
+            // @@protoc_insertion_point(special_field:TikTok.WebcastLinkMicBattle.LinkMicBattleHost.HostGroup.special_fields)
+            pub special_fields: ::protobuf::SpecialFields,
+        }
+
+        impl<'a> ::std::default::Default for &'a HostGroup {
+            fn default() -> &'a HostGroup {
+                <HostGroup as ::protobuf::Message>::default_instance()
+            }
+        }
+
+        impl HostGroup {
+            pub fn new() -> HostGroup {
+                ::std::default::Default::default()
+            }
+
+            pub(in super::super) fn generated_message_descriptor_data() -> ::protobuf::reflect::GeneratedMessageDescriptorData {
+                let mut fields = ::std::vec::Vec::with_capacity(3);
+                let mut oneofs = ::std::vec::Vec::with_capacity(0);
+                fields.push(::protobuf::reflect::rt::v2::make_vec_simpler_accessor::<_, _>(
+                    "host",
+                    |m: &HostGroup| { &m.host },
+                    |m: &mut HostGroup| { &mut m.host },
+                ));
+                fields.push(::protobuf::reflect::rt::v2::make_simpler_field_accessor::<_, _>(
+                    "points",
+                    |m: &HostGroup| { &m.points },
+                    |m: &mut HostGroup| { &mut m.points },
+                ));
+                fields.push(::protobuf::reflect::rt::v2::make_simpler_field_accessor::<_, _>(
+                    "hostId",
+                    |m: &HostGroup| { &m.hostId },
+                    |m: &mut HostGroup| { &mut m.hostId },
+                ));
+                ::protobuf::reflect::GeneratedMessageDescriptorData::new_2::<HostGroup>(
+                    "WebcastLinkMicBattle.LinkMicBattleHost.HostGroup",
+                    fields,
+                    oneofs,
+                )
+            }
+        }
+
+        impl ::protobuf::Message for HostGroup {
+            const NAME: &'static str = "HostGroup";
+
+            fn is_initialized(&self) -> bool {
+                true
+            }
+
+            fn merge_from(&mut self, is: &mut ::protobuf::CodedInputStream<'_>) -> ::protobuf::Result<()> {
+                while let Some(tag) = is.read_raw_tag_or_eof()? {
+                    match tag {
+                        10 => {
+                            self.host.push(is.read_message()?);
+                        },
+                        16 => {
+                            self.points = is.read_uint32()?;
+                        },
+                        26 => {
+                            self.hostId = is.read_string()?;
+                        },
+                        tag => {
+                            ::protobuf::rt::read_unknown_or_skip_group(tag, is, self.special_fields.mut_unknown_fields())?;
+                        },
+                    };
+                }
+                ::std::result::Result::Ok(())
+            }
+
+            // Compute sizes of nested messages
+            #[allow(unused_variables)]
+            fn compute_size(&self) -> u64 {
+                let mut my_size = 0;
+                for value in &self.host {
+                    let len = value.compute_size();
+                    my_size += 1 + ::protobuf::rt::compute_raw_varint64_size(len) + len;
+                };
+                if self.points != 0 {
+                    my_size += ::protobuf::rt::uint32_size(2, self.points);
+                }
+                if !self.hostId.is_empty() {
+                    my_size += ::protobuf::rt::string_size(3, &self.hostId);
+                }
+                my_size += ::protobuf::rt::unknown_fields_size(self.special_fields.unknown_fields());
+                self.special_fields.cached_size().set(my_size as u32);
+                my_size
+            }
+
+            fn write_to_with_cached_sizes(&self, os: &mut ::protobuf::CodedOutputStream<'_>) -> ::protobuf::Result<()> {
+                for v in &self.host {
+                    ::protobuf::rt::write_message_field_with_cached_size(1, v, os)?;
+                };
+                if self.points != 0 {
+                    os.write_uint32(2, self.points)?;
+                }
+                if !self.hostId.is_empty() {
+                    os.write_string(3, &self.hostId)?;
+                }
+                os.write_unknown_fields(self.special_fields.unknown_fields())?;
+                ::std::result::Result::Ok(())
+            }
+
+            fn special_fields(&self) -> &::protobuf::SpecialFields {
+                &self.special_fields
+            }
+
+            fn mut_special_fields(&mut self) -> &mut ::protobuf::SpecialFields {
+                &mut self.special_fields
+            }
+
+            fn new() -> HostGroup {
+                HostGroup::new()
+            }
+
+            fn clear(&mut self) {
+                self.host.clear();
+                self.points = 0;
+                self.hostId.clear();
+                self.special_fields.clear();
+            }
+
+            fn default_instance() -> &'static HostGroup {
+                static instance: HostGroup = HostGroup {
+                    host: ::std::vec::Vec::new(),
+                    points: 0,
+                    hostId: ::std::string::String::new(),
+                    special_fields: ::protobuf::SpecialFields::new(),
+                };
+                &instance
+            }
+        }
+
+        impl ::protobuf::MessageFull for HostGroup {
+            fn descriptor() -> ::protobuf::reflect::MessageDescriptor {
+                static descriptor: ::protobuf::rt::Lazy<::protobuf::reflect::MessageDescriptor> = ::protobuf::rt::Lazy::new();
+                descriptor.get(|| super::super::file_descriptor().message_by_package_relative_name("WebcastLinkMicBattle.LinkMicBattleHost.HostGroup").unwrap()).clone()
+            }
+        }
+
+        impl ::std::fmt::Display for HostGroup {
+            fn fmt(&self, f: &mut ::std::fmt::Formatter<'_>) -> ::std::fmt::Result {
+                ::protobuf::text_format::fmt(self, f)
+            }
+        }
+
+        impl ::protobuf::reflect::ProtobufValue for HostGroup {
+            type RuntimeType = ::protobuf::reflect::rt::RuntimeTypeMessage<Self>;
+        }
+
+        /// Nested message and enums of message `HostGroup`
+        pub mod host_group {
+            // @@protoc_insertion_point(message:TikTok.WebcastLinkMicBattle.LinkMicBattleHost.HostGroup.Host)
+            #[derive(PartialEq,Clone,Default,Debug)]
+            pub struct Host {
+                // message fields
+                // @@protoc_insertion_point(field:TikTok.WebcastLinkMicBattle.LinkMicBattleHost.HostGroup.Host.id)
+                pub id: u64,
+                // @@protoc_insertion_point(field:TikTok.WebcastLinkMicBattle.LinkMicBattleHost.HostGroup.Host.profileId)
+                pub profileId: ::std::string::String,
+                // @@protoc_insertion_point(field:TikTok.WebcastLinkMicBattle.LinkMicBattleHost.HostGroup.Host.images)
+                pub images: ::std::vec::Vec<super::super::super::super::data::Image>,
+                // @@protoc_insertion_point(field:TikTok.WebcastLinkMicBattle.LinkMicBattleHost.HostGroup.Host.name)
+                pub name: ::std::string::String,
+                // special fields
+                // @@protoc_insertion_point(special_field:TikTok.WebcastLinkMicBattle.LinkMicBattleHost.HostGroup.Host.special_fields)
+                pub special_fields: ::protobuf::SpecialFields,
+            }
+
+            impl<'a> ::std::default::Default for &'a Host {
+                fn default() -> &'a Host {
+                    <Host as ::protobuf::Message>::default_instance()
+                }
+            }
+
+            impl Host {
+                pub fn new() -> Host {
+                    ::std::default::Default::default()
+                }
+
+                pub(in super::super::super) fn generated_message_descriptor_data() -> ::protobuf::reflect::GeneratedMessageDescriptorData {
+                    let mut fields = ::std::vec::Vec::with_capacity(4);
+                    let mut oneofs = ::std::vec::Vec::with_capacity(0);
+                    fields.push(::protobuf::reflect::rt::v2::make_simpler_field_accessor::<_, _>(
+                        "id",
+                        |m: &Host| { &m.id },
+                        |m: &mut Host| { &mut m.id },
+                    ));
+                    fields.push(::protobuf::reflect::rt::v2::make_simpler_field_accessor::<_, _>(
+                        "profileId",
+                        |m: &Host| { &m.profileId },
+                        |m: &mut Host| { &mut m.profileId },
+                    ));
+                    fields.push(::protobuf::reflect::rt::v2::make_vec_simpler_accessor::<_, _>(
+                        "images",
+                        |m: &Host| { &m.images },
+                        |m: &mut Host| { &mut m.images },
+                    ));
+                    fields.push(::protobuf::reflect::rt::v2::make_simpler_field_accessor::<_, _>(
+                        "name",
+                        |m: &Host| { &m.name },
+                        |m: &mut Host| { &mut m.name },
+                    ));
+                    ::protobuf::reflect::GeneratedMessageDescriptorData::new_2::<Host>(
+                        "WebcastLinkMicBattle.LinkMicBattleHost.HostGroup.Host",
+                        fields,
+                        oneofs,
+                    )
+                }
+            }
+
+            impl ::protobuf::Message for Host {
+                const NAME: &'static str = "Host";
+
+                fn is_initialized(&self) -> bool {
+                    true
+                }
+
+                fn merge_from(&mut self, is: &mut ::protobuf::CodedInputStream<'_>) -> ::protobuf::Result<()> {
+                    while let Some(tag) = is.read_raw_tag_or_eof()? {
+                        match tag {
+                            8 => {
+                                self.id = is.read_uint64()?;
+                            },
+                            18 => {
+                                self.profileId = is.read_string()?;
+                            },
+                            26 => {
+                                self.images.push(is.read_message()?);
+                            },
+                            34 => {
+                                self.name = is.read_string()?;
+                            },
+                            tag => {
+                                ::protobuf::rt::read_unknown_or_skip_group(tag, is, self.special_fields.mut_unknown_fields())?;
+                            },
+                        };
+                    }
+                    ::std::result::Result::Ok(())
+                }
+
+                // Compute sizes of nested messages
+                #[allow(unused_variables)]
+                fn compute_size(&self) -> u64 {
+                    let mut my_size = 0;
+                    if self.id != 0 {
+                        my_size += ::protobuf::rt::uint64_size(1, self.id);
+                    }
+                    if !self.profileId.is_empty() {
+                        my_size += ::protobuf::rt::string_size(2, &self.profileId);
+                    }
+                    for value in &self.images {
+                        let len = value.compute_size();
+                        my_size += 1 + ::protobuf::rt::compute_raw_varint64_size(len) + len;
+                    };
+                    if !self.name.is_empty() {
+                        my_size += ::protobuf::rt::string_size(4, &self.name);
+                    }
+                    my_size += ::protobuf::rt::unknown_fields_size(self.special_fields.unknown_fields());
+                    self.special_fields.cached_size().set(my_size as u32);
+                    my_size
+                }
+
+                fn write_to_with_cached_sizes(&self, os: &mut ::protobuf::CodedOutputStream<'_>) -> ::protobuf::Result<()> {
+                    if self.id != 0 {
+                        os.write_uint64(1, self.id)?;
+                    }
+                    if !self.profileId.is_empty() {
+                        os.write_string(2, &self.profileId)?;
+                    }
+                    for v in &self.images {
+                        ::protobuf::rt::write_message_field_with_cached_size(3, v, os)?;
+                    };
+                    if !self.name.is_empty() {
+                        os.write_string(4, &self.name)?;
+                    }
+                    os.write_unknown_fields(self.special_fields.unknown_fields())?;
+                    ::std::result::Result::Ok(())
+                }
+
+                fn special_fields(&self) -> &::protobuf::SpecialFields {
+                    &self.special_fields
+                }
+
+                fn mut_special_fields(&mut self) -> &mut ::protobuf::SpecialFields {
+                    &mut self.special_fields
+                }
+
+                fn new() -> Host {
+                    Host::new()
+                }
+
+                fn clear(&mut self) {
+                    self.id = 0;
+                    self.profileId.clear();
+                    self.images.clear();
+                    self.name.clear();
+                    self.special_fields.clear();
+                }
+
+                fn default_instance() -> &'static Host {
+                    static instance: Host = Host {
+                        id: 0,
+                        profileId: ::std::string::String::new(),
+                        images: ::std::vec::Vec::new(),
+                        name: ::std::string::String::new(),
+                        special_fields: ::protobuf::SpecialFields::new(),
+                    };
+                    &instance
+                }
+            }
+
+            impl ::protobuf::MessageFull for Host {
+                fn descriptor() -> ::protobuf::reflect::MessageDescriptor {
+                    static descriptor: ::protobuf::rt::Lazy<::protobuf::reflect::MessageDescriptor> = ::protobuf::rt::Lazy::new();
+                    descriptor.get(|| super::super::super::file_descriptor().message_by_package_relative_name("WebcastLinkMicBattle.LinkMicBattleHost.HostGroup.Host").unwrap()).clone()
+                }
+            }
+
+            impl ::std::fmt::Display for Host {
+                fn fmt(&self, f: &mut ::std::fmt::Formatter<'_>) -> ::std::fmt::Result {
+                    ::protobuf::text_format::fmt(self, f)
+                }
+            }
+
+            impl ::protobuf::reflect::ProtobufValue for Host {
+                type RuntimeType = ::protobuf::reflect::rt::RuntimeTypeMessage<Self>;
+            }
+        }
     }
 }
 
@@ -16602,64 +18017,97 @@ static file_descriptor_proto_data: &'static [u8] = b"\
     a2\x18\x02\x20\x01(\rR\x05data2\x12+\n\x08rankdata\x18\x03\x20\x01(\x0b2\
     \x0f.TikTok.RankingR\x08rankdata\x12\x14\n\x05data3\x18\x04\x20\x01(\tR\
     \x05data3\x12\x14\n\x05data4\x18\x05\x20\x01(\rR\x05data4\x12\x14\n\x05d\
-    ata5\x18\x06\x20\x01(\rR\x05data5\"\x95\x03\n\x14WebcastLinkMicArmies\
+    ata5\x18\x06\x20\x01(\rR\x05data5\"\xb2\x03\n\x14WebcastLinkMicArmies\
     \x12&\n\x06common\x18\x01\x20\x01(\x0b2\x0e.TikTok.CommonR\x06common\x12\
     \x0e\n\x02id\x18\x02\x20\x01(\x04R\x02id\x12<\n\x0bbattleItems\x18\x03\
     \x20\x03(\x0b2\x1a.TikTok.LinkMicArmiesItemsR\x0bbattleItems\x12\x10\n\
     \x03id2\x18\x04\x20\x01(\x04R\x03id2\x12\x1e\n\ntimeStamp1\x18\x05\x20\
     \x01(\x04R\ntimeStamp1\x12\x1e\n\ntimeStamp2\x18\x06\x20\x01(\x04R\ntime\
-    Stamp2\x12\"\n\x0cbattleStatus\x18\x07\x20\x01(\x05R\x0cbattleStatus\x12\
-    \x14\n\x05data1\x18\x08\x20\x01(\x04R\x05data1\x12\x14\n\x05data2\x18\t\
-    \x20\x01(\x04R\x05data2\x12\x14\n\x05data3\x18\n\x20\x01(\rR\x05data3\
-    \x12#\n\x05Image\x18\x0b\x20\x01(\x0b2\r.TikTok.ImageR\x05Image\x12\x14\
-    \n\x05data4\x18\x0c\x20\x01(\rR\x05data4\x12\x14\n\x05data5\x18\r\x20\
-    \x01(\rR\x05data5\"\xbc\x03\n\x20WebcastLinkMicBattlePunishFinish\x12&\n\
-    \x06Header\x18\x01\x20\x01(\x0b2\x0e.TikTok.CommonR\x06Header\x12\x10\n\
-    \x03Id1\x18\x02\x20\x01(\x04R\x03Id1\x12\x1c\n\tTimestamp\x18\x03\x20\
-    \x01(\x04R\tTimestamp\x12\x14\n\x05Data4\x18\x04\x20\x01(\rR\x05Data4\
-    \x12\x10\n\x03Id2\x18\x05\x20\x01(\x04R\x03Id2\x12\\\n\x05Data6\x18\x06\
-    \x20\x01(\x0b2F.TikTok.WebcastLinkMicBattlePunishFinish.LinkMicBattlePun\
-    ishFinishDataR\x05Data6\x1a\xb9\x01\n\x1dLinkMicBattlePunishFinishData\
-    \x12\x10\n\x03Id2\x18\x01\x20\x01(\x04R\x03Id2\x12\x1c\n\tTimestamp\x18\
-    \x02\x20\x01(\x04R\tTimestamp\x12\x14\n\x05Data3\x18\x03\x20\x01(\rR\x05\
-    Data3\x12\x10\n\x03Id1\x18\x04\x20\x01(\x04R\x03Id1\x12\x14\n\x05Data5\
-    \x18\x05\x20\x01(\rR\x05Data5\x12\x14\n\x05Data6\x18\x06\x20\x01(\rR\x05\
-    Data6\x12\x14\n\x05Data8\x18\x08\x20\x01(\rR\x05Data8\"\xdf\x03\n\x1fWeb\
-    castLinkmicBattleTaskMessage\x12&\n\x06Header\x18\x01\x20\x01(\x0b2\x0e.\
-    TikTok.CommonR\x06Header\x12\x14\n\x05Data2\x18\x02\x20\x01(\rR\x05Data2\
-    \x12S\n\x05Data3\x18\x03\x20\x01(\x0b2=.TikTok.WebcastLinkmicBattleTaskM\
-    essage.LinkmicBattleTaskDataR\x05Data3\x12T\n\x05Data5\x18\x05\x20\x01(\
-    \x0b2>.TikTok.WebcastLinkmicBattleTaskMessage.LinkmicBattleTaskData2R\
-    \x05Data5\x1ae\n\x15LinkmicBattleTaskData\x12L\n\x05Data1\x18\x01\x20\
-    \x01(\x0b26.TikTok.WebcastLinkmicBattleTaskMessage.BattleTaskDataR\x05Da\
-    ta1\x1a&\n\x0eBattleTaskData\x12\x14\n\x05Data1\x18\x01\x20\x01(\rR\x05D\
-    ata1\x1aD\n\x16LinkmicBattleTaskData2\x12\x14\n\x05Data1\x18\x01\x20\x01\
-    (\rR\x05Data1\x12\x14\n\x05Data2\x18\x02\x20\x01(\rR\x05Data2\"\x96\x08\
-    \n\x14WebcastLinkMicBattle\x12&\n\x06common\x18\x01\x20\x01(\x0b2\x0e.Ti\
-    kTok.CommonR\x06common\x12\x0e\n\x02id\x18\x02\x20\x01(\x04R\x02id\x12T\
-    \n\x0cbattleConfig\x18\x03\x20\x01(\x0b20.TikTok.WebcastLinkMicBattle.Li\
-    nkMicBattleConfigR\x0cbattleConfig\x12\x14\n\x05data2\x18\x04\x20\x01(\r\
-    R\x05data2\x12K\n\x07details\x18\x05\x20\x03(\x0b21.TikTok.WebcastLinkMi\
-    cBattle.LinkMicBattleDetailsR\x07details\x12F\n\x06teams1\x18\t\x20\x03(\
-    \x0b2..TikTok.WebcastLinkMicBattle.LinkMicBattleTeamR\x06teams1\x12F\n\
-    \x06teams2\x18\n\x20\x03(\x0b2..TikTok.WebcastLinkMicBattle.LinkMicBattl\
-    eTeamR\x06teams2\x12N\n\x08teamData\x18\r\x20\x03(\x0b22.TikTok.WebcastL\
-    inkMicBattle.LinkMicBattleTeamDataR\x08teamData\x1a\x83\x01\n\x13LinkMic\
-    BattleConfig\x12\x10\n\x03id1\x18\x01\x20\x01(\x04R\x03id1\x12\x1c\n\tti\
-    mestamp\x18\x02\x20\x01(\x04R\ttimestamp\x12\x14\n\x05data1\x18\x03\x20\
-    \x01(\rR\x05data1\x12\x10\n\x03id2\x18\x04\x20\x01(\x04R\x03id2\x12\x14\
-    \n\x05data2\x18\x05\x20\x01(\rR\x05data2\x1aw\n\x11LinkMicBattleData\x12\
-    \x0e\n\x02id\x18\x01\x20\x01(\x04R\x02id\x12\x14\n\x05data1\x18\x02\x20\
-    \x01(\rR\x05data1\x12\x14\n\x05data2\x18\x03\x20\x01(\rR\x05data2\x12\
-    \x14\n\x05data3\x18\x05\x20\x01(\rR\x05data3\x12\x10\n\x03url\x18\x06\
-    \x20\x01(\tR\x03url\x1ap\n\x14LinkMicBattleDetails\x12\x0e\n\x02id\x18\
-    \x01\x20\x01(\x04R\x02id\x12H\n\x07details\x18\x02\x20\x01(\x0b2..TikTok\
-    .WebcastLinkMicBattle.LinkMicBattleDataR\x07details\x1aG\n\x11LinkMicBat\
-    tleTeam\x12\x0e\n\x02id\x18\x01\x20\x01(\x04R\x02id\x12\"\n\x05users\x18\
-    \x02\x20\x03(\x0b2\x0c.TikTok.UserR\x05users\x1as\n\x15LinkMicBattleTeam\
-    Data\x12\x16\n\x06teamId\x18\x01\x20\x01(\x04R\x06teamId\x12B\n\x04data\
-    \x18\x02\x20\x01(\x0b2..TikTok.WebcastLinkMicBattle.LinkMicBattleDataR\
-    \x04data\"\x9d\x01\n\x1dWebcastLinkMicFanTicketMethod\x12&\n\x06common\
+    Stamp2\x12?\n\x0cbattleStatus\x18\x07\x20\x01(\x0e2\x1b.TikTok.LinkMicBa\
+    ttleStatusR\x0cbattleStatus\x12\x14\n\x05data1\x18\x08\x20\x01(\x04R\x05\
+    data1\x12\x14\n\x05data2\x18\t\x20\x01(\x04R\x05data2\x12\x14\n\x05data3\
+    \x18\n\x20\x01(\rR\x05data3\x12#\n\x05Image\x18\x0b\x20\x01(\x0b2\r.TikT\
+    ok.ImageR\x05Image\x12\x14\n\x05data4\x18\x0c\x20\x01(\rR\x05data4\x12\
+    \x14\n\x05data5\x18\r\x20\x01(\rR\x05data5\"\xbc\x03\n\x20WebcastLinkMic\
+    BattlePunishFinish\x12&\n\x06Header\x18\x01\x20\x01(\x0b2\x0e.TikTok.Com\
+    monR\x06Header\x12\x10\n\x03Id1\x18\x02\x20\x01(\x04R\x03Id1\x12\x1c\n\t\
+    Timestamp\x18\x03\x20\x01(\x04R\tTimestamp\x12\x14\n\x05Data4\x18\x04\
+    \x20\x01(\rR\x05Data4\x12\x10\n\x03Id2\x18\x05\x20\x01(\x04R\x03Id2\x12\
+    \\\n\x05Data6\x18\x06\x20\x01(\x0b2F.TikTok.WebcastLinkMicBattlePunishFi\
+    nish.LinkMicBattlePunishFinishDataR\x05Data6\x1a\xb9\x01\n\x1dLinkMicBat\
+    tlePunishFinishData\x12\x10\n\x03Id2\x18\x01\x20\x01(\x04R\x03Id2\x12\
+    \x1c\n\tTimestamp\x18\x02\x20\x01(\x04R\tTimestamp\x12\x14\n\x05Data3\
+    \x18\x03\x20\x01(\rR\x05Data3\x12\x10\n\x03Id1\x18\x04\x20\x01(\x04R\x03\
+    Id1\x12\x14\n\x05Data5\x18\x05\x20\x01(\rR\x05Data5\x12\x14\n\x05Data6\
+    \x18\x06\x20\x01(\rR\x05Data6\x12\x14\n\x05Data8\x18\x08\x20\x01(\rR\x05\
+    Data8\"\xdf\x03\n\x1fWebcastLinkmicBattleTaskMessage\x12&\n\x06Header\
+    \x18\x01\x20\x01(\x0b2\x0e.TikTok.CommonR\x06Header\x12\x14\n\x05Data2\
+    \x18\x02\x20\x01(\rR\x05Data2\x12S\n\x05Data3\x18\x03\x20\x01(\x0b2=.Tik\
+    Tok.WebcastLinkmicBattleTaskMessage.LinkmicBattleTaskDataR\x05Data3\x12T\
+    \n\x05Data5\x18\x05\x20\x01(\x0b2>.TikTok.WebcastLinkmicBattleTaskMessag\
+    e.LinkmicBattleTaskData2R\x05Data5\x1ae\n\x15LinkmicBattleTaskData\x12L\
+    \n\x05Data1\x18\x01\x20\x01(\x0b26.TikTok.WebcastLinkmicBattleTaskMessag\
+    e.BattleTaskDataR\x05Data1\x1a&\n\x0eBattleTaskData\x12\x14\n\x05Data1\
+    \x18\x01\x20\x01(\rR\x05Data1\x1aD\n\x16LinkmicBattleTaskData2\x12\x14\n\
+    \x05Data1\x18\x01\x20\x01(\rR\x05Data1\x12\x14\n\x05Data2\x18\x02\x20\
+    \x01(\rR\x05Data2\"\xc0\x13\n\x14WebcastLinkMicBattle\x12&\n\x06common\
+    \x18\x01\x20\x01(\x0b2\x0e.TikTok.CommonR\x06common\x12\x0e\n\x02id\x18\
+    \x02\x20\x01(\x04R\x02id\x12T\n\x0cbattleConfig\x18\x03\x20\x01(\x0b20.T\
+    ikTok.WebcastLinkMicBattle.LinkMicBattleConfigR\x0cbattleConfig\x12?\n\
+    \x0cbattleStatus\x18\x04\x20\x01(\x0e2\x1b.TikTok.LinkMicBattleStatusR\
+    \x0cbattleStatus\x12K\n\x07details\x18\x05\x20\x03(\x0b21.TikTok.Webcast\
+    LinkMicBattle.LinkMicBattleDetailsR\x07details\x12T\n\nviewerTeam\x18\t\
+    \x20\x03(\x0b24.TikTok.WebcastLinkMicBattle.LinkMicBattleTopViewersR\nvi\
+    ewerTeam\x12J\n\x08hostTeam\x18\n\x20\x03(\x0b2..TikTok.WebcastLinkMicBa\
+    ttle.LinkMicBattleHostR\x08hostTeam\x12N\n\x08teamData\x18\r\x20\x03(\
+    \x0b22.TikTok.WebcastLinkMicBattle.LinkMicBattleTeamDataR\x08teamData\
+    \x12$\n\runknownData16\x18\x10\x20\x01(\x04R\runknownData16\x12J\n\x0bho\
+    stData2v2\x18\x11\x20\x03(\x0b2(.TikTok.WebcastLinkMicBattle.Host2v2Data\
+    R\x0bhostData2v2\x1a\x9c\x02\n\x0bHost2v2Data\x12\x1e\n\nteamNumber\x18\
+    \x01\x20\x01(\rR\nteamNumber\x12M\n\x08hostdata\x18\x02\x20\x03(\x0b21.T\
+    ikTok.WebcastLinkMicBattle.Host2v2Data.HostDataR\x08hostdata\x12\"\n\x0c\
+    unknownData3\x18\x03\x20\x01(\rR\x0cunknownData3\x12\x20\n\x0btotalPoint\
+    s\x18\x04\x20\x01(\rR\x0btotalPoints\x1aX\n\x08HostData\x12\x16\n\x06hos\
+    tId\x18\x01\x20\x01(\x04R\x06hostId\x12\x16\n\x06points\x18\x02\x20\x01(\
+    \rR\x06points\x12\x1c\n\thostIdStr\x18\x03\x20\x01(\tR\thostIdStr\x1a\
+    \xaf\x01\n\x13LinkMicBattleConfig\x12\x10\n\x03id1\x18\x01\x20\x01(\x04R\
+    \x03id1\x12\x1c\n\ttimestamp\x18\x02\x20\x01(\x04R\ttimestamp\x12\x14\n\
+    \x05data1\x18\x03\x20\x01(\rR\x05data1\x12\x10\n\x03id2\x18\x04\x20\x01(\
+    \x04R\x03id2\x12\x14\n\x05data2\x18\x05\x20\x01(\rR\x05data2\x12\x14\n\
+    \x05data3\x18\x06\x20\x01(\rR\x05data3\x12\x14\n\x05data4\x18\x08\x20\
+    \x01(\rR\x05data4\x1as\n\x15LinkMicBattleTeamData\x12\x16\n\x06teamId\
+    \x18\x01\x20\x01(\x04R\x06teamId\x12B\n\x04data\x18\x02\x20\x01(\x0b2..T\
+    ikTok.WebcastLinkMicBattle.LinkMicBattleDataR\x04data\x1a\x7f\n\x11LinkM\
+    icBattleData\x12\x0e\n\x02id\x18\x01\x20\x01(\x04R\x02id\x12\x14\n\x05da\
+    ta1\x18\x02\x20\x01(\rR\x05data1\x12\x1c\n\twinStreak\x18\x03\x20\x01(\r\
+    R\twinStreak\x12\x14\n\x05data3\x18\x05\x20\x01(\rR\x05data3\x12\x10\n\
+    \x03url\x18\x06\x20\x01(\tR\x03url\x1a\xfa\x01\n\x14LinkMicBattleDetails\
+    \x12\x0e\n\x02id\x18\x01\x20\x01(\x04R\x02id\x12g\n\x07summary\x18\x02\
+    \x20\x01(\x0b2M.TikTok.WebcastLinkMicBattle.LinkMicBattleDetails.LinkMic\
+    BattleDetailsSummaryR\x07summary\x1ai\n\x1bLinkMicBattleDetailsSummary\
+    \x12\x0e\n\x02id\x18\x01\x20\x01(\x04R\x02id\x12\"\n\x0cunknownData2\x18\
+    \x02\x20\x01(\rR\x0cunknownData2\x12\x16\n\x06points\x18\x03\x20\x01(\rR\
+    \x06points\x1a\xe3\x03\n\x17LinkMicBattleTopViewers\x12\x0e\n\x02id\x18\
+    \x01\x20\x01(\x04R\x02id\x12e\n\x0bviewerGroup\x18\x02\x20\x03(\x0b2C.Ti\
+    kTok.WebcastLinkMicBattle.LinkMicBattleTopViewers.TopViewerGroupR\x0bvie\
+    werGroup\x1a\xd0\x02\n\x0eTopViewerGroup\x12e\n\x06viewer\x18\x01\x20\
+    \x03(\x0b2M.TikTok.WebcastLinkMicBattle.LinkMicBattleTopViewers.TopViewe\
+    rGroup.TopViewerR\x06viewer\x12\x16\n\x06points\x18\x02\x20\x01(\rR\x06p\
+    oints\x12(\n\x0fhostIdOrTeamNum\x18\x03\x20\x01(\tR\x0fhostIdOrTeamNum\
+    \x1a\x94\x01\n\tTopViewer\x12\x0e\n\x02id\x18\x01\x20\x01(\x04R\x02id\
+    \x12\x16\n\x06points\x18\x02\x20\x01(\rR\x06points\x12\x1c\n\tprofileId\
+    \x18\x03\x20\x01(\tR\tprofileId\x12%\n\x06images\x18\x04\x20\x03(\x0b2\r\
+    .TikTok.ImageR\x06images\x12\x1a\n\x08stringId\x18\x06\x20\x01(\tR\x08st\
+    ringId\x1a\xfd\x02\n\x11LinkMicBattleHost\x12\x0e\n\x02id\x18\x01\x20\
+    \x01(\x04R\x02id\x12V\n\thostGroup\x18\x02\x20\x03(\x0b28.TikTok.Webcast\
+    LinkMicBattle.LinkMicBattleHost.HostGroupR\thostGroup\x1a\xff\x01\n\tHos\
+    tGroup\x12Q\n\x04host\x18\x01\x20\x03(\x0b2=.TikTok.WebcastLinkMicBattle\
+    .LinkMicBattleHost.HostGroup.HostR\x04host\x12\x16\n\x06points\x18\x02\
+    \x20\x01(\rR\x06points\x12\x16\n\x06hostId\x18\x03\x20\x01(\tR\x06hostId\
+    \x1ao\n\x04Host\x12\x0e\n\x02id\x18\x01\x20\x01(\x04R\x02id\x12\x1c\n\tp\
+    rofileId\x18\x02\x20\x01(\tR\tprofileId\x12%\n\x06images\x18\x03\x20\x03\
+    (\x0b2\r.TikTok.ImageR\x06images\x12\x12\n\x04name\x18\x04\x20\x01(\tR\
+    \x04name\"\x9d\x01\n\x1dWebcastLinkMicFanTicketMethod\x12&\n\x06common\
     \x18\x01\x20\x01(\x0b2\x0e.TikTok.CommonR\x06common\x12T\n\x13FanTicketR\
     oomNotice\x18\x02\x20\x01(\x0b2\".TikTok.FanTicketRoomNoticeContentR\x13\
     FanTicketRoomNotice\"\xc9\x03\n\x14WebcastLinkMicMethod\x12&\n\x06common\
@@ -16817,7 +18265,7 @@ pub fn file_descriptor() -> &'static ::protobuf::reflect::FileDescriptor {
             let mut deps = ::std::vec::Vec::with_capacity(2);
             deps.push(super::data::file_descriptor().clone());
             deps.push(super::enums::file_descriptor().clone());
-            let mut messages = ::std::vec::Vec::with_capacity(72);
+            let mut messages = ::std::vec::Vec::with_capacity(80);
             messages.push(WebcastPushFrame::generated_message_descriptor_data());
             messages.push(WebcastResponse::generated_message_descriptor_data());
             messages.push(WebcastGiftMessage::generated_message_descriptor_data());
@@ -16881,11 +18329,19 @@ pub fn file_descriptor() -> &'static ::protobuf::reflect::FileDescriptor {
             messages.push(webcast_linkmic_battle_task_message::LinkmicBattleTaskData::generated_message_descriptor_data());
             messages.push(webcast_linkmic_battle_task_message::BattleTaskData::generated_message_descriptor_data());
             messages.push(webcast_linkmic_battle_task_message::LinkmicBattleTaskData2::generated_message_descriptor_data());
+            messages.push(webcast_link_mic_battle::Host2v2Data::generated_message_descriptor_data());
             messages.push(webcast_link_mic_battle::LinkMicBattleConfig::generated_message_descriptor_data());
+            messages.push(webcast_link_mic_battle::LinkMicBattleTeamData::generated_message_descriptor_data());
             messages.push(webcast_link_mic_battle::LinkMicBattleData::generated_message_descriptor_data());
             messages.push(webcast_link_mic_battle::LinkMicBattleDetails::generated_message_descriptor_data());
-            messages.push(webcast_link_mic_battle::LinkMicBattleTeam::generated_message_descriptor_data());
-            messages.push(webcast_link_mic_battle::LinkMicBattleTeamData::generated_message_descriptor_data());
+            messages.push(webcast_link_mic_battle::LinkMicBattleTopViewers::generated_message_descriptor_data());
+            messages.push(webcast_link_mic_battle::LinkMicBattleHost::generated_message_descriptor_data());
+            messages.push(webcast_link_mic_battle::host2v2data::HostData::generated_message_descriptor_data());
+            messages.push(webcast_link_mic_battle::link_mic_battle_details::LinkMicBattleDetailsSummary::generated_message_descriptor_data());
+            messages.push(webcast_link_mic_battle::link_mic_battle_top_viewers::TopViewerGroup::generated_message_descriptor_data());
+            messages.push(webcast_link_mic_battle::link_mic_battle_top_viewers::top_viewer_group::TopViewer::generated_message_descriptor_data());
+            messages.push(webcast_link_mic_battle::link_mic_battle_host::HostGroup::generated_message_descriptor_data());
+            messages.push(webcast_link_mic_battle::link_mic_battle_host::host_group::Host::generated_message_descriptor_data());
             messages.push(webcast_msg_detect_message::TimeInfo::generated_message_descriptor_data());
             messages.push(webcast_msg_detect_message::TriggerCondition::generated_message_descriptor_data());
             messages.push(webcast_oec_live_shopping_message::LiveShoppingData::generated_message_descriptor_data());
