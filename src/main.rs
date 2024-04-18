@@ -24,12 +24,12 @@ async fn main() {
 
 fn handle_event(_client: &TikTokLiveClient, event: &TikTokLiveEvent) {
     match event {
-        TikTokLiveEvent::OnMember(join_event) => {
-			info!("user: {}  joined", join_event.raw_data.user.nickname);
-		},
-        TikTokLiveEvent::OnChat(chat_event) => {
-			info!("user: {} -> {} ", chat_event.raw_data.user.nickname, chat_event.raw_data.content);
-        },
+        // TikTokLiveEvent::OnMember(join_event) => {
+			// info!("user: {}  joined", join_event.raw_data.user.nickname);
+		// },
+        // TikTokLiveEvent::OnChat(chat_event) => {
+			// info!("user: {} -> {} ", chat_event.raw_data.user.nickname, chat_event.raw_data.content);
+        // },
         TikTokLiveEvent::OnGift(gift_event) => {
 			let nick = &gift_event.raw_data.user.nickname;
 			let gift_name = &gift_event.raw_data.gift.name;
