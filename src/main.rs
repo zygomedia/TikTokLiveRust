@@ -1,4 +1,3 @@
-use std::io;
 use std::time::Duration;
 
 use env_logger::Env;
@@ -21,11 +20,6 @@ async fn main() {
         .build();
 
     client.connect().await;
-
-    let mut input = String::new();
-    if io::stdin().read_line(&mut input).is_ok() && input.trim() == "stop" {
-        // client.disconnect();
-    }
 }
 
 fn handle_event(client: &TikTokLiveClient, event: &TikTokLiveEvent) {
