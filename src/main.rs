@@ -1,16 +1,21 @@
-use std::{io, thread};
+use std::io;
 use std::time::Duration;
 
+use env_logger::Env;
+use log::info;
 use tiktoklive::core::live_client::TikTokLiveClient;
 use tiktoklive::data::live_common::TikTokLiveSettings;
-use tiktoklive::generated::events::{TikTokLiveEvent};
+use tiktoklive::generated::events::TikTokLiveEvent;
 
 use tiktoklive::TikTokLive;
 
 #[tokio::main]
 async fn main() {
-    let user_name = "dash4214";
-    let mut client = TikTokLive::new_client(user_name)
+    let env = Env::default().filter_or("tiktoklive", "info");
+    env_logger::init_from_env(env);
+
+    let user_name = "username";
+    let client = TikTokLive::new_client(user_name)
         .configure(configure)
         .on_event(handle_event)
         .build();
@@ -20,7 +25,7 @@ async fn main() {
     let mut input = String::new();
     if io::stdin().read_line(&mut input).is_ok() && input.trim() == "stop"
     {
-        //client.disconnect();
+        // client.disconnect();
     }
 }
 

@@ -1,8 +1,3 @@
-use std::rc::Rc;
-
-use env_logger::{Builder, Env};
-use log::LevelFilter;
-
 use crate::core::live_client::TikTokLiveClient;
 use crate::core::live_client_events::{TikTokEventHandler, TikTokLiveEventObserver};
 use crate::core::live_client_http::TikTokLiveHttpClient;
@@ -30,11 +25,6 @@ impl TikTokLiveBuilder
     ///
     pub fn new(user_name: &str) -> Self
     {
-        let env = Env::default()
-            .filter_or("MY_LOG_LEVEL", "info");
-        Builder::from_env(env)
-            .filter_module("my_crate::module", LevelFilter::Debug)
-            .init();
         Self
         {
             settings: create_default_settings(user_name),
