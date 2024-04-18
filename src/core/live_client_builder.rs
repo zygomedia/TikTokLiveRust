@@ -5,7 +5,6 @@ use crate::core::live_client_mapper::TikTokLiveMessageMapper;
 use crate::core::live_client_websocket::TikTokLiveWebsocketClient;
 use crate::data::create_default_settings;
 use crate::data::live_common::{TikTokLiveInfo, TikTokLiveSettings};
-use crate::generated::events::TikTokLiveEvent;
 use crate::http::http_request_builder::HttpRequestFactory;
 
 pub struct TikTokLiveBuilder {

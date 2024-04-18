@@ -10,8 +10,7 @@ pub struct TikTokLiveEventObserver {
 
 impl TikTokLiveEventObserver {
     pub fn new() -> Self {
-        TikTokLiveEventObserver
-        {
+        TikTokLiveEventObserver {
             events: vec![]
         }
     }
