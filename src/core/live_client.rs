@@ -82,7 +82,7 @@ impl TikTokLiveClient
         let client_arc = Arc::new(self);
 
         let ws = TikTokLiveWebsocketClient {
-            message_mapper: TikTokLiveMessageMapper {},
+            message_mapper: TikTokLiveMessageMapper,
             running: Arc::new(AtomicBool::new(false)),
         };
         ws.start(response, client_arc).await;
