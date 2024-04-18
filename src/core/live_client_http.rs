@@ -6,8 +6,7 @@ use crate::http::http_data_mappers::{map_live_data_response, map_live_user_data_
 use crate::http::http_request_builder::HttpRequestFactory;
 use crate::generated::messages::webcast::WebcastResponse;
 
-pub struct TikTokLiveHttpClient
-{
+pub struct TikTokLiveHttpClient {
     pub(crate) settings: TikTokLiveSettings,
     pub(crate) factory: HttpRequestFactory,
 }
@@ -16,15 +15,8 @@ pub const TIKTOK_URL_WEB: &str = "https://www.tiktok.com/";
 pub const TIKTOK_URL_WEBCAST: &str = "https://webcast.tiktok.com/webcast/";
 pub const TIKTOK_SIGN_API: &str = "https://tiktok.eulerstream.com/webcast/sign_url";
 
-
-
-
-impl TikTokLiveHttpClient
-{
-
-
-    pub async fn fetch_live_user_data(&self, request: LiveUserDataRequest) -> LiveUserDataResponse
-    {
+impl TikTokLiveHttpClient {
+    pub async fn fetch_live_user_data(&self, request: LiveUserDataRequest) -> LiveUserDataResponse {
         let url = format!("{}{}", TIKTOK_URL_WEB, "api-live/user/room");
         let option = self.factory
             .request()
@@ -41,8 +33,8 @@ impl TikTokLiveHttpClient
         let json = option.unwrap();
         return map_live_user_data_response(json);
     }
-    pub async fn fetch_live_data(&self, request: LiveDataRequest) -> LiveDataResponse
-    {
+
+    pub async fn fetch_live_data(&self, request: LiveDataRequest) -> LiveDataResponse {
         let url = format!("{}{}", TIKTOK_URL_WEBCAST, "room/info");
         let option = self.factory
             .request()
@@ -50,7 +42,6 @@ impl TikTokLiveHttpClient
             .with_param("room_id", request.room_id.as_str())
             .as_json()
             .await;
-
 
         if option.is_none()
         {
@@ -60,8 +51,7 @@ impl TikTokLiveHttpClient
         return map_live_data_response(json);
     }
 
-    pub async fn fetch_live_connection_data(&self, request: LiveConnectionDataRequest) -> LiveConnectionDataResponse
-    {
+    pub async fn fetch_live_connection_data(&self, request: LiveConnectionDataRequest) -> LiveConnectionDataResponse {
         //Preparing URL to sign
         let url_to_sign = self.factory
             .request()
@@ -79,14 +69,13 @@ impl TikTokLiveHttpClient
             .as_json()
             .await;
 
-        if option.is_none()
-        {
+        if option.is_none() {
             panic!("Unable sign url {}", url_to_sign.as_str())
         }
         let json = option.unwrap();
         let sign_server_response = map_sign_server_response(json);
 
-        //Getting credentials for connection to websocket
+        // Getting credentials for connection to websocket
         let response = self.factory
             .request()
             .with_reset()
@@ -100,8 +89,7 @@ impl TikTokLiveHttpClient
 
         let optional_header = response.headers().get("set-cookie");
 
-        if optional_header.is_none()
-        {
+        if optional_header.is_none() {
             panic!("Header was not received not provided")
         }
         let header_value = optional_header.unwrap().to_str().unwrap().to_string();
@@ -125,8 +113,7 @@ impl TikTokLiveHttpClient
 
         let url = url::Url::parse(web_socket_url.as_str()).unwrap();
 
-        return LiveConnectionDataResponse
-        {
+        return LiveConnectionDataResponse {
             web_socket_timeout: self.settings.http_data.time_out,
             web_socket_cookies: header_value,
             web_socket_url: url,

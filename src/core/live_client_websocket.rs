@@ -15,14 +15,12 @@ use crate::http::http_data::LiveConnectionDataResponse;
 use crate::generated::messages::webcast::{WebcastPushFrame, WebcastResponse};
 
 
-pub struct TikTokLiveWebsocketClient
-{
+pub struct TikTokLiveWebsocketClient {
     pub(crate) message_mapper: TikTokLiveMessageMapper,
     pub(crate) running: Arc<AtomicBool>,
 }
 
-impl TikTokLiveWebsocketClient
-{
+impl TikTokLiveWebsocketClient {
     pub fn new(message_mapper: TikTokLiveMessageMapper) -> Self {
         TikTokLiveWebsocketClient {
             message_mapper,
@@ -31,8 +29,7 @@ impl TikTokLiveWebsocketClient
     }
 
 
-    pub async fn start(&self, response: LiveConnectionDataResponse,  client: Arc<TikTokLiveClient>)
-    {
+    pub async fn start(&self, response: LiveConnectionDataResponse,  client: Arc<TikTokLiveClient>) {
         let host = response.web_socket_url.host_str().expect("Invalid host in WebSocket URL");
 
         let request = Request::builder()
@@ -59,12 +56,10 @@ impl TikTokLiveWebsocketClient
         let message_mapper = self.message_mapper.clone();
 
         thread::spawn(move || {
-            while running.load(Ordering::SeqCst)
-            {
+            while running.load(Ordering::SeqCst) {
                 let optional_message = socket.read_message();
 
-                if (optional_message.is_err())
-                {
+                if optional_message.is_err() {
                     continue;
                 }
                 let message = optional_message.unwrap();
@@ -74,8 +69,7 @@ impl TikTokLiveWebsocketClient
                 let mut push_frame = WebcastPushFrame::parse_from_bytes(buffer.as_slice()).expect("Unable to read push frame");
                 let webcast_response = WebcastResponse::parse_from_bytes(push_frame.Payload.as_mut_slice()).expect("Unable to read webcast response");
 
-                if webcast_response.needsAck
-                {
+                if webcast_response.needsAck {
                     let mut push_frame_ack = WebcastPushFrame::new();
                     push_frame_ack.PayloadType = "ack".to_string();
                     push_frame_ack.LogId = push_frame.LogId;
@@ -91,8 +85,7 @@ impl TikTokLiveWebsocketClient
         });
     }
 
-    pub fn stop(&self)
-    {
+    pub fn stop(&self) {
         self.running.store(false, Ordering::SeqCst);
     }
 }
