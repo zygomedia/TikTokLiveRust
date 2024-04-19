@@ -10,13 +10,15 @@ impl TikTokLiveMessageMapper {
         client.publish_event(TikTokLiveEvent::OnWebsocketResponse(TikTokWebsocketResponseEvent {
             raw_data: webcast_response.clone(),
         }));
+
         for message in &webcast_response.messages {
             self.handle_single_message(message.clone(), client);
         }
     }
 
     /// Dupa
-    pub fn dupa(&self,webcast_response: WebcastResponse, client: &TikTokLiveClient) {
+	#[allow(unused)]
+    pub fn dupa(&self, webcast_response: WebcastResponse, client: &TikTokLiveClient) {
 
         println!("XD")
     }
