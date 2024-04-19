@@ -19,17 +19,18 @@ async fn main() {
         .on_event(handle_event)
         .build();
 
-    client.connect().await;
+	// This does not block but it does consume the client
+	// So it'll just kinda run the background forever
+	// if we do ever need to end the client,
+	// make it an arc and call client.disconnect();
+    let _client = client.connect().await.unwrap();
+
+	tokio::time::sleep(std::time::Duration::from_secs(60 * 3)).await;
 }
 
 fn handle_event(_client: &TikTokLiveClient, event: &TikTokLiveEvent) {
+
     match event {
-        // TikTokLiveEvent::OnMember(join_event) => {
-			// info!("user: {}  joined", join_event.raw_data.user.nickname);
-		// },
-        // TikTokLiveEvent::OnChat(chat_event) => {
-			// info!("user: {} -> {} ", chat_event.raw_data.user.nickname, chat_event.raw_data.content);
-        // },
         TikTokLiveEvent::OnGift(gift_event) => {
 			let nick = &gift_event.raw_data.user.nickname;
 			let gift_name = &gift_event.raw_data.gift.name;

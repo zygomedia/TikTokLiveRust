@@ -55,7 +55,7 @@ impl TikTokLiveWebsocketClient {
 
         let message_mapper = self.message_mapper.clone();
 
-        thread::spawn(move || {
+        tokio::task::spawn_blocking(move || {
             while running.load(Ordering::SeqCst) {
                 let optional_message = socket.read_message();
 
