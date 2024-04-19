@@ -27,16 +27,16 @@ pub struct TikTokLiveClient
 
 }
 
-impl TikTokLiveClient
-{
-    pub(crate) fn new(settings: TikTokLiveSettings,
-                      http_client: TikTokLiveHttpClient,
-                      event_observer: TikTokLiveEventObserver,
-                      websocket_client: TikTokLiveWebsocketClient,
-                      room_info: TikTokLiveInfo) -> Self
+impl TikTokLiveClient {
+    pub(crate) fn new(
+      settings: TikTokLiveSettings,
+      http_client: TikTokLiveHttpClient,
+      event_observer: TikTokLiveEventObserver,
+      websocket_client: TikTokLiveWebsocketClient,
+      room_info: TikTokLiveInfo) -> Self
     {
-        return TikTokLiveClient
-        {
+
+        return TikTokLiveClient {
             settings,
             http_client,
             event_observer,
@@ -45,36 +45,32 @@ impl TikTokLiveClient
         };
     }
 
-    pub async fn connect(self)
-    {
+    pub async fn connect(self) -> anyhow::Result<Arc<TikTokLiveClient>> {
         if *(self.room_info.connection_state.lock().unwrap()) != DISCONNECTED {
-            warn!("Client already connected!");
-            return;
+			anyhow::bail!("Client already connected!");
         }
 
         self.set_connection_state(CONNECTING);
 
         info!("Getting live user information's");
-        let response = self.http_client.fetch_live_user_data(LiveUserDataRequest
-        {
+
+        let response = self.http_client.fetch_live_user_data(LiveUserDataRequest {
             user_name: self.settings.host_name.clone()
         }).await;
 
         info!("Getting live room information's");
         let room_id = response.room_id;
-        let response = self.http_client.fetch_live_data(LiveDataRequest
-        {
+
+        let response = self.http_client.fetch_live_data(LiveDataRequest {
             room_id: room_id.clone()
         }).await;
-        if response.live_status != HostOnline
-        {
-            error!("Live stream for host is not online!, current status {:?}",response.live_status);
-            return;
+
+        if response.live_status != HostOnline {
+			anyhow::bail!("Live stream for host is not online!, current status {:?}", response.live_status);
         }
 
         info!("Getting live connections information's");
-        let response = self.http_client.fetch_live_connection_data(LiveConnectionDataRequest
-        {
+        let response = self.http_client.fetch_live_connection_data(LiveConnectionDataRequest {
             room_id: room_id.clone()
         }).await;
 
@@ -85,9 +81,10 @@ impl TikTokLiveClient
             message_mapper: TikTokLiveMessageMapper,
             running: Arc::new(AtomicBool::new(false)),
         };
-        ws.start(response, client_arc).await;
 
+        ws.start(response, client_arc.clone()).await;
 
+		Ok(client_arc)
     }
 
     pub fn disconnect(&self)
