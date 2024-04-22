@@ -1,16 +1,11 @@
 use crate::core::live_client_builder::TikTokLiveBuilder;
 
-///  # Data structures
 pub mod data;
-
-///  # Core functionality of library
 pub mod core;
-
-///  # Http client and request handling
 pub mod http;
-
-///  # ProtocolBuffer structures
 pub mod generated;
+
+pub use protobuf;
 
 ///
 /// # Entry point of library used to create new instance of TikTokLive client
