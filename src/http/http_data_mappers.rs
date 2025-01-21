@@ -100,13 +100,13 @@ pub fn map_live_data_response(json: String) -> Result<LiveDataResponse, LibError
     })
 }
 
-pub fn map_sign_server_response(json: String) -> SignServerResponse {
-    let json_value: Value = serde_json::from_str(json.as_str()).unwrap();
-    let signed_url = json_value["signedUrl"].as_str().unwrap();
-    let user_agent = json_value["User-Agent"].as_str().unwrap();
+pub fn map_sign_server_response(json: String) -> Result<SignServerResponse, LibError> {
+    let json_value: Value = serde_json::from_str(json.as_str()).map_err(|_| LibError::JsonParseError)?;
+    let signed_url = json_value["signedUrl"].as_str().ok_or(LibError::UrlSigningFailed)?;
+    let user_agent = json_value["User-Agent"].as_str().ok_or(LibError::UrlSigningFailed)?;
 
-    SignServerResponse {
+    Ok(SignServerResponse {
         signed_url: signed_url.to_string(),
         user_agent: user_agent.to_string(),
-    }
+    })
 }

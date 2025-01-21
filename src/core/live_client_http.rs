@@ -82,7 +82,7 @@ impl TikTokLiveHttpClient {
             .await;
 
         let json = option.ok_or(LibError::UrlSigningFailed)?;
-        let sign_server_response = map_sign_server_response(json);
+        let sign_server_response = map_sign_server_response(json)?;
 
         // Getting credentials for connection to websocket
         let response = self
